@@ -335,6 +335,7 @@
   gtag('js', new Date());
 
   gtag('config', 'G-1235J90MCS');
+  (function () { var spot = new URLSearchParams(window.location.search).get('spot'); if (spot) { gtag('event', 'qr_scan', { restaurant: spot }); } })();
 </script>
 </head>
 <body>
