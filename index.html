@@ -320,6 +320,62 @@
   }
   #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+  /* ── SPOT WELCOME CARD (?spot= visits from QR cards) ── */
+  .spot-card {
+    display: none;
+    max-width: 600px;
+    margin: 108px auto 0;
+    padding: 34px 30px 28px;
+    text-align: center;
+    background: rgba(200,148,60,.06);
+    border: 1px solid rgba(200,148,60,.45);
+    border-radius: 16px;
+  }
+  .spot-card.show { display: block; }
+  .spot-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .spot-headline {
+    font-size: clamp(20px, 4.5vw, 28px);
+    font-weight: 700; line-height: 1.25;
+    color: var(--ivory); margin-bottom: 10px;
+  }
+  .spot-sub {
+    font-size: 15px; line-height: 1.65;
+    color: var(--steel); margin-bottom: 24px;
+  }
+  .spot-sub strong { color: var(--gold); }
+  .spot-sub #spot-name { color: var(--ivory); font-weight: 600; }
+  .spot-actions {
+    display: flex; gap: 10px; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 16px;
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid rgba(200,148,60,.5); border-radius: var(--radius);
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px; font-weight: 700;
+    padding: 13px 22px;
+    cursor: pointer; white-space: nowrap;
+    transition: border-color .2s, color .2s;
+    text-decoration: none;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold-light); }
+  .spot-note {
+    font-size: 12px; color: var(--steel); opacity: .65;
+  }
+  @media (max-width: 480px) {
+    .spot-card { margin: 96px 16px 0; padding: 28px 20px 24px; }
+    .spot-actions { flex-direction: column; }
+    .spot-actions .btn-primary,
+    .spot-actions .btn-secondary { width: 100%; }
+  }
+
   /* ── MOBILE TWEAKS ────────────────────────────────── */
   @media (max-width: 480px) {
     .hero-form-row { flex-direction: column; }
@@ -348,6 +404,21 @@
   </a>
   <a href="#owner" class="nav-owner-link">Own a restaurant? →</a>
 </nav>
+
+<!-- ══ SPOT WELCOME CARD — shown on ?spot= visits from QR counter cards ══ -->
+<section class="spot-card" id="spot-card">
+  <p class="spot-eyebrow">✓ Rihla-verified halal spot</p>
+  <h2 class="spot-headline">You're at a Rihla-verified halal spot.</h2>
+  <p class="spot-sub">
+    Show this screen for <strong>15% off</strong> your first visit
+    at <span id="spot-name">this restaurant</span>.
+  </p>
+  <div class="spot-actions">
+    <a class="btn-primary" id="spot-call" href="#">Call to order</a>
+    <a class="btn-secondary" id="spot-directions" href="#" target="_blank" rel="noopener">Get directions</a>
+  </div>
+  <p class="spot-note">No app needed — just show this screen to your server.</p>
+</section>
 
 <!-- ══ DOOR 1: TRAVELLERS ══════════════════════════════ -->
 <section class="hero" id="main">
@@ -530,6 +601,54 @@
     el.classList.add('show');
     setTimeout(function () { el.classList.remove('show'); }, 3200);
   }
+
+  /* ── SPOT WELCOME CARD (?spot= visits from QR counter cards) ── */
+  (function () {
+    /* Business phone numbers live on the QR card backs — fill in to enable tap-to-call. */
+    var SPOTS = {
+      'moka-and-co':         { name: 'Moka and Co',         phone: '' },
+      'halal-munchies':      { name: 'Halal Munchies',      phone: '' },
+      'mokafe':              { name: 'MOKAFÉ',              phone: '' },
+      'zyara-restaurant':    { name: 'Zyara Restaurant',    phone: '' },
+      'merguez-and-frites':  { name: 'Merguez and Frites',  phone: '' },
+      'chick-rocks-astoria': { name: 'Chick Rocks Astoria', phone: '' },
+      'al-sham-restaurant':  { name: 'Al-Sham Restaurant',  phone: '' },
+      'levant':              { name: 'Levant',               phone: '' },
+      'kunafa-bites':        { name: 'Kunafa Bites',        phone: '' },
+      'amlu':                { name: 'AMLU',                 phone: '' }
+    };
+
+    var spot = new URLSearchParams(window.location.search).get('spot');
+    if (!spot) return;
+
+    var info = SPOTS[spot];
+    if (!info) {
+      var pretty = spot.replace(/-/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+      info = { name: pretty, phone: '' };
+    }
+
+    document.getElementById('spot-name').textContent = info.name;
+
+    var callBtn = document.getElementById('spot-call');
+    if (info.phone) {
+      callBtn.href = 'tel:' + info.phone.replace(/\D/g, '');
+      callBtn.textContent = 'Call ' + info.name;
+      callBtn.addEventListener('click', function () {
+        gtag('event', 'call_tap', { restaurant: spot });
+      });
+    } else {
+      callBtn.style.display = 'none';
+    }
+
+    var dirBtn = document.getElementById('spot-directions');
+    dirBtn.href = 'https://www.google.com/maps/search/?api=1&query=' +
+      encodeURIComponent(info.name + ', Queens, NY');
+    dirBtn.addEventListener('click', function () {
+      gtag('event', 'directions_tap', { restaurant: spot });
+    });
+
+    document.getElementById('spot-card').classList.add('show');
+  })();
 
 })();
 </script>
