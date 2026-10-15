@@ -604,18 +604,18 @@
 
   /* ── SPOT WELCOME CARD (?spot= visits from QR counter cards) ── */
   (function () {
-    /* Business phone numbers live on the QR card backs — fill in to enable tap-to-call. */
+    /* Business phone numbers, taken from the QR card backs (rihla-qr-counter-cards.pdf). */
     var SPOTS = {
-      'moka-and-co':         { name: 'Moka and Co',         phone: '' },
-      'halal-munchies':      { name: 'Halal Munchies',      phone: '' },
-      'mokafe':              { name: 'MOKAFÉ',              phone: '' },
-      'zyara-restaurant':    { name: 'Zyara Restaurant',    phone: '' },
-      'merguez-and-frites':  { name: 'Merguez and Frites',  phone: '' },
-      'chick-rocks-astoria': { name: 'Chick Rocks Astoria', phone: '' },
-      'al-sham-restaurant':  { name: 'Al-Sham Restaurant',  phone: '' },
-      'levant':              { name: 'Levant',               phone: '' },
-      'kunafa-bites':        { name: 'Kunafa Bites',        phone: '' },
-      'amlu':                { name: 'AMLU',                 phone: '' }
+      'moka-and-co':         { name: 'Moka and Co',         phone: '(929) 666-7002' },
+      'halal-munchies':      { name: 'Halal Munchies',      phone: '(917) 745-0585' },
+      'mokafe':              { name: 'MOKAFÉ',              phone: '(917) 745-0585' },
+      'zyara-restaurant':    { name: 'Zyara Restaurant',    phone: '(718) 777-7753' },
+      'merguez-and-frites':  { name: 'Merguez and Frites',  phone: '(917) 365-6877' },
+      'chick-rocks-astoria': { name: 'Chick Rocks Astoria', phone: '(347) 242-3449' },
+      'al-sham-restaurant':  { name: 'Al-Sham Restaurant',  phone: '(929) 884-2556' },
+      'levant':              { name: 'Levant',               phone: '(718) 233-8800' },
+      'kunafa-bites':        { name: 'Kunafa Bites',        phone: '(347) 407-5721' },
+      'amlu':                { name: 'AMLU',                 phone: '(347) 242-2033' }
     };
 
     var spot = new URLSearchParams(window.location.search).get('spot');
