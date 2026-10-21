@@ -14,8 +14,8 @@ Don't post it until it's filled in with the true one.
 ## The reel: "Prove me wrong"
 
 **Hook:** #6 The Receipt, written as a challenge. Scored **80.8 STRONG**.
-**Length:** 28.0s across 10 beats at 165 wpm, target 30s. No flags.
-**Humanizer:** 0 artefacts, human score **89.7 PASS**.
+**Length:** 28.4s across 10 beats at 165 wpm, target 30s. No flags.
+**Humanizer:** 0 artefacts, human score **89.1 PASS**.
 **Loop:** the last line repeats "30" and "wrong" from the hook.
 
 ### Spoken script
@@ -26,7 +26,7 @@ My bet? This card brings halal spots new diners.
 It sits on the counter, you scan it,
 and you get 15% off your first visit.
 I log every scan.
-Free for the restaurant.
+No fee for the restaurant.
 On day 30 I walk back in with the numbers,
 and if nobody scanned, I take the card back.
 Now I need 10 owners to say yes.
@@ -44,7 +44,7 @@ Change the shot on every line. That's what keeps people watching.
 | 0:06 | Card on the counter | (burned-in captions only) |
 | 0:09 | Phone scanning the QR | **15% OFF FIRST VISIT** |
 | 0:12 | Screen showing the scan log (only if real) | **EVERY SCAN COUNTED** |
-| 0:14 | You, to camera | **FREE FOR RESTAURANTS** |
+| 0:14 | You, to camera | **NO FEE FOR RESTAURANTS** |
 | 0:15 | Calendar / phone showing day 30 | **DAY 30: THE NUMBERS** |
 | 0:19 | Hand picking the card up off a counter | **NO SCANS? CARD GOES** |
 | 0:22 | Stack of blank cards, or you walking past Steinway shopfronts (no signs readable) | **NEED 10 YESES** |
@@ -56,14 +56,14 @@ Change the shot on every line. That's what keeps people watching.
 - Cover image: the card in your hand on Steinway, with **10 SPOTS. 30 DAYS.**
 - Use a card with no restaurant name on it. The current one says "Moka and Co".
 
-### Caption (lint: READY · humanizer: 98.7 PASS)
+### Caption (lint: READY · humanizer: 98.4 PASS)
 
 ```
 10 Astoria halal restaurants. 30 days. Every scan counted.
 
 One card sits on the counter, and on day 30 the numbers decide whether it stays there or I take it back.
 
-You scan it. You get 15% off your first visit. The restaurant pays nothing.
+You scan it. You get 15% off your first visit. The restaurant pays no fee.
 
 Now I need 10 owners on Steinway St to say yes. Follow for the day 30 numbers, good or bad. It's the halal NYC guide I wish I'd had.
 
