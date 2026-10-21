@@ -9,7 +9,7 @@ were not in those scripts. Fill them in rather than letting a skill guess.
 ## Who I am
 
 - **Name:** TBD (founder of Rihla)
-- **Handle:** TBD
+- **Handle:** @rihla.nl
 - **What I do, in one sentence:** I'm building Rihla, a hand-checked halal food
   guide for Astoria, starting with Steinway Street.
 - **Who I am talking to:** Muslims in New York, especially Astoria and Queens,
@@ -50,6 +50,9 @@ were not in those scripts. Fill them in rather than letting a skill guess.
 
 ## Style notes
 
+- Use contractions in spoken scripts ("you've", "isn't", "I'm"). A second
+  draft round dropped them all and read stiff out loud.
+
 - Opens on the place or the shared moment, not on the brand. Rihla comes in
   mid-script, never in the first line.
 - Uses real street and station names. Keep them, they are the specificity.
@@ -81,7 +84,10 @@ were not in those scripts. Fill them in rather than letting a skill guess.
 ## Proof I can use
 
 - Rihla cards going into 10 Astoria halal restaurants (launch week).
-- 1 café already live.
+- 1 café already live: Moka and Co.
+- Pilot is free for restaurants for 30 days (from the bio).
+- Account as of launch week: 2 posts, 2 followers, 13 views in 30 days.
+  Food photo post: 9 views. QR card post: 5 views.
 - 15% off the first visit for diners who scan the card.
 - Every Rihla spot is hand-checked by a person.
 - "10 spots, 30 days, real numbers at the end": the numbers don't exist yet,
@@ -89,8 +95,8 @@ were not in those scripts. Fill them in rather than letting a skill guess.
 
 ## The ask
 
-- **My keyword CTA, if I use one:** none yet
-- **What the keyword sends them:** n/a
-- **Where my link goes:** TBD (link in bio)
+- **My keyword CTA, if I use one:** "PILOT" (restaurant owners only, by DM)
+- **What the keyword sends them:** the free 30-day pilot offer
+- **Where my link goes:** rihla-website-self.vercel.app
 - **CTAs used so far:** "Follow for the full list", "Follow to watch the other
   nine join", "Link in bio", plus a question in the caption.
