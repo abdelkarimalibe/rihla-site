@@ -210,18 +210,20 @@ Alt text: Overhead shot of a halal spread on a wooden table: a mixed grill platt
 
 ---
 
-## Caption for the card post (lint: READY · humanizer: 80.4 PASS)
+## Caption for the card post (lint: READY · humanizer: 83.7 PASS)
 
 For a card with no restaurant name on it. The current image says "Moka and Co".
 
 ```
-Astoria halal restaurant owners: this card sits on your counter for 30 days, free. Here's the catch.
+Astoria halal restaurant owners: this card sits on your counter for 30 days, free. Then the numbers decide.
 
-There isn't one. A customer scans it and gets 15% off their first visit. You get a report on day 30 showing exactly how many diners scanned your card.
+A customer scans it and gets 15% off their first visit. On day 30 you get a report showing exactly how many diners scanned your card.
 
-If nobody scans in 30 days, I take the card back. You've paid nothing.
+No scans? I take the card back. You've paid nothing.
 
-Every spot gets hand-checked before it gets a card. That's the whole point of the guide.
+After that it's $79/month, and only if the report shows it's worth it. No contract.
+
+Every spot gets hand-checked by me, in person, before it ever gets a card on its counter. That's the point.
 
 DM me PILOT and I'll come by with one.
 

@@ -104,8 +104,10 @@ were not in those scripts. Fill them in rather than letting a skill guess.
 - The Day-30 report counts unique scanners, page views, call taps,
   directions taps and offer redemptions. It shows how many, never who.
   A scan is not a visit; only redemptions are visits.
-- Public wording: "hand-checked". Avoid "certified" until the check is
-  written down and published.
+- Public wording: "hand-checked". "Rihla Certified" is planned for year 3,
+  so never use "certified" or "certification" in posts before then.
+- Always mention the $79/month after the pilot when pitching owners. Never
+  write "no catch".
 
 ## The ask
 
