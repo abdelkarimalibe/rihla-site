@@ -84,7 +84,9 @@ were not in those scripts. Fill them in rather than letting a skill guess.
 ## Proof I can use
 
 - Rihla cards going into 10 Astoria halal restaurants (launch week).
-- 1 café already live: Moka and Co.
+- No restaurant confirmed yet (Mokafé and Moka and Co pending owner and
+  manager approval). Don't name any restaurant, or say any spot is live,
+  until it's confirmed.
 - Pilot is free for restaurants for 30 days (from the bio).
 - Account as of launch week: 2 posts, 2 followers, 13 views in 30 days.
   Food photo post: 9 views. QR card post: 5 views.
