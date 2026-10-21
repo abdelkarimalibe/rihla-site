@@ -189,3 +189,21 @@ the whole guide sells.
 
 Expected profile score once all of this is done: about 82, up from 43.
 The remaining points need a fuller grid, a real domain and a clearer logo.
+
+---
+
+## Caption for the food photo post (lint: READY · humanizer: 89.4 PASS)
+
+```
+Kofta, shish, doner, hummus, tabbouleh. All from one street in Astoria that most people walk straight past.
+
+It's Steinway St. Maybe the best halal food street in New York.
+
+I'm hand-checking halal spots in Astoria one at a time. The ones that make the Rihla guide get a card on the counter: scan it for 15% off your first visit.
+
+Tell me your go-to mixed grill on Steinway. That's where I'm checking next.
+
+#HalalNYC #Astoria #HalalFood #NYCFood
+```
+
+Alt text: Overhead shot of a halal spread on a wooden table: a mixed grill platter with kofta, shish and doner over salad, a mezze plate with hummus, tabbouleh and baba ghanoush, a wrap, and two pitas in foil.
