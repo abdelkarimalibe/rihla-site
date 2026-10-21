@@ -210,14 +210,14 @@ Alt text: Overhead shot of a halal spread on a wooden table: a mixed grill platt
 
 ---
 
-## Caption for the card post (lint: READY · humanizer: 83.0 PASS)
+## Caption for the card post (lint: READY · humanizer: 80.4 PASS)
 
 For a card with no restaurant name on it. The current image says "Moka and Co".
 
 ```
 Astoria halal restaurant owners: this card sits on your counter for 30 days, free. Here's the catch.
 
-There isn't one. A customer scans it and gets 15% off their first visit. You get a report of every scan, so you see exactly who Rihla sent through your door.
+There isn't one. A customer scans it and gets 15% off their first visit. You get a report on day 30 showing exactly how many diners scanned your card.
 
 If nobody scans in 30 days, I take the card back. You've paid nothing.
 

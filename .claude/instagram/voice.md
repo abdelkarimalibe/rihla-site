@@ -8,7 +8,7 @@ were not in those scripts. Fill them in rather than letting a skill guess.
 
 ## Who I am
 
-- **Name:** TBD (founder of Rihla)
+- **Name:** Abdelkarim, founder of Rihla
 - **Handle:** @rihla.nl
 - **What I do, in one sentence:** I'm building Rihla, a hand-checked halal food
   guide for Astoria, starting with Steinway Street.
@@ -94,6 +94,18 @@ were not in those scripts. Fill them in rather than letting a skill guess.
 - Every Rihla spot is hand-checked by a person.
 - "10 spots, 30 days, real numbers at the end": the numbers don't exist yet,
   so drafts use `{{your number}}` until they do.
+
+## The offer, as the pilot documents state it
+
+- Diners: scan the card, show the Rihla page at the till, get 15% off the
+  first visit. Card line: "Scan. Show. Save."
+- Restaurants: free 30-day pilot, then $79/month, no contract, cancel
+  anytime. "If the report doesn't show customers, don't pay."
+- The Day-30 report counts unique scanners, page views, call taps,
+  directions taps and offer redemptions. It shows how many, never who.
+  A scan is not a visit; only redemptions are visits.
+- Public wording: "hand-checked". Avoid "certified" until the check is
+  written down and published.
 
 ## The ask
 
