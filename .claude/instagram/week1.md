@@ -207,3 +207,25 @@ Tell me your go-to mixed grill on Steinway. That's where I'm checking next.
 ```
 
 Alt text: Overhead shot of a halal spread on a wooden table: a mixed grill platter with kofta, shish and doner over salad, a mezze plate with hummus, tabbouleh and baba ghanoush, a wrap, and two pitas in foil.
+
+---
+
+## Caption for the card post (lint: READY · humanizer: 83.0 PASS)
+
+For a card with no restaurant name on it. The current image says "Moka and Co".
+
+```
+Astoria halal restaurant owners: this card sits on your counter for 30 days, free. Here's the catch.
+
+There isn't one. A customer scans it and gets 15% off their first visit. You get a report of every scan, so you see exactly who Rihla sent through your door.
+
+If nobody scans in 30 days, I take the card back. You've paid nothing.
+
+Every spot gets hand-checked before it gets a card. That's the whole point of the guide.
+
+DM me PILOT and I'll come by with one.
+
+#HalalNYC #Astoria #SmallBusiness #RestaurantOwners
+```
+
+Alt text: A white Rihla counter card with a gold border and a QR code. Text reads "Scan for 15% off your first visit" and "Halal food in NYC you can actually trust".
