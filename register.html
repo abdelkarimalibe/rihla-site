@@ -106,7 +106,10 @@
       var res = await client.auth.signUp({
         email: document.getElementById('email').value.trim(),
         password: document.getElementById('password').value,
-        options: { data: { restaurant_name: document.getElementById('restaurant').value.trim() } }
+        options: {
+          data: { restaurant_name: document.getElementById('restaurant').value.trim() },
+          emailRedirectTo: window.location.origin + '/members.html'
+        }
       });
       if (res.error) { showError(res.error.message); return; }
       success.classList.add('show');
