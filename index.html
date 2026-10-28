@@ -68,13 +68,14 @@
     color: var(--gold);
   }
   .nav-owner-link {
-    font-size: 13px; font-weight: 600;
-    color: var(--steel); text-decoration: none;
-    padding: 8px 18px;
-    border: 1px solid var(--border); border-radius: 7px;
-    transition: color .2s, border-color .2s;
+    font-size: 13px; font-weight: 700;
+    color: var(--navy); text-decoration: none;
+    padding: 9px 18px;
+    background: var(--gold);
+    border: 1px solid var(--gold); border-radius: 7px;
+    transition: opacity .2s;
   }
-  .nav-owner-link:hover { color: var(--gold); border-color: var(--gold); }
+  .nav-owner-link:hover { opacity: .9; }
 
   /* ── TRAVELLER HERO ───────────────────────────────── */
   .hero {
@@ -235,6 +236,8 @@
     color: var(--ivory); margin-bottom: 4px;
   }
   .bullet-text span { font-size: 13px; color: var(--steel); line-height: 1.6; }
+  .owner-mark { text-align: center; color: var(--steel); font-size: 14px; line-height: 1.6; margin: 0 auto 30px; max-width: 560px; }
+  .owner-mark .mark-arabic { font-family: 'Amiri', serif; color: var(--gold); font-size: 22px; }
 
   /* ── CLAIM FORM ───────────────────────────────────── */
   .claim-card {
@@ -444,7 +447,7 @@
     <span class="nav-arabic">ر</span>
     <span class="nav-en">Rihla</span>
   </a>
-  <a href="#owner" class="nav-owner-link">Own a restaurant? →</a>
+  <a href="#owner" class="nav-owner-link">Claim your spot →</a>
 </nav>
 
 <!-- ══ SPOT WELCOME CARD — shown on ?spot= visits from QR counter cards ══ -->
@@ -515,27 +518,29 @@
 
   <div class="owner-bullets">
     <div class="bullet">
-      <div class="bullet-icon">📲</div>
+      <div class="bullet-icon">🔍</div>
       <div class="bullet-text">
-        <strong>Tracked QR — see every Rihla customer we send you</strong>
-        <span>A small counter card with your unique QR. Customers scan for 15% off their first visit. You get a monthly report: scans, estimated covers, best day of week.</span>
-      </div>
-    </div>
-    <div class="bullet">
-      <div class="bullet-icon">🚫</div>
-      <div class="bullet-text">
-        <strong>No tablet, no app, no menu changes needed</strong>
-        <span>Staff brief takes two minutes. Nothing to install, nothing to change. Just honour the discount and keep the Rihla sticker in your window.</span>
+        <strong>Get discovered — a verified page AI can read</strong>
+        <span>Your restaurant gets a verified page that Google and AI can actually read, so Muslim diners find you instead of skipping you.</span>
       </div>
     </div>
     <div class="bullet">
       <div class="bullet-icon">✅</div>
       <div class="bullet-text">
-        <strong>Cancel anytime — you pay nothing if it doesn't work</strong>
-        <span>30 days completely free. After that it's $79/month — covered by roughly 3 extra tables. If the numbers don't move, walk away with zero cost.</span>
+        <strong>Get chosen — the badge plus 15% off</strong>
+        <span>A diner scans your counter card, sees your verified halal status, and gets 15% off their first visit. The card does the convincing.</span>
+      </div>
+    </div>
+    <div class="bullet">
+      <div class="bullet-icon">🔁</div>
+      <div class="bullet-text">
+        <strong>Get them back — your list, not a delivery app's</strong>
+        <span>Every scanner joins your list, not a delivery app's, so you can bring them back without paying commission on every order. The monthly report shows the scans, so you see it working.</span>
       </div>
     </div>
   </div>
+
+  <p class="owner-mark">Every Rihla-verified restaurant carries the <span class="mark-arabic">ر</span> mark. One mark, one meaning: this halal claim was checked.</p>
 
   <div class="claim-card">
     <h3>Claim your spot — only 10 available in NYC right now</h3>
