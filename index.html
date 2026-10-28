@@ -455,7 +455,7 @@
   } catch (_) {}
 
   gtag('config', 'G-1235J90MCS');
-  (function () { var spot = new URLSearchParams(window.location.search).get('spot'); if (spot) { gtag('event', 'qr_scan', { restaurant: spot }); } })();
+  (function () { var q = new URLSearchParams(window.location.search), spot = q.get('spot'); if (spot) { gtag('event', q.get('utm_medium') === 'email' ? 'email_click' : 'qr_scan', { restaurant: spot }); } })();
 </script>
 </head>
 <body>

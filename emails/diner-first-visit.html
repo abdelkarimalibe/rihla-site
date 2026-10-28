@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="robots" content="noindex">
+<title>15% off at *|SPOT_NAME|*, hand-checked halal</title>
+<!--
+  Rihla diner email. Mailchimp merge tags:
+  *|FNAME|*  *|SPOT_NAME|*  *|SPOT_AREA|*  *|CHECK_DATE|*  *|TIER|*  *|SPOT_SLUG|* (e.g. kunafa-bites, opens the spot card)
+  Hero image rule: hands plus dish, no face. 1200x900 JPG, swap the src below.
+  Every claim here must match the spot's real check: tier and date come from the check record, never typed by hand.
+-->
+<style>
+  body { margin:0; padding:0; background:#080D1A; }
+  a { color:#E8B85C; }
+  @media (max-width:620px) {
+    .wrap { width:100% !important; }
+    .pad { padding-left:20px !important; padding-right:20px !important; }
+    .hero-type { font-size:52px !important; line-height:50px !important; }
+    .col { display:block !important; width:100% !important; }
+    .big { font-size:44px !important; }
+    .col { padding-bottom:20px !important; }
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background:#080D1A;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">Hand-checked halal at *|SPOT_NAME|*. 15% off your first visit. Show this screen.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#080D1A">
+<tr><td align="center" style="padding:24px 0;">
+<table role="presentation" class="wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;">
+
+  <!-- Header: the frame, never personalized away -->
+  <tr><td class="pad" style="padding:8px 32px 20px;border-bottom:1px solid #3A3220;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+      <td style="font-family:Amiri,Georgia,'Times New Roman',serif;font-size:36px;font-weight:700;color:#F5EDD6;line-height:1;">ر <span style="font-family:Manrope,Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:3px;color:#C8943C;vertical-align:middle;">RIHLA</span></td>
+      <td align="right" style="font-family:'Courier New',Courier,monospace;font-size:11px;letter-spacing:1px;color:#8A9BB0;text-transform:uppercase;">*|SPOT_AREA|* &middot; NYC</td>
+    </tr></table>
+  </td></tr>
+
+  <!-- Loud line: type is the hero -->
+  <tr><td class="pad" style="padding:40px 32px 8px;">
+    <div style="font-family:'Courier New',Courier,monospace;font-size:11px;letter-spacing:2px;color:#C8943C;text-transform:uppercase;padding-bottom:14px;">&mdash; New verified spot &middot; *|SPOT_NAME|*</div>
+    <div class="hero-type" style="font-family:'Arial Black',Manrope,Arial,Helvetica,sans-serif;font-size:68px;line-height:64px;font-weight:900;color:#F5EDD6;text-transform:uppercase;letter-spacing:-2px;">Hand-checked<br><span style="color:#C8943C;">halal.</span><br>15% off.</div>
+  </td></tr>
+  <tr><td class="pad" style="padding:16px 32px 32px;font-family:Manrope,Arial,Helvetica,sans-serif;font-size:15px;line-height:24px;color:#8A9BB0;">
+    Salaam *|FNAME|*. We checked *|SPOT_NAME|* so you don't have to ask. Your first visit is 15% off.
+  </td></tr>
+
+  <!-- One big image: hands plus dish, no face.
+       Until the photo exists this block stands in. To swap, replace the <td> content with:
+       <img src="https://rihla-website-self.vercel.app/emails/img/dish.jpg" width="600" alt="A dish at *|SPOT_NAME|*" style="display:block;width:100%;max-width:600px;height:auto;border:0;"> -->
+  <tr><td align="center" bgcolor="#1A2234" style="padding:64px 32px;background:#1A2234;">
+    <div style="font-family:Amiri,Georgia,'Times New Roman',serif;font-size:120px;line-height:120px;font-weight:700;color:#C8943C;">ر</div>
+    <div style="font-family:'Courier New',Courier,monospace;font-size:11px;letter-spacing:2px;color:#8A9BB0;text-transform:uppercase;padding-top:12px;">Checked &middot; *|SPOT_NAME|*</div>
+  </td></tr>
+
+  <!-- Spec grid: the proof, in huge type -->
+  <tr><td class="pad" bgcolor="#F5EDD6" style="padding:32px;background:#F5EDD6;">
+    <div style="font-family:'Courier New',Courier,monospace;font-size:11px;letter-spacing:2px;color:#080D1A;text-transform:uppercase;padding-bottom:18px;">&mdash; The check &middot; behind this email</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td class="col" width="50%" valign="top" style="padding:0 0 24px;">
+          <div class="big" style="font-family:'Arial Black',Arial,Helvetica,sans-serif;font-size:52px;line-height:52px;font-weight:900;color:#080D1A;">15<span style="font-size:20px;color:#C8943C;">%</span></div>
+          <div style="font-family:'Courier New',Courier,monospace;font-size:10px;letter-spacing:1px;color:#4A5568;text-transform:uppercase;">Off your first visit</div>
+        </td>
+        <td class="col" width="50%" valign="top" style="padding:0 0 24px;">
+          <div class="big" style="font-family:Amiri,Georgia,'Times New Roman',serif;font-size:56px;line-height:52px;font-weight:700;color:#080D1A;">ر</div>
+          <div style="font-family:'Courier New',Courier,monospace;font-size:10px;letter-spacing:1px;color:#4A5568;text-transform:uppercase;">One mark, one meaning: checked</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="col" width="50%" valign="top" style="padding:0;">
+          <div style="font-family:'Arial Black',Arial,Helvetica,sans-serif;font-size:26px;line-height:30px;font-weight:900;color:#080D1A;text-transform:uppercase;">*|TIER|*</div>
+          <div style="font-family:'Courier New',Courier,monospace;font-size:10px;letter-spacing:1px;color:#4A5568;text-transform:uppercase;">Check tier</div>
+        </td>
+        <td class="col" width="50%" valign="top" style="padding:0;">
+          <div style="font-family:'Arial Black',Arial,Helvetica,sans-serif;font-size:26px;line-height:30px;font-weight:900;color:#080D1A;text-transform:uppercase;">*|CHECK_DATE|*</div>
+          <div style="font-family:'Courier New',Courier,monospace;font-size:10px;letter-spacing:1px;color:#4A5568;text-transform:uppercase;">Last checked</div>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+
+  <!-- One CTA -->
+  <tr><td class="pad" align="center" style="padding:40px 32px;">
+    <div style="font-family:'Arial Black',Arial,Helvetica,sans-serif;font-size:30px;line-height:34px;font-weight:900;color:#F5EDD6;text-transform:uppercase;padding-bottom:20px;">Show this screen<br><span style="color:#C8943C;">at the counter.</span></div>
+    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="https://rihla-website-self.vercel.app/?spot=*|SPOT_SLUG|*&utm_source=mailchimp&utm_medium=email&utm_campaign=diner_first_visit" style="height:52px;v-text-anchor:middle;width:300px;" arcsize="14%" fillcolor="#C8943C" stroke="f"><center style="color:#080D1A;font-family:Arial,sans-serif;font-size:15px;font-weight:bold;">See the spot and its check &rarr;</center></v:roundrect><![endif]-->
+    <!--[if !mso]><!--><a href="https://rihla-website-self.vercel.app/?spot=*|SPOT_SLUG|*&utm_source=mailchimp&utm_medium=email&utm_campaign=diner_first_visit" style="display:inline-block;background:#C8943C;color:#080D1A;font-family:Manrope,Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;text-decoration:none;padding:16px 28px;border-radius:7px;">See the spot and its check &rarr;</a><!--<![endif]-->
+  </td></tr>
+
+  <!-- Footer: required unsubscribe and postal address -->
+  <tr><td class="pad" style="padding:24px 32px;border-top:1px solid #3A3220;font-family:Manrope,Arial,Helvetica,sans-serif;font-size:11px;line-height:18px;color:#8A9BB0;">
+    One offer per diner, first visit only. You're getting this because you joined Rihla.<br>
+    *|LIST:ADDRESSLINE|*<br>
+    <a href="*|UNSUB|*" style="color:#8A9BB0;">Unsubscribe</a> &middot; <a href="*|UPDATE_PROFILE|*" style="color:#8A9BB0;">Preferences</a> &middot; <a href="https://rihla-website-self.vercel.app/privacy.html" style="color:#8A9BB0;">Privacy</a>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
