@@ -257,6 +257,45 @@
   .owner-demo { text-align: center; margin-top: 12px; }
   .owner-demo a { color: var(--gold); font-size: 13px; font-weight: 600; text-decoration: none; }
 
+  /* ── HALAL VISIBILITY CHECK ──────────────────────── */
+  .check-box {
+    background: rgba(200,148,60,.06);
+    border: 1px solid rgba(200,148,60,.45); border-radius: 14px;
+    padding: 24px 20px; margin: 0 auto 40px; text-align: left;
+  }
+  .check-box label { display: block; font-size: 15px; font-weight: 700; color: var(--ivory); margin-bottom: 4px; }
+  .check-box .check-hint { font-size: 13px; color: var(--steel); line-height: 1.6; margin-bottom: 14px; }
+  .check-row { display: flex; gap: 8px; }
+  .check-row input {
+    flex: 1; min-width: 0;
+    background: rgba(255,255,255,.06);
+    border: 1px solid var(--border); border-radius: 8px;
+    color: var(--ivory); font-family: 'Manrope', sans-serif;
+    font-size: 15px; padding: 14px 16px; outline: none;
+  }
+  .check-row input:focus { border-color: var(--gold); }
+  .check-row button { flex-shrink: 0; padding: 14px 18px; }
+  .check-sample { display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--gold); text-decoration: none; }
+
+  /* ── BEHIND THE MARK ──────────────────────────────── */
+  .proof-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0 0 30px; }
+  @media (max-width: 560px) { .proof-row { grid-template-columns: 1fr; } }
+  .proof-tile {
+    background: rgba(255,255,255,.025);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px 16px; text-align: left;
+  }
+  .proof-tile b { display: block; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .proof-tile span { font-size: 13px; line-height: 1.6; color: var(--steel); }
+
+  /* ── PILOT ────────────────────────────────────────── */
+  .pilot-card {
+    border-left: 2px solid var(--gold);
+    padding: 4px 0 4px 16px; margin: 0 auto 30px;
+    text-align: left; font-size: 14px; line-height: 1.7; color: var(--steel);
+  }
+  .pilot-card strong { color: var(--ivory); }
+
   /* ── CLAIM FORM ───────────────────────────────────── */
   .claim-card {
     background: rgba(255,255,255,.03);
@@ -541,6 +580,16 @@
     and you decide if it's worth it.
   </p>
 
+  <form class="check-box" id="check-form" novalidate>
+    <label for="check-name">Free Halal Visibility Check</label>
+    <p class="check-hint">Can diners and AI tell your restaurant is halal? Type your restaurant's name. We check it by hand and call you with your grade and three fixes.</p>
+    <div class="check-row">
+      <input type="text" id="check-name" placeholder="Your restaurant name" autocomplete="organization">
+      <button type="submit" class="btn-primary">Check it →</button>
+    </div>
+    <a class="check-sample" href="/grader-demo.html">See a sample grade first →</a>
+  </form>
+
   <div class="owner-bullets">
     <div class="bullet">
       <div class="bullet-icon">🔍</div>
@@ -566,6 +615,14 @@
   </div>
 
   <p class="owner-mark">Every Rihla-verified restaurant carries the <span class="mark-arabic">ر</span> mark. One mark, one meaning: this halal claim was checked.</p>
+
+  <div class="proof-row">
+    <div class="proof-tile"><b>The tier</b><span>Hand-Checked, Document-Verified or Community-Reported. Diners see exactly how it was checked.</span></div>
+    <div class="proof-tile"><b>The date</b><span>Every check shows when it was done, and expires after 12 months.</span></div>
+    <div class="proof-tile"><b>The count</b><span>Every scan and every first-visit offer is counted, so your report shows which diners Rihla sent.</span></div>
+  </div>
+
+  <p class="pilot-card"><strong>Pilot underway in Queens.</strong> The first 30-day reports land November 19. Real results go here after that. We never post a number we can't show you.</p>
 
   <div class="claim-card">
     <h3>Claim your spot — only 10 available in NYC right now</h3>
@@ -608,6 +665,9 @@
 
     <p class="owner-fine-print">
       No card required. No commitment. 30 days free — then $79/mo only if it's working for you.
+    </p>
+    <p class="owner-fine-print">
+      One flat price. No per-cover fees, no paying per click, no 12-month contract.
     </p>
     <p class="owner-demo">
       <a href="/demo.html">See a demo of the monthly report →</a>
@@ -671,6 +731,16 @@
   });
 
   /* ── OWNER FORM ──────────────────────────────────── */
+  document.getElementById('check-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('check-name').value.trim();
+    var field = document.getElementById('restaurant-name');
+    if (name) field.value = name;
+    gtag('event', 'visibility_check_start', { restaurant: name });
+    field.closest('.claim-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function () { document.getElementById(name ? 'owner-name' : 'restaurant-name').focus({ preventScroll: true }); }, 500);
+  });
+
   document.getElementById('owner-form').addEventListener('submit', function (e) {
     e.preventDefault();
     const data = {
