@@ -85,6 +85,8 @@
     transition: color .2s, border-color .2s;
   }
   .nav-demo-link:hover { color: var(--gold); border-color: var(--gold); }
+  .nav-login-link { font-size: 13px; font-weight: 600; color: var(--steel); text-decoration: none; padding: 9px 4px; }
+  .nav-login-link:hover { color: var(--gold); }
 
   /* ── TRAVELLER HERO ───────────────────────────────── */
   .hero {
@@ -469,6 +471,7 @@
   </a>
   <div class="nav-actions">
     <a href="/demo.html" class="nav-demo-link">See a demo</a>
+    <a href="/login.html" class="nav-login-link">Login</a>
     <a href="#owner" class="nav-owner-link">Claim your spot →</a>
   </div>
 </nav>
@@ -796,6 +799,25 @@
   document.getElementById('cookie-accept').addEventListener('click', function () { choose('granted'); });
   document.getElementById('cookie-decline').addEventListener('click', function () { choose('denied'); });
 })();
+</script>
+<script>
+  // First-touch attribution: save UTM parameters so the claim-form fix can
+  // attach them to every lead. GA4 already captures session source/medium
+  // from the landing URL; this persists it past the first page.
+  (function () {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (k) {
+        var v = params.get(k);
+        if (v) utm[k] = v;
+      });
+      if (Object.keys(utm).length) {
+        utm.first_touch = new Date().toISOString();
+        localStorage.setItem('rihla_utm', JSON.stringify(utm));
+      }
+    } catch (e) { /* storage unavailable, ignore */ }
+  })();
 </script>
 </body>
 </html>

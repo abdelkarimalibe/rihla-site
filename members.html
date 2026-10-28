@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Members Area — Rihla</title>
+<meta name="description" content="Your Rihla Members Area: your restaurant listing and monthly report.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://rihla-website-self.vercel.app/members.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #080D1A; color: #F5EDD6; font-family: 'Manrope', sans-serif; min-height: 100vh; overflow-x: hidden; }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 28px; border-bottom: 1px solid rgba(200,148,60,0.18); }
+  nav a { text-decoration: none; }
+  .nav-arabic { font-family: 'Amiri', serif; font-size: 24px; font-weight: 700; color: #F5EDD6; direction: rtl; }
+  .nav-en { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #C8943C; }
+  .nav-back { font-size: 13px; font-weight: 600; color: #8A9BB0; }
+  .nav-back:hover { color: #C8943C; }
+  main { max-width: 680px; margin: 0 auto; padding: 96px 24px 88px; text-align: center; }
+  h1 { font-size: clamp(26px, 5.5vw, 38px); font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+  .member-sub { font-size: 15px; line-height: 1.7; color: #8A9BB0; margin-bottom: 30px; }
+  .member-sub strong { color: #F5EDD6; }
+  .member-card { background: rgba(200,148,60,.06); border: 1px solid rgba(200,148,60,.45); border-radius: 16px; padding: 30px 26px; text-align: left; margin-bottom: 20px; }
+  .member-card h2 { font-size: 17px; font-weight: 700; color: #E8B85C; margin-bottom: 10px; }
+  .member-card p { font-size: 14px; line-height: 1.7; color: #8A9BB0; }
+  .auth-notice { display: none; font-size: 13px; line-height: 1.6; color: #8A9BB0; text-align: center; background: rgba(255,255,255,.04); border: 1px solid rgba(200,148,60,.25); border-radius: 10px; padding: 14px; margin-bottom: 18px; }
+  .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: #C8943C; color: #080D1A; font-size: 15px; font-weight: 700; padding: 14px 26px; border-radius: 7px; text-decoration: none; }
+  .btn-secondary { background: transparent; color: #E8B85C; font-size: 15px; font-weight: 600; padding: 14px 26px; border: 1px solid rgba(200,148,60,.45); border-radius: 7px; text-decoration: none; }
+  footer { border-top: 1px solid rgba(200,148,60,0.18); padding: 22px 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  footer p, footer a { font-size: 12px; color: #8A9BB0; text-decoration: none; }
+  footer a:hover { color: #C8943C; }
+  @media (max-width: 480px) { nav { padding: 14px 18px; } main { padding-top: 72px; } .member-card { padding: 24px 18px; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/">
+    <span class="nav-arabic">ر</span>
+    <span class="nav-en">Rihla</span>
+  </a>
+  <a class="nav-back" href="/" id="logout">Log out</a>
+</nav>
+<main>
+  <p class="auth-notice" id="auth-notice">The Members Area is being set up. Your dashboard opens once the project is connected.</p>
+  <div id="member-content" style="display:none;">
+    <h1 id="member-heading">Members Area.</h1>
+    <p class="member-sub" id="member-welcome"></p>
+    <div class="member-card">
+      <h2>Your dashboard is being built.</h2>
+      <p>Your listing, your scans, and your monthly report will live here. Listing edits, live report view, and document uploads arrive with the next Members Area update.</p>
+    </div>
+    <div class="cta-row">
+      <a class="btn-primary" href="/demo.html">See the demo report →</a>
+      <a class="btn-secondary" href="/">Back to Rihla</a>
+    </div>
+  </div>
+</main>
+<footer>
+  <p>© 2026 Rihla &nbsp;·&nbsp; <a href="mailto:rihla.enquiries@gmail.com">rihla.enquiries@gmail.com</a></p>
+  <p>
+    <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp;
+    <a href="/terms.html">Terms</a> &nbsp;·&nbsp;
+    <a href="https://www.instagram.com/rihla.nl" target="_blank" rel="noopener">@rihla.nl on Instagram</a>
+  </p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/supabase-config.js"></script>
+<script>
+  (function () {
+    var notice = document.getElementById('auth-notice');
+    var content = document.getElementById('member-content');
+    if (!SUPABASE_CONFIGURED || typeof supabase === 'undefined') {
+      notice.style.display = 'block';
+      return;
+    }
+    var client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    client.auth.getSession().then(function (res) {
+      var user = res.data.session && res.data.session.user;
+      if (!user) { window.location.href = '/login.html'; return; }
+      var name = (user.user_metadata && user.user_metadata.restaurant_name) || '';
+      document.getElementById('member-heading').textContent = name ? name + ' — Members Area.' : 'Members Area.';
+      document.getElementById('member-welcome').innerHTML = 'Logged in as <strong>' + user.email + '</strong>.';
+      content.style.display = 'block';
+    });
+    document.getElementById('logout').addEventListener('click', async function (e) {
+      e.preventDefault();
+      await client.auth.signOut();
+      window.location.href = '/login.html';
+    });
+  })();
+</script>
+</body>
+</html>
