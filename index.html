@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rihla — Halal food in NYC you can actually trust</title>
-<meta name="description" content="Rihla hand-checks the best halal spots in New York. Get 15% off your first visit. Restaurant owners: we send you Muslim customers, free for 30 days.">
+<meta name="description" content="Rihla hand-checks the best halal spots in New York. Get 15%* off your first visit. Restaurant owners: we send you Muslim customers, free for 30 days.">
 <link rel="canonical" href="https://rihla-website-self.vercel.app/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Rihla">
 <meta property="og:title" content="Rihla — Halal food in NYC you can actually trust">
-<meta property="og:description" content="Rihla hand-checks the best halal spots in New York. Get 15% off your first visit. Restaurant owners: we send you Muslim customers, free for 30 days.">
+<meta property="og:description" content="Rihla hand-checks the best halal spots in New York. Get 15%* off your first visit. Restaurant owners: we send you Muslim customers, free for 30 days.">
 <meta property="og:url" content="https://rihla-website-self.vercel.app/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rihla — Halal food in NYC you can actually trust">
-<meta name="twitter:description" content="Rihla hand-checks the best halal spots in New York. Get 15% off your first visit. Restaurant owners: we send you Muslim customers, free for 30 days.">
+<meta name="twitter:description" content="Rihla hand-checks the best halal spots in New York. Get 15%* off your first visit. Restaurant owners: we send you Muslim customers, free for 30 days.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,6 +76,15 @@
     transition: opacity .2s;
   }
   .nav-owner-link:hover { opacity: .9; }
+  .nav-actions { display: flex; gap: 10px; align-items: center; }
+  .nav-demo-link {
+    font-size: 13px; font-weight: 600;
+    color: var(--steel); text-decoration: none;
+    padding: 9px 16px;
+    border: 1px solid var(--border); border-radius: 7px;
+    transition: color .2s, border-color .2s;
+  }
+  .nav-demo-link:hover { color: var(--gold); border-color: var(--gold); }
 
   /* ── TRAVELLER HERO ───────────────────────────────── */
   .hero {
@@ -243,6 +252,8 @@
   .bullet-text span { font-size: 13px; color: var(--steel); line-height: 1.6; }
   .owner-mark { text-align: center; color: var(--steel); font-size: 14px; line-height: 1.6; margin: 0 auto 30px; max-width: 560px; }
   .owner-mark .mark-arabic { font-family: 'Amiri', serif; color: var(--gold); font-size: 22px; }
+  .owner-demo { text-align: center; margin-top: 12px; }
+  .owner-demo a { color: var(--gold); font-size: 13px; font-weight: 600; text-decoration: none; }
 
   /* ── CLAIM FORM ───────────────────────────────────── */
   .claim-card {
@@ -412,6 +423,9 @@
   .spot-note {
     font-size: 12px; color: var(--steel); opacity: .8;
   }
+  .spot-fine {
+    font-size: 11px; color: var(--steel); opacity: .7; margin-top: 10px;
+  }
   @media (max-width: 480px) {
     .spot-card { margin: 96px 16px 0; padding: 28px 20px 24px; }
     .spot-actions { flex-direction: column; }
@@ -423,6 +437,7 @@
   @media (max-width: 480px) {
     .hero-form-row { flex-direction: column; }
     nav { padding: 14px 18px; }
+    .nav-demo-link { display: none; }
     .claim-card { padding: 24px 18px; }
   }
 </style>
@@ -452,7 +467,10 @@
     <span class="nav-arabic">ر</span>
     <span class="nav-en">Rihla</span>
   </a>
-  <a href="#owner" class="nav-owner-link">Claim your spot →</a>
+  <div class="nav-actions">
+    <a href="/demo.html" class="nav-demo-link">See a demo</a>
+    <a href="#owner" class="nav-owner-link">Claim your spot →</a>
+  </div>
 </nav>
 
 <!-- ══ SPOT WELCOME CARD — shown on ?spot= visits from QR counter cards ══ -->
@@ -460,7 +478,7 @@
   <p class="spot-eyebrow">✓ Rihla-verified halal spot</p>
   <h2 class="spot-headline">You're at a Rihla-verified halal spot.</h2>
   <p class="spot-sub">
-    Show this screen for <strong>15% off</strong> your first visit
+    Show this screen for <strong>15%* off</strong> your first visit
     at <span id="spot-name">this restaurant</span>.
   </p>
   <div class="spot-actions">
@@ -468,6 +486,7 @@
     <a class="btn-secondary" id="spot-directions" href="#" target="_blank" rel="noopener">Get directions</a>
   </div>
   <p class="spot-note">No app needed — just show this screen to your server.</p>
+  <p class="spot-fine">*First-visit discount at participating restaurants, on each restaurant's own terms.</p>
 </section>
 
 <!-- ══ DOOR 1: TRAVELLERS ══════════════════════════════ -->
@@ -481,7 +500,7 @@
   </h1>
   <p class="hero-sub">
     Rihla is hand-checking the 50 best halal spots in New York.
-    Get&nbsp;<strong style="color:var(--gold)">15% off</strong> your first visit
+    Get&nbsp;<strong style="color:var(--gold)">15%* off</strong> your first visit
     when you show your Rihla pass.
   </p>
 
@@ -534,8 +553,8 @@
     <div class="bullet">
       <div class="bullet-icon">✅</div>
       <div class="bullet-text">
-        <strong>Get chosen — the badge plus 15% off</strong>
-        <span>A diner scans your counter card, sees your verified halal status, and gets 15% off their first visit. The card does the convincing.</span>
+        <strong>Get chosen — the badge plus 15%* off</strong>
+        <span>A diner scans your counter card, sees your verified halal status, and gets 15%* off their first visit. The card does the convincing.</span>
       </div>
     </div>
     <div class="bullet">
@@ -591,6 +610,9 @@
     <p class="owner-fine-print">
       No card required. No commitment. 30 days free — then $79/mo only if it's working for you.
     </p>
+    <p class="owner-demo">
+      <a href="/demo.html">See a demo of the monthly report →</a>
+    </p>
   </div>
 
 </section>
@@ -604,6 +626,7 @@
     <a href="/terms.html">Terms</a> &nbsp;·&nbsp;
     <a href="https://www.instagram.com/rihla.nl" target="_blank" rel="noopener">@rihla.nl on Instagram</a>
   </p>
+  <p>*First-visit discount at participating restaurants, on each restaurant's own terms.</p>
 </footer>
 
 <div id="cookie-banner" role="dialog" aria-label="Cookie consent">
