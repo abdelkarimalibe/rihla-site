@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halal Visibility Check demo — Rihla</title>
+<meta name="description" content="Demo of the Rihla Halal Visibility Check. Sample data only, no real restaurant was graded.">
+<link rel="canonical" href="https://rihla-website-self.vercel.app/grader-demo.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #080D1A; color: #F5EDD6; font-family: 'Manrope', sans-serif; min-height: 100vh; overflow-x: hidden; }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 28px; border-bottom: 1px solid rgba(200,148,60,0.18); }
+  nav a { text-decoration: none; }
+  .nav-arabic { font-family: 'Amiri', serif; font-size: 24px; font-weight: 700; color: #F5EDD6; direction: rtl; }
+  .nav-en { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #C8943C; }
+  .nav-back { font-size: 13px; font-weight: 600; color: #8A9BB0; }
+  .nav-back:hover { color: #C8943C; }
+  main { max-width: 680px; margin: 0 auto; padding: 72px 24px 88px; }
+  .demo-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .15em; color: #080D1A; background: #C8943C; padding: 6px 12px; border-radius: 20px; margin-bottom: 20px; }
+  h1 { font-size: clamp(26px, 5.5vw, 38px); font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+  .sub { font-size: 15px; line-height: 1.7; color: #8A9BB0; margin-bottom: 28px; }
+  .grade-form { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .grade-form input { flex: 1; min-width: 220px; background: rgba(255,255,255,.06); border: 1px solid rgba(200,148,60,.45); border-radius: 7px; color: #F5EDD6; font-size: 15px; font-family: inherit; padding: 14px 16px; }
+  .grade-form input:focus { outline: 2px solid #C8943C; }
+  .btn-primary { background: #C8943C; color: #080D1A; font-size: 15px; font-weight: 700; padding: 14px 26px; border: none; border-radius: 7px; cursor: pointer; font-family: inherit; text-decoration: none; display: inline-block; }
+  .btn-secondary { background: transparent; color: #E8B85C; font-size: 15px; font-weight: 600; padding: 14px 26px; border: 1px solid rgba(200,148,60,.45); border-radius: 7px; text-decoration: none; display: inline-block; }
+  .form-note { font-size: 12px; line-height: 1.6; color: #8A9BB0; margin-bottom: 28px; }
+  .grade-card { background: rgba(200,148,60,.06); border: 1px solid rgba(200,148,60,.45); border-radius: 16px; padding: 30px 26px; margin-bottom: 20px; }
+  .grade-card h2 { font-size: 20px; font-weight: 700; color: #F5EDD6; margin-bottom: 4px; }
+  .grade-place { font-size: 13px; color: #8A9BB0; margin-bottom: 20px; }
+  .grade-big { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+  .grade-letter { font-size: 56px; font-weight: 700; color: #C8943C; line-height: 1; }
+  .grade-verdict { font-size: 16px; font-weight: 700; color: #F5EDD6; }
+  .signal { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid rgba(200,148,60,.25); }
+  .signal span:first-child { font-size: 14px; color: #F5EDD6; }
+  .signal span:last-child { font-size: 13px; font-weight: 700; text-align: right; }
+  .ok { color: #7FB069; }
+  .partial { color: #E8B85C; }
+  .missing { color: #8A9BB0; }
+  .fixes { margin-top: 20px; }
+  .fixes h3 { font-size: 15px; font-weight: 700; color: #E8B85C; margin-bottom: 10px; }
+  .fixes ol { padding-left: 20px; }
+  .fixes li { font-size: 14px; line-height: 1.7; color: #8A9BB0; margin-bottom: 6px; }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+  footer { border-top: 1px solid rgba(200,148,60,0.18); padding: 22px 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  footer p, footer a { font-size: 12px; color: #8A9BB0; text-decoration: none; }
+  footer a:hover { color: #C8943C; }
+  @media (max-width: 480px) { nav { padding: 14px 18px; } main { padding-top: 56px; } .grade-card { padding: 24px 18px; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/">
+    <span class="nav-arabic">ر</span>
+    <span class="nav-en">Rihla</span>
+  </a>
+  <a class="nav-back" href="/">Back to Rihla</a>
+</nav>
+<main>
+  <span class="demo-badge">DEMO — SAMPLE DATA ONLY</span>
+  <h1>Halal Visibility Check.</h1>
+  <p class="sub">See what AI can find, and what it cannot verify, about a restaurant.</p>
+  <div class="grade-form">
+    <input type="text" id="grade-name" value="Demo Diner" aria-label="Restaurant name">
+    <button class="btn-primary" id="grade-btn" type="button">See a sample grade</button>
+  </div>
+  <p class="form-note">This demo always grades the fictional Demo Diner. A real check would grade the name you enter. No real restaurant was graded.</p>
+  <div class="grade-card" id="grade-card" style="display:none;">
+    <h2>Demo Diner</h2>
+    <p class="grade-place">Astoria, Queens · Sample data</p>
+    <div class="grade-big">
+      <div class="grade-letter">C</div>
+      <div class="grade-verdict">Findable, not verifiable.</div>
+    </div>
+    <div class="signal"><span>Google listing</span><span class="ok">✓ Found</span></div>
+    <div class="signal"><span>Halal mentioned on the listing</span><span class="partial">◐ Partial: in reviews, not in the business description</span></div>
+    <div class="signal"><span>Certificate visible online</span><span class="missing">✗ Not found</span></div>
+    <div class="signal"><span>Machine-readable halal info for AI</span><span class="missing">✗ Not found</span></div>
+    <div class="signal"><span>Recent reviews mentioning halal</span><span class="ok">✓ 18 in the last 90 days</span></div>
+    <div class="fixes">
+      <h3>Three fixes that would raise this grade</h3>
+      <ol>
+        <li>Add halal to your Google business description.</li>
+        <li>Publish your halal certificate where diners and AI can see it.</li>
+        <li>Get a Rihla verified listing so AI can read your check, not just your claim.</li>
+      </ol>
+    </div>
+    <div class="cta-row">
+      <a class="btn-primary" href="mailto:rihla.enquiries@gmail.com?subject=Book%20a%20free%20halal%20visibility%20check">Book a free check</a>
+      <a class="btn-secondary" href="/">Back to Rihla</a>
+    </div>
+  </div>
+</main>
+<footer>
+  <p>© 2026 Rihla &nbsp;·&nbsp; <a href="mailto:rihla.enquiries@gmail.com">rihla.enquiries@gmail.com</a></p>
+  <p>
+    <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp;
+    <a href="/terms.html">Terms</a> &nbsp;·&nbsp;
+    <a href="https://www.instagram.com/rihla.nl" target="_blank" rel="noopener">@rihla.nl on Instagram</a>
+  </p>
+</footer>
+<script>
+  document.getElementById('grade-btn').addEventListener('click', function () {
+    var card = document.getElementById('grade-card');
+    card.style.display = 'block';
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
+</body>
+</html>
