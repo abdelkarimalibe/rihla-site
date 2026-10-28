@@ -23,3 +23,13 @@ Two Mailchimp templates. One shape: big type, one image or one grade, short copy
 Links carry `utm_source=mailchimp&utm_medium=email`, and the site saves them for first-touch attribution. Diner links use `?spot=<slug>`. These log as `email_click` in GA, not `qr_scan`, so the scan count stays QR-only.
 
 Weekly check: time spent, QR scans, email clicks, paying ($79/mo) customers.
+
+## Account emails (Supabase Auth)
+`auth/confirm-signup.html` and `auth/reset-password.html`. Same frame, one button, nothing else.
+
+1. **Custom SMTP first.** Without it, Supabase only emails addresses on your Supabase team, so real owners get "Email address not authorized." Set it under Authentication, Emails, SMTP Settings. Sender name: `Rihla`.
+2. **Templates.** Under Authentication, Emails, Templates, paste each file:
+   - Confirm signup, subject `Confirm your Rihla account`
+   - Reset password, subject `Reset your Rihla password`
+3. **Redirect URL.** Under Authentication, URL Configuration, add `https://rihla-website-self.vercel.app/members.html` to Redirect URLs. A confirmed signup then lands straight in the Members Area.
+4. Sign up with a non-team address and check that the email arrives from Rihla.
