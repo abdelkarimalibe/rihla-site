@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rihla-website-self.vercel.app/sitemap.xml
