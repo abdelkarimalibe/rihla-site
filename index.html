@@ -176,6 +176,37 @@
     text-align: center;
   }
 
+  /* ── COMET — crosses the hero behind the logo, every 30s ── */
+  .hero > *:not(.comet) { position: relative; z-index: 1; }
+  .comet {
+    position: absolute; top: 0; left: 0; z-index: 0;
+    display: flex; align-items: center;
+    pointer-events: none;
+    opacity: 0;
+    animation: comet-fly 30s linear infinite;
+  }
+  .comet-head {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--gold-light);
+    box-shadow: 0 0 10px 2px rgba(232,184,92,.8);
+    flex-shrink: 0;
+  }
+  .comet-tail {
+    width: 120px; height: 2px; border-radius: 2px;
+    background: linear-gradient(to right, rgba(232,184,92,.9), rgba(200,148,60,0));
+  }
+  @keyframes comet-fly {
+    0%   { transform: translate3d(108vw, 20vh, 0); opacity: 0; }
+    2%   { opacity: 1; }
+    10%  { transform: translate3d(-32vw, 32vh, 0); opacity: 1; }
+    11%  { opacity: 0; }
+    12%  { transform: translate3d(108vw, 20vh, 0); opacity: 0; }
+    100% { transform: translate3d(108vw, 20vh, 0); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .comet { animation: none; display: none; }
+  }
+
   .success-msg {
     display: none;
     background: rgba(22,101,52,.22);
@@ -529,6 +560,7 @@
 
 <!-- ══ DOOR 1: TRAVELLERS ══════════════════════════════ -->
 <section class="hero" id="main">
+  <div class="comet" aria-hidden="true"><span class="comet-head"></span><span class="comet-tail"></span></div>
   <p class="hero-arabic">رحلة</p>
   <p class="hero-transliteration">R · I · H · L · A</p>
   <div class="hero-rule"><span></span><i></i><span></span></div>
@@ -802,7 +834,7 @@
     var SPOTS = {
       'moka-and-co':         { name: 'Moka and Co',         phone: '(929) 666-7002' },
       'halal-munchies':      { name: 'Halal Munchies',      phone: '(917) 745-0585' },
-      'mokafe':              { name: 'MOKAFÉ',              phone: '(917) 745-0585' },
+      'mokafe':              { name: 'MOKAFÉ',              phone: '(718) 489-0242' },
       'zyara-restaurant':    { name: 'Zyara Restaurant',    phone: '(718) 777-7753' },
       'merguez-and-frites':  { name: 'Merguez and Frites',  phone: '(917) 365-6877' },
       'chick-rocks-astoria': { name: 'Chick Rocks Astoria', phone: '(347) 242-3449' },
