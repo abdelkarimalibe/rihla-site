@@ -179,21 +179,21 @@
   /* ── COMET — crosses the hero behind the logo, every 30s ── */
   .hero > *:not(.comet) { position: relative; z-index: 1; }
   .comet {
-    position: absolute; top: 0; left: 0; z-index: 0;
+    position: absolute; top: 0; left: 0; z-index: 2;
     display: flex; align-items: center;
     pointer-events: none;
     opacity: 0;
     animation: comet-fly 30s linear infinite;
   }
   .comet-head {
-    width: 7px; height: 7px; border-radius: 50%;
+    width: 9px; height: 9px; border-radius: 50%;
     background: var(--gold-light);
-    box-shadow: 0 0 10px 2px rgba(232,184,92,.8);
+    box-shadow: 0 0 12px 3px rgba(232,184,92,.85);
     flex-shrink: 0;
   }
   .comet-tail {
-    width: 120px; height: 2px; border-radius: 2px;
-    background: linear-gradient(to right, rgba(232,184,92,.9), rgba(200,148,60,0));
+    width: 160px; height: 3px; border-radius: 2px;
+    background: linear-gradient(to right, rgba(232,184,92,.95), rgba(200,148,60,0));
   }
   @keyframes comet-fly {
     0%   { transform: translate3d(108vw, 20vh, 0); opacity: 0; }
