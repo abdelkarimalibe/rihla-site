@@ -513,6 +513,8 @@
 </nav>
 
 <!-- ══ SPOT WELCOME CARD — shown on ?spot= visits from QR counter cards ══ -->
+<!-- Generic by rule (2026-11-02): no store name, number or location is shown
+     unless that specific store has confirmed. -->
 <section class="spot-card" id="spot-card">
   <p class="spot-eyebrow">✓ Rihla-verified halal spot</p>
   <h2 class="spot-headline">You're at a Rihla-verified halal spot.</h2>
@@ -520,10 +522,6 @@
     Show this screen for <strong>15% off</strong> your first visit
     at <span id="spot-name">this restaurant</span>.
   </p>
-  <div class="spot-actions">
-    <a class="btn-primary" id="spot-call" href="#">Call to order</a>
-    <a class="btn-secondary" id="spot-directions" href="#" target="_blank" rel="noopener">Get directions</a>
-  </div>
   <p class="spot-note">No app needed — just show this screen to your server.</p>
 </section>
 
@@ -797,50 +795,12 @@
   }
 
   /* ── SPOT WELCOME CARD (?spot= visits from QR counter cards) ── */
+  /* Generic by rule (2026-11-02): no store name, number or location is shown
+     unless that specific store has confirmed. The ?spot= slug is still used
+     for the GA4 qr_scan event above, which is analytics only, not public. */
   (function () {
-    /* Business phone numbers, taken from the QR card backs (rihla-qr-counter-cards.pdf). */
-    var SPOTS = {
-      'moka-and-co':         { name: 'Moka and Co',         phone: '(929) 666-7002' },
-      'halal-munchies':      { name: 'Halal Munchies',      phone: '(917) 745-0585' },
-      'mokafe':              { name: 'MOKAFÉ',              phone: '(718) 489-0242' },
-      'zyara-restaurant':    { name: 'Zyara Restaurant',    phone: '(718) 777-7753' },
-      'merguez-and-frites':  { name: 'Merguez and Frites',  phone: '(917) 365-6877' },
-      'chick-rocks-astoria': { name: 'Chick Rocks Astoria', phone: '(347) 242-3449' },
-      'al-sham-restaurant':  { name: 'Al-Sham Restaurant',  phone: '(929) 884-2556' },
-      'levant':              { name: 'Levant',               phone: '(718) 233-8800' },
-      'kunafa-bites':        { name: 'Kunafa Bites',        phone: '(347) 407-5721' },
-      'amlu':                { name: 'AMLU',                 phone: '(347) 242-2033' }
-    };
-
     var spot = new URLSearchParams(window.location.search).get('spot');
     if (!spot) return;
-
-    var info = SPOTS[spot];
-    if (!info) {
-      var pretty = spot.replace(/-/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
-      info = { name: pretty, phone: '' };
-    }
-
-    document.getElementById('spot-name').textContent = info.name;
-
-    var callBtn = document.getElementById('spot-call');
-    if (info.phone) {
-      callBtn.href = 'tel:' + info.phone.replace(/\D/g, '');
-      callBtn.textContent = 'Call ' + info.name;
-      callBtn.addEventListener('click', function () {
-        gtag('event', 'call_tap', { restaurant: spot });
-      });
-    } else {
-      callBtn.style.display = 'none';
-    }
-
-    var dirBtn = document.getElementById('spot-directions');
-    dirBtn.href = 'https://www.google.com/maps/search/?api=1&query=' +
-      encodeURIComponent(info.name + ', Queens, NY');
-    dirBtn.addEventListener('click', function () {
-      gtag('event', 'directions_tap', { restaurant: spot });
-    });
-
     document.getElementById('spot-card').classList.add('show');
   })();
 
