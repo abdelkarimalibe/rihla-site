@@ -35,6 +35,28 @@
 
   html { scroll-behavior: smooth; }
 
+  /* ── ACCESSIBILITY ──────────────────────────────── */
+  /* Visually hidden but available to screen readers. */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+  /* Skip link: hidden until keyboard focus. */
+  .skip-link {
+    position: absolute; left: 16px; top: -60px; z-index: 400;
+    background: var(--gold); color: var(--navy);
+    font-size: 14px; font-weight: 700; text-decoration: none;
+    padding: 10px 18px; border-radius: 8px;
+    transition: top .2s;
+  }
+  .skip-link:focus { top: 12px; }
+  /* Visible keyboard focus on everything interactive. */
+  :focus-visible {
+    outline: 3px solid var(--gold-light);
+    outline-offset: 2px;
+  }
+
   body {
     background: var(--navy);
     color: var(--ivory);
@@ -150,7 +172,6 @@
     font-family: 'Manrope', sans-serif;
     font-size: 14px;
     padding: 13px 16px;
-    outline: none;
     transition: border-color .2s;
   }
   .hero-form input[type="email"]::placeholder { color: var(--steel); opacity: .85; }
@@ -247,7 +268,7 @@
     background: rgba(200,148,60,.10); border-radius: 8px;
     font-size: 17px;
   }
-  .bullet-text strong {
+  .bullet-text h3 {
     display: block; font-size: 14px; font-weight: 700;
     color: var(--ivory); margin-bottom: 4px;
   }
@@ -271,7 +292,7 @@
     background: rgba(255,255,255,.06);
     border: 1px solid var(--border); border-radius: 8px;
     color: var(--ivory); font-family: 'Manrope', sans-serif;
-    font-size: 15px; padding: 14px 16px; outline: none;
+    font-size: 15px; padding: 14px 16px;
   }
   .check-row input:focus { border-color: var(--gold); }
   .check-row button { flex-shrink: 0; padding: 14px 18px; }
@@ -285,7 +306,7 @@
     border: 1px solid var(--border); border-radius: var(--radius);
     padding: 18px 16px; text-align: left;
   }
-  .proof-tile b { display: block; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .proof-tile h3 { display: block; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
   .proof-tile span { font-size: 13px; line-height: 1.6; color: var(--steel); }
 
   /* ── PILOT ────────────────────────────────────────── */
@@ -328,7 +349,7 @@
     color: var(--ivory);
     font-family: 'Manrope', sans-serif;
     font-size: 14px; padding: 12px 14px;
-    outline: none; transition: border-color .2s;
+    transition: border-color .2s;
     -webkit-appearance: none;
   }
   .form-field input::placeholder { color: var(--steel); opacity: .85; }
@@ -499,10 +520,13 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to main content</a>
+
 <!-- NAV -->
+<header>
 <nav>
   <a href="/" class="nav-logo">
-    <span class="nav-arabic">ر</span>
+    <span class="nav-arabic" lang="ar">ر</span>
     <span class="nav-en">Rihla</span>
   </a>
   <div class="nav-actions">
@@ -511,19 +535,21 @@
     <a href="#owner" class="nav-owner-link">Claim your spot →</a>
   </div>
 </nav>
+</header>
 
 <!-- ══ SPOT WELCOME CARD — shown on ?spot= visits from QR counter cards ══ -->
 <!-- Generic by rule (2026-11-02): no store name, number or location is shown
      unless that specific store has confirmed. -->
+<main id="main">
 <section class="spot-card" id="spot-card">
   <p class="spot-eyebrow">✓ Rihla-verified halal spot</p>
-  <h2 class="spot-headline">You're at a Rihla-verified halal spot.</h2>
+  <p class="spot-headline">You're at a Rihla-verified halal spot.</p>
   <p class="spot-note">No app needed — just show this screen to your server.</p>
 </section>
 
 <!-- ══ DOOR 1: TRAVELLERS ══════════════════════════════ -->
-<section class="hero" id="main">
-  <p class="hero-arabic">رحلة</p>
+<section class="hero">
+  <p class="hero-arabic" lang="ar">رحلة</p>
   <p class="hero-transliteration">R · I · H · L · A</p>
   <div class="hero-rule"><span></span><i></i><span></span></div>
 
@@ -536,9 +562,11 @@
 
   <form class="hero-form" id="traveller-form" novalidate>
     <div class="hero-form-row">
+      <label class="sr-only" for="traveller-email">Your email address</label>
       <input
         type="email"
         id="traveller-email"
+        aria-describedby="traveller-error"
         placeholder="Your email address"
         autocomplete="email"
         required
@@ -546,9 +574,9 @@
       <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button type="submit" class="btn-secondary">Get the free NYC list</button>
     </div>
-    <p class="form-error" id="traveller-error">Please enter a valid email address.</p>
+    <p class="form-error" id="traveller-error" role="alert">Please enter a valid email address.</p>
     <p class="hero-note">Join New York Muslims getting the list. Free. No spam, ever.</p>
-    <div class="success-msg" id="traveller-success">
+    <div class="success-msg" id="traveller-success" role="status">
       ✓ You're on the list — halal NYC coming to your inbox soon.
     </div>
   </form>
@@ -584,34 +612,34 @@
 
   <div class="owner-bullets">
     <div class="bullet">
-      <div class="bullet-icon">🔍</div>
+      <div class="bullet-icon" aria-hidden="true">🔍</div>
       <div class="bullet-text">
-        <strong>Get discovered — a verified page AI can read</strong>
+        <h3>Get discovered — a verified page AI can read</h3>
         <span>Your restaurant gets a verified page that Google and AI can actually read, so Muslim diners find you instead of skipping you.</span>
       </div>
     </div>
     <div class="bullet">
-      <div class="bullet-icon">✅</div>
+      <div class="bullet-icon" aria-hidden="true">✅</div>
       <div class="bullet-text">
-        <strong>Get chosen — the badge plus your offer</strong>
+        <h3>Get chosen — the badge plus your offer</h3>
         <span>A diner scans your counter card, sees your verified halal status, and gets the first-visit offer you agreed. The card does the convincing.</span>
       </div>
     </div>
     <div class="bullet">
-      <div class="bullet-icon">🔁</div>
+      <div class="bullet-icon" aria-hidden="true">🔁</div>
       <div class="bullet-text">
-        <strong>Get them back — your list, not a delivery app's</strong>
+        <h3>Get them back — your list, not a delivery app's</h3>
         <span>Every scanner joins your list, not a delivery app's, so you can bring them back without paying commission on every order. The monthly report shows the scans, so you see it working.</span>
       </div>
     </div>
   </div>
 
-  <p class="owner-mark">Every Rihla-verified restaurant carries the <span class="mark-arabic">ر</span> mark. One mark, one meaning: this halal claim was checked.</p>
+  <p class="owner-mark">Every Rihla-verified restaurant carries the <span class="mark-arabic" lang="ar">ر</span> mark. One mark, one meaning: this halal claim was checked.</p>
 
   <div class="proof-row">
-    <div class="proof-tile"><b>The tier</b><span>Hand-Checked, Document-Verified or Community-Reported. Diners see exactly how it was checked.</span></div>
-    <div class="proof-tile"><b>The date</b><span>Every check shows when it was done, and expires after 12 months.</span></div>
-    <div class="proof-tile"><b>The count</b><span>Every scan and every first-visit offer is counted, so your report shows which diners Rihla sent.</span></div>
+    <div class="proof-tile"><h3>The tier</h3><span>Hand-Checked, Document-Verified or Community-Reported. Diners see exactly how it was checked.</span></div>
+    <div class="proof-tile"><h3>The date</h3><span>Every check shows when it was done, and expires after 12 months.</span></div>
+    <div class="proof-tile"><h3>The count</h3><span>Every scan and every first-visit offer is counted, so your report shows which diners Rihla sent.</span></div>
   </div>
 
   <p class="pilot-card"><strong>Pilot underway in Queens.</strong> The first 30-day reports land November 19. Real results go here after that. We never post a number we can't show you.</p>
@@ -623,19 +651,19 @@
       <div class="form-grid">
         <div class="form-field">
           <label for="restaurant-name">Restaurant name</label>
-          <input type="text" id="restaurant-name" placeholder="Al-Nour Kitchen" required>
+          <input type="text" id="restaurant-name" aria-describedby="owner-error" placeholder="Al-Nour Kitchen" required>
         </div>
         <div class="form-field">
           <label for="owner-name">Your name</label>
-          <input type="text" id="owner-name" placeholder="Ahmed" required>
+          <input type="text" id="owner-name" aria-describedby="owner-error" placeholder="Ahmed" required>
         </div>
         <div class="form-field">
           <label for="owner-phone">Phone number</label>
-          <input type="tel" id="owner-phone" placeholder="(718) 555-0123" required>
+          <input type="tel" id="owner-phone" aria-describedby="owner-error" placeholder="(718) 555-0123" required>
         </div>
         <div class="form-field">
           <label for="neighbourhood">Neighbourhood</label>
-          <select id="neighbourhood" required>
+          <select id="neighbourhood" aria-describedby="owner-error" required>
             <option value="" disabled selected>Select your area</option>
             <option>Astoria, Queens</option>
             <option>Jackson Heights, Queens</option>
@@ -648,10 +676,10 @@
       </div>
       <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button type="submit" class="btn-primary claim-submit">Claim your spot →</button>
-      <p class="form-error" id="owner-error">Please fill in every field.</p>
+      <p class="form-error" id="owner-error" role="alert">Please fill in every field.</p>
     </form>
 
-    <div class="claim-success" id="owner-success">
+    <div class="claim-success" id="owner-success" role="status">
       ✓ Spot claimed! Abdelkarim will call you within 24 hours to drop off your QR card and window sticker.
     </div>
 
@@ -668,6 +696,8 @@
 
 </section>
 
+</main>
+
 <hr class="section-divider">
 
 <footer>
@@ -679,7 +709,7 @@
   </p>
 </footer>
 
-<div id="cookie-banner" role="dialog" aria-label="Cookie consent">
+<div id="cookie-banner">
   <p>We use Google Analytics to count page views and QR scans, so restaurants can see how many customers Rihla sends them. You can accept or decline. Read our <a href="/privacy.html">Privacy Policy</a>.</p>
   <div class="cookie-actions">
     <button type="button" class="btn-primary" id="cookie-accept">Accept</button>
@@ -687,7 +717,7 @@
   </div>
 </div>
 
-<div id="toast"></div>
+<div id="toast" role="status"></div>
 
 <script>
 (function () {
@@ -702,11 +732,13 @@
     var travErr = document.getElementById('traveller-error');
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       emailInput.classList.add('field-invalid');
+      emailInput.setAttribute('aria-invalid', 'true');
       travErr.classList.add('show');
       emailInput.focus();
       return;
     }
     emailInput.classList.remove('field-invalid');
+    emailInput.removeAttribute('aria-invalid');
     travErr.classList.remove('show');
     this.dataset.submitted = '1';
 
@@ -756,9 +788,11 @@
       var el = document.getElementById(f[0]);
       if (!f[1]) {
         el.classList.add('field-invalid');
+        el.setAttribute('aria-invalid', 'true');
         if (!firstMissing) firstMissing = el;
       } else {
         el.classList.remove('field-invalid');
+        el.removeAttribute('aria-invalid');
       }
     });
     if (firstMissing) {
