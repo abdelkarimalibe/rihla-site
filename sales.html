@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Control Panel — Rihla</title>
+<meta name="description" content="Rihla internal sales control panel.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://accounts.google.com/gsi/client https://cdn.sheetjs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com/gsi/style; font-src https://fonts.gstatic.com; connect-src https://www.googleapis.com https://gmail.googleapis.com https://accounts.google.com/gsi/; frame-src https://accounts.google.com/gsi/; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #080D1A; --panel: #0E1526; --panel-2: #131C31;
+    --gold: #C8943C; --gold-light: #E8B85C; --ivory: #F5EDD6; --steel: #8A9BB0;
+    --border: rgba(200,148,60,.18); --border-strong: rgba(200,148,60,.4);
+    --line: rgba(138,155,176,.16);
+    --red: #F2938C; --red-bg: rgba(242,147,140,.12);
+    --amber: #E8B85C; --amber-bg: rgba(232,184,92,.12);
+    --blue: #9DB8F2; --blue-bg: rgba(157,184,242,.12);
+    --green: #8FD3A8; --green-bg: rgba(143,211,168,.12);
+  }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  :focus-visible { outline: 3px solid var(--gold-light); outline-offset: 2px; }
+  body { background: var(--navy); color: var(--ivory); font-family: 'Manrope', sans-serif; min-height: 100vh; font-size: 14px; line-height: 1.5; }
+  button, input { font-family: inherit; }
+  a { color: var(--gold-light); }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 22px 16px 60px; }
+
+  /* Header */
+  .top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+  .mark { width: 46px; height: 46px; border-radius: 12px; border: 1px solid var(--gold); display: grid; place-items: center; font-family: 'Amiri', serif; font-size: 28px; font-weight: 700; color: var(--gold-light); text-decoration: none; line-height: 1; padding-bottom: 6px; flex: none; }
+  .top h1 { font-size: 21px; font-weight: 700; line-height: 1.2; }
+  .top-sub { color: var(--steel); font-size: 13px; }
+  .top-actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .btn { background: transparent; color: var(--ivory); border: 1px solid var(--border-strong); border-radius: 8px; padding: 8px 13px; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; }
+  .btn:hover { border-color: var(--gold); color: var(--gold-light); }
+  .btn-gold { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 700; }
+  .btn-gold:hover { color: var(--navy); opacity: .9; }
+  .btn-sm { padding: 4px 9px; font-size: 12px; border-radius: 6px; }
+  .src { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--steel); border: 1px solid var(--line); border-radius: 20px; padding: 5px 10px; }
+  .src i { width: 7px; height: 7px; border-radius: 50%; background: var(--steel); opacity: .5; }
+  .src.on { color: var(--ivory); } .src.on i { background: var(--green); opacity: 1; }
+  .banner { background: var(--amber-bg); border: 1px solid var(--border-strong); border-radius: 10px; padding: 10px 14px; font-size: 13px; margin-bottom: 16px; }
+  .banner strong { color: var(--gold-light); }
+  .banner.err { background: var(--red-bg); border-color: rgba(242,147,140,.4); }
+
+  /* KPI cards */
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 14px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 18px; min-width: 0; }
+  .kpi-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--steel); }
+  .kpi-value { font-size: 34px; font-weight: 700; line-height: 1.15; margin: 8px 0 4px; }
+  .kpi-value.alert { color: var(--red); }
+  .kpi-sub { font-size: 12.5px; color: var(--steel); }
+
+  /* Panels */
+  .grid { display: grid; gap: 14px; margin-bottom: 14px; }
+  .g-2 { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+  .g-eq { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .head h2 { font-size: 16px; font-weight: 700; }
+  .head p { font-size: 12.5px; color: var(--steel); }
+  .chip { flex: none; font-size: 12px; font-weight: 600; color: var(--steel); background: rgba(138,155,176,.12); border-radius: 20px; padding: 3px 10px; white-space: nowrap; }
+  .tag { flex: none; font-size: 11px; font-weight: 700; border-radius: 20px; padding: 2px 9px; white-space: nowrap; }
+  .t-red { color: var(--red); background: var(--red-bg); } .t-amber { color: var(--amber); background: var(--amber-bg); }
+  .t-blue { color: var(--blue); background: var(--blue-bg); } .t-green { color: var(--green); background: var(--green-bg); }
+  .t-steel { color: var(--steel); background: rgba(138,155,176,.12); }
+  .whale { font-size: 10px; font-weight: 700; letter-spacing: .08em; color: var(--gold-light); border: 1px solid var(--border-strong); border-radius: 4px; padding: 0 5px; margin-left: 6px; vertical-align: 1px; display: inline-block; white-space: nowrap; }
+  .muted { color: var(--steel); } .small { font-size: 12.5px; }
+  .empty { color: var(--steel); font-size: 13px; padding: 14px 0; }
+  .num { font-weight: 700; white-space: nowrap; }
+
+  /* Today's plan */
+  .bar { height: 5px; background: rgba(138,155,176,.16); border-radius: 4px; overflow: hidden; margin: 6px 0 12px; }
+  .bar span { display: block; height: 100%; background: var(--gold); border-radius: 4px; transition: width .25s; }
+  .add { width: 100%; background: transparent; border: 1px dashed var(--border-strong); border-radius: 9px; color: var(--ivory); font-size: 14px; padding: 10px 13px; margin-bottom: 8px; }
+  .add::placeholder { color: var(--steel); }
+  .link-btn { background: none; border: 0; color: var(--steel); font-size: 12.5px; font-weight: 600; cursor: pointer; padding: 4px 0; }
+  .link-btn:hover { color: var(--gold-light); }
+  .task { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); }
+  .task input { appearance: none; -webkit-appearance: none; flex: none; width: 18px; height: 18px; border: 1.5px solid var(--steel); border-radius: 50%; margin-top: 2px; cursor: pointer; }
+  .task input:checked { background: var(--gold); border-color: var(--gold); box-shadow: inset 0 0 0 3px var(--panel); }
+  .task label { flex: 1; min-width: 0; cursor: pointer; overflow-wrap: anywhere; }
+  .task.done label { color: var(--steel); text-decoration: line-through; }
+  .task .x { background: none; border: 0; color: var(--steel); cursor: pointer; font-size: 15px; line-height: 1; padding: 2px 4px; }
+
+  /* Meetings */
+  .mtg { border-top: 1px solid var(--line); }
+  .mtg:first-of-type { border-top: 0; }
+  .mtg-row { width: 100%; display: flex; gap: 12px; align-items: flex-start; background: none; border: 0; color: inherit; text-align: left; padding: 11px 0; cursor: pointer; font-size: 14px; }
+  .mtg-time { flex: none; width: 72px; font-weight: 700; white-space: nowrap; }
+  .mtg-main { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .mtg-side { flex: none; text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+  .caret { color: var(--steel); font-size: 10px; margin-left: 4px; }
+  .prep { background: var(--panel-2); border-radius: 12px; padding: 14px; margin: 0 0 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .prep h3 { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--steel); margin-bottom: 8px; }
+  .prep-full { grid-column: 1 / -1; }
+  .tp { background: rgba(245,237,214,.04); border-left: 3px solid var(--gold); border-radius: 6px; padding: 9px 11px; margin-bottom: 8px; font-size: 13.5px; overflow-wrap: anywhere; }
+  .mail { background: rgba(245,237,214,.04); border-radius: 8px; padding: 9px 11px; margin-bottom: 8px; font-size: 13px; overflow-wrap: anywhere; }
+  .mail-dir { font-size: 10px; font-weight: 700; letter-spacing: .08em; color: var(--steel); margin-right: 6px; }
+  .mail-foot { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--steel); margin-top: 4px; }
+  .call { font-style: italic; color: var(--ivory); opacity: .85; font-size: 13.5px; overflow-wrap: anywhere; }
+
+  /* Commitments */
+  .scroll { overflow-x: auto; position: relative; }
+  table { width: 100%; border-collapse: collapse; min-width: 640px; }
+  th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--steel); padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); }
+  td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr.click { cursor: pointer; } tr.click:hover td { background: rgba(245,237,214,.03); }
+  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 8px; vertical-align: 1px; }
+  .d-email { background: var(--blue); } .d-call { background: var(--gold); }
+  .legend { display: flex; gap: 16px; font-size: 12px; color: var(--steel); margin-top: 10px; flex-wrap: wrap; }
+  td.r, th.r { text-align: right; padding-right: 18px; }
+  td.r:last-child, th.r:last-child { padding-right: 0; }
+
+  /* Stale + trials */
+  .row { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); }
+  .row:first-of-type { border-top: 0; }
+  .days { flex: none; width: 46px; height: 46px; border-radius: 10px; display: grid; place-items: center; text-align: center; font-weight: 700; font-size: 17px; line-height: 1; }
+  .days small { display: block; font-size: 8px; letter-spacing: .1em; margin-top: 2px; }
+  .row-main { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+
+  /* Forecast */
+  .hero-num { background: var(--green-bg); border-left: 3px solid var(--green); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; }
+  .hero-num .kpi-value { color: var(--green); margin: 4px 0 2px; }
+  .stage { border-top: 1px solid var(--line); }
+  .stage-row { width: 100%; display: flex; align-items: center; gap: 12px; background: none; border: 0; color: inherit; text-align: left; padding: 12px 0; cursor: pointer; font-size: 14px; }
+  .stage-dot { flex: none; width: 10px; height: 10px; border-radius: 50%; }
+  .stage-bar { flex: none; width: 90px; height: 5px; border-radius: 4px; background: rgba(138,155,176,.16); overflow: hidden; }
+  .stage-bar span { display: block; height: 100%; border-radius: 4px; }
+  .stage-val { flex: none; text-align: right; min-width: 92px; }
+  .drill { padding: 0 0 8px 22px; }
+  .drill-row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+
+  /* Data sources */
+  details summary { cursor: pointer; font-weight: 700; font-size: 15px; }
+  details ol { margin: 10px 0 0 20px; color: var(--steel); font-size: 13px; }
+  details li { margin-bottom: 5px; } details li strong, details p strong { color: var(--ivory); }
+  details p { color: var(--steel); font-size: 13px; margin-top: 10px; }
+  code { background: rgba(245,237,214,.08); border-radius: 4px; padding: 1px 5px; font-size: 12px; }
+  .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--ivory); color: var(--navy); font-weight: 600; font-size: 13px; padding: 10px 16px; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity .2s; max-width: calc(100vw - 32px); }
+  .toast.show { opacity: 1; }
+
+  @media (max-width: 860px) { .g-2, .g-eq { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 560px) {
+    .prep { grid-template-columns: minmax(0, 1fr); }
+    .top-actions { margin-left: 0; width: 100%; }
+    .stage-bar { display: none; }
+    .kpi-value { font-size: 28px; }
+    .card { padding: 15px; }
+    .row { flex-wrap: wrap; }
+    .row-main { flex-basis: calc(100% - 60px); }
+    .row > .num { margin-left: 58px; }
+    .row > .btn { margin-left: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="/" lang="ar" aria-label="Rihla home">ر</a>
+    <div>
+      <h1>Sales Control Panel</h1>
+      <p class="top-sub" id="greeting"></p>
+    </div>
+    <div class="top-actions">
+      <span class="src" id="src-excel"><i></i><span>Excel</span></span>
+      <span class="src" id="src-gmail"><i></i><span>Gmail</span></span>
+      <span class="src" id="src-cal"><i></i><span>Calendar</span></span>
+      <button class="btn btn-gold" id="btn-google" type="button">Connect Google</button>
+      <button class="btn" id="btn-import" type="button">Import Excel</button>
+      <button class="btn" id="btn-export" type="button">Export Excel</button>
+      <input class="sr-only" type="file" id="file" accept=".xlsx,.xls,.csv" aria-label="Choose a pipeline workbook" tabindex="-1">
+    </div>
+  </header>
+
+  <div id="banners" aria-live="polite"></div>
+
+  <main>
+    <section class="kpis" id="kpis" aria-label="Today at a glance"></section>
+
+    <div class="grid g-2">
+      <section class="card" aria-labelledby="h-plan">
+        <div class="head">
+          <div><h2 id="h-plan">Today's plan</h2><p>Auto-seeded from commitments, stale deals, meeting prep and ending trials</p></div>
+          <span class="chip" id="plan-chip"></span>
+        </div>
+        <p class="small muted" id="plan-count" aria-live="polite"></p>
+        <div class="bar" aria-hidden="true"><span id="plan-bar"></span></div>
+        <form id="plan-form">
+          <label class="sr-only" for="plan-input">Add a task to today's plan</label>
+          <input class="add" id="plan-input" type="text" maxlength="160" placeholder="Add a task to today's plan…" autocomplete="off">
+        </form>
+        <button class="link-btn" id="plan-toggle" type="button"></button>
+        <div id="plan-list"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-mtg">
+        <div class="head">
+          <div><h2 id="h-mtg">Meetings today</h2><p id="mtg-sub"></p></div>
+          <span class="chip" id="mtg-chip"></span>
+        </div>
+        <div id="mtg-list"></div>
+      </section>
+    </div>
+
+    <section class="card" style="margin-bottom:14px" aria-labelledby="h-com">
+        <div class="head">
+          <div><h2 id="h-com">Commitments tracker</h2><p>Promises from your sent email and call notes · click a row to open the source</p></div>
+          <span class="chip" id="com-chip"></span>
+        </div>
+        <div class="scroll" id="com-table"></div>
+        <div class="legend"><span><i class="dot d-email"></i>Email source</span><span><i class="dot d-call"></i>Call source</span></div>
+    </section>
+
+    <div class="grid g-eq">
+      <section class="card" aria-labelledby="h-stale">
+        <div class="head">
+          <div><h2 id="h-stale">Stale deals</h2><p id="stale-sub"></p></div>
+          <span class="chip" id="stale-chip"></span>
+        </div>
+        <div id="stale-list"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-fc">
+        <div class="head">
+          <div><h2 id="h-fc">Pipeline forecast</h2><p id="fc-sub"></p></div>
+          <span class="chip" id="fc-chip"></span>
+        </div>
+        <div id="fc-body"></div>
+      </section>
+    </div>
+
+    <div class="grid g-eq">
+      <section class="card" aria-labelledby="h-trial">
+        <div class="head">
+          <div><h2 id="h-trial">Free trials ending</h2><p>The $79/mo decision. Bring the report before day 30.</p></div>
+          <span class="chip" id="trial-chip"></span>
+        </div>
+        <div id="trial-list"></div>
+      </section>
+
+      <section class="card">
+        <details id="sources">
+          <summary>Data sources and setup</summary>
+          <p><strong>Excel.</strong> The workbook is the pipeline. Export it, edit the <code>Deals</code>, <code>Commitments</code> and <code>Calls</code> sheets in Excel, then import it back. It is stored in this browser only and never uploaded.</p>
+          <p><strong>Gmail and Google Calendar.</strong> Read-only, and only in your browser. One-time setup:</p>
+          <ol>
+            <li>In <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer">Google Cloud Console</a>, create a project and enable the <strong>Gmail API</strong> and the <strong>Google Calendar API</strong>.</li>
+            <li>Google Auth Platform: audience <strong>External</strong>, keep it in <strong>Testing</strong>, and add your own Gmail address as a test user.</li>
+            <li>Create an OAuth client of type <strong>Web application</strong>. Authorised JavaScript origin: <code id="origin"></code></li>
+            <li>Paste the client ID into <code>sales-config.js</code> as <code>SALES_GOOGLE_CLIENT_ID</code> and redeploy.</li>
+            <li>Press <strong>Connect Google</strong>. Access lasts about an hour, then press it again.</li>
+          </ol>
+          <p>With Google connected the panel reads today's calendar, recent email with the contacts in your workbook, and promises in your sent mail to them. Nothing else is read and nothing is stored.</p>
+          <p><button class="btn btn-sm" id="btn-reset" type="button">Reset to sample data</button></p>
+        </details>
+      </section>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/sales-config.js"></script>
+<script src="/sales.js"></script>
+</body>
+</html>
