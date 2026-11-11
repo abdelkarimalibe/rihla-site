@@ -1,0 +1,180 @@
+{
+  "page_name": "Privacy Policy",
+  "page_path": "/privacy.html",
+  "page_file": "privacy.html",
+  "page_url": "rihla-website-self.vercel.app/privacy.html",
+  "index": 4,
+  "of": 12,
+  "date_long": "November 11, 2026",
+  "status": "Done",
+
+  "in_short": [
+    "This page mattered more than its search value suggests. The policy said what the site collects and ended with \"That is everything.\" After this pass's tracking changes that sentence was no longer true.",
+    "I changed the wording so the policy matches what the site now does: click counts, form counts and the first campaign are in it. **Please read the three edited paragraphs. I am not a lawyer.**",
+    "13 changes are on the branch: 7 technical, 5 text, 1 tracking.",
+    "The policy still leaves things out that were already missing before this pass. They are listed under \"What I could not do for you\"."
+  ],
+
+  "scorecard": [
+    { "metric": "Does the policy match the site?", "before": "No. It listed page views and QR scans only.", "after": "Yes for analytics. Accounts and outside services are still missing." },
+    { "metric": "Title tag", "before": "Privacy Policy — Rihla\n22 characters", "after": "Privacy Policy: what we collect and why — Rihla\n47 characters" },
+    { "metric": "Meta description", "before": "104 characters", "after": "146 characters" },
+    { "metric": "Last updated", "before": "October 28, 2026", "after": "November 11, 2026, also readable by machines" },
+    { "metric": "Words in the policy", "before": "222", "after": "335" },
+    { "metric": "Google Analytics", "before": "Not on the page", "after": "Same tag and consent settings as the homepage" },
+    { "metric": "Cookie notice", "before": "None on this page", "after": "Shown until the visitor chooses" },
+    { "metric": "Share preview", "before": "No share tags at all", "after": "Title, description and the 1200 × 630 card" },
+    { "metric": "Structured data", "before": "None", "after": "WebSite, WebPage with its date, BreadcrumbList" },
+    { "metric": "Layout shift while loading, lab test", "before": "0.02", "after": "0.04. Google's limit for good is 0.1." }
+  ],
+
+  "needs_you_intro": "These are about what the policy says, so they are yours to decide.",
+  "needs_you": [
+    {
+      "priority": "High",
+      "title": "The policy leaves out accounts and the services that handle data",
+      "detail": "Four things were missing before this pass and still are. One: the Members Area. Owners who register give an email address, a password and a restaurant name, and Supabase stores them. Two: the services that receive data on your behalf, which from the code are Google (Analytics and Fonts), Supabase and Vercel, plus Mailchimp if that is where the diner list goes. Three: how long you keep anything. Four: who is responsible, with a postal address. I did not write these in, because they are statements about your business that I cannot confirm from the code.",
+      "action": "Tell me the facts and I will write them in the policy's own plain style. If you have visitors or owners in the EU, have a lawyer look at the result.",
+      "effort": "20 minutes of your answers, 20 of mine"
+    },
+    {
+      "priority": "High",
+      "title": "\"We receive the details you type\" is not true yet",
+      "detail": "The policy says that when someone fills in a form you receive what they typed. Today the two homepage forms keep it in the visitor's browser and send you nothing. The policy describes the site as it should work, so I left the sentence. It becomes true the day the forms are fixed.",
+      "action": "Fix the forms. That is the critical item in the homepage changelog.",
+      "effort": "about 1 hour, already listed"
+    },
+    {
+      "priority": "Medium",
+      "title": "Changing a cookie choice means clearing browser data",
+      "detail": "The policy tells people to clear their browser data and wait for the banner to come back. Most visitors will not know how. A \"Change my cookie choice\" link on this page that brings the notice back would do it in one click.",
+      "action": "Say yes and I add the link. It is a few lines in `site.js`.",
+      "effort": "10 minutes"
+    },
+    {
+      "priority": "Low",
+      "title": "One stale price outside this pass",
+      "detail": "`emails/README.md` still says \"paying ($79/mo) customers\". Your price change today updated the site and the owner email but not that line. The file is published with the site.",
+      "action": "Change it to the current price, or tell me to.",
+      "effort": "1 minute"
+    }
+  ],
+
+  "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`. The page looks the same. Only the words changed.",
+  "changes": [
+    {
+      "area": "Text",
+      "title": "\"What we collect\" now lists what analytics really counts",
+      "why": "This pass added click counts, form counts and the first campaign to Google Analytics. The existing code already sent email link clicks, and the restaurant name typed into the Halal Visibility Check box. None of that was in the policy. It now is, with a plain statement of what is never sent. The claim form sends the chosen neighbourhood, so that is named too.",
+      "before": "When you visit Rihla, Google Analytics counts page views and QR scans, including which restaurant's QR code was scanned. If you fill in a form on the site, we receive the details you type, such as your name, restaurant name, email address, and phone number. That is everything.",
+      "after": "When you visit Rihla, Google Analytics counts page views, QR scans and clicks on links in our emails, including which restaurant's QR code or email link it was. It also counts which buttons and links are clicked, when a form is sent, and which campaign link first brought you to the site. Google Analytics is never sent your name, email address or phone number. It does receive the restaurant name typed into the Halal Visibility Check box, and the neighbourhood chosen on the claim form.\n\nIf you fill in a form on the site, we receive the details you type, such as your name, restaurant name, email address, and phone number. That is everything.",
+      "note": "Please read this one closely. Every sentence describes something the code does today."
+    },
+    {
+      "area": "Text",
+      "title": "\"What we use it for\": one sentence added",
+      "why": "The section ended with \"Nothing else\", but click and campaign counts are there to improve the site, which was not listed.",
+      "before": "Analytics lets us show restaurants how many customers came through their QR card, in the monthly proof report. Form details are used …",
+      "after": "Analytics lets us show restaurants how many customers came through their QR card, in the monthly proof report. It also shows us which pages, buttons and campaigns bring people in, so we can improve the site. Form details are used …"
+    },
+    {
+      "area": "Text",
+      "title": "\"Cookies\": what the browser keeps besides cookies",
+      "why": "The site stores the visitor's answer to the cookie banner and the first campaign link in the browser's local storage. They are not cookies, and the policy did not mention them.",
+      "after": "Your browser also keeps a few small notes for this site that are not cookies, such as your answer to the banner and the campaign link that first brought you here."
+    },
+    {
+      "area": "Text",
+      "title": "Title and meta description",
+      "why": "\"Privacy Policy — Rihla\" was 22 characters. The new title says what the reader will find. The description now names what is counted and keeps the promise that data is never sold.",
+      "before": "Privacy Policy — Rihla\nHow Rihla collects and uses data: analytics, QR scan counts, and form details. We do not sell your data.",
+      "after": "Privacy Policy: what we collect and why — Rihla\nHow Rihla collects and uses data: Google Analytics page views, QR scans and clicks, plus the details you type into forms. We never sell your data."
+    },
+    {
+      "area": "Text",
+      "title": "\"Last updated\" date",
+      "why": "The wording changed, so the date did. It is now November 11, 2026, and wrapped in a `<time>` tag so machines can read it. If the branch is published on a later day, change it to that day.",
+      "before": "Last updated: October 28, 2026.",
+      "after": "Last updated: <time datetime=\"2026-11-11\">November 11, 2026</time>."
+    },
+    {
+      "area": "Technical",
+      "title": "Share tags",
+      "why": "The page had no Open Graph or X tags. A shared link now shows the title, the description and the Rihla card.",
+      "before": "(none)",
+      "after": "og:type, og:site_name, og:locale, og:title, og:description, og:url, og:image (+ size and alt), twitter:card = summary_large_image"
+    },
+    {
+      "area": "Technical",
+      "title": "Structured data",
+      "why": "Added WebSite, WebPage and a breadcrumb. The WebPage entry carries `dateModified`, so a search engine can see how current the policy is.",
+      "before": "(none)",
+      "after": "<script type=\"application/ld+json\"> { \"@graph\": [ WebSite, WebPage (dateModified 2026-11-11), BreadcrumbList ] }"
+    },
+    {
+      "area": "Technical",
+      "title": "Each section can be linked to",
+      "why": "The six headings now have ids, so a link can open the policy at the right section, for example `/privacy.html#cookies`. The cookie notice could point there later.",
+      "before": "<h2>Cookies</h2>",
+      "after": "<h2 id=\"cookies\">Cookies</h2>"
+    },
+    {
+      "area": "Technical",
+      "title": "Icons and language, as on the homepage",
+      "why": "Added the `favicon.ico` fallback, the iPhone icon and `theme-color`, set `lang=\"en-US\"`, and marked the Arabic letter in the top bar as Arabic."
+    },
+    {
+      "area": "Technical",
+      "title": "Same font request as the homepage",
+      "why": "The page now sends the identical request, so a visitor arriving from the homepage already has it cached.",
+      "before": "family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700",
+      "after": "family=Amiri:wght@700&family=Manrope:wght@400;600;700"
+    },
+    {
+      "area": "Technical",
+      "title": "Taller tap areas in the footer",
+      "why": "The footer links were 17 px tall. They are now 29 px to tap, and the footer is the same height as before."
+    },
+    {
+      "area": "Technical",
+      "title": "Sitemap date",
+      "why": "The entry for this page in `sitemap.xml` now says it changed today.",
+      "before": "<lastmod>2026-10-28</lastmod>",
+      "after": "<lastmod>2026-11-11</lastmod>"
+    },
+    {
+      "area": "Tracking",
+      "title": "Google Analytics, cookie notice and click names",
+      "why": "The page now carries the homepage's tag and loads `site.js`, so a visit to the policy is counted and a visitor who lands here first is asked about cookies. Five links report `cta_click`. Two of them show how often people use the email links in the policy: one to ask for deletion, one to ask a question.",
+      "after": "privacy_delete_email · privacy_contact_email · privacy_home · footer_email · footer_instagram"
+    }
+  ],
+
+  "left_alone": [
+    "**\"What we do not do\", \"Your choices\" and \"Contact\".** Unchanged. They are short, true and clear.",
+    "**The plain style.** The policy reads like the rest of the site. My additions follow it: short sentences, no legal vocabulary.",
+    "**Indexing.** The page stays indexable and in the sitemap. People do search for a company's privacy policy.",
+    "**The spelling \"neighbourhood\".** Kept, as you asked."
+  ],
+
+  "verify_intro": "Do these once the branch is published.",
+  "verify": [
+    "Read the first three sections of the live page once more and check that every sentence is true for you.",
+    "Open the page in a private window. The cookie notice should appear, and its Privacy Policy link should lead back to this page.",
+    "In GA4, open Reports, then Realtime, and open `/privacy.html`. A page view for it should appear after you accept cookies."
+  ],
+
+  "files": [
+    { "path": "privacy.html", "change": "Three paragraphs of policy text, head tags, structured data, Google tag, section ids" },
+    { "path": "index.html", "change": "Questions section states the current price, after your change on main" },
+    { "path": "sitemap.xml", "change": "Date for this page" },
+    { "path": "seo/README.md", "change": "Page 4 done; sales.html added as page 12; list of places the price appears" }
+  ],
+
+  "method": [
+    "Audited from the repository and rendered in headless Chrome at 390 px and 1366 px on a local copy of the site. 29 automated checks pass.",
+    "Every statement added to the policy was checked against the code: the events in `index.html` and `site.js`, and the tests that confirm no name, email address or phone number is sent to Google Analytics.",
+    "The live site is still unreachable from the audit sandbox, so nothing here was checked in production.",
+    "The layout-shift figure comes from a lab run on an emulated slow phone. The text reflows once when the fonts arrive. That was already so; the analytics script changes the timing in the lab, as noted in the demo page changelog."
+  ]
+}

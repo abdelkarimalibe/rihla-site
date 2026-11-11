@@ -1,15 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy Policy — Rihla</title>
-<meta name="description" content="How Rihla collects and uses data: analytics, QR scan counts, and form details. We do not sell your data.">
+<title>Privacy Policy: what we collect and why — Rihla</title>
+<meta name="description" content="How Rihla collects and uses data: Google Analytics page views, QR scans and clicks, plus the details you type into forms. We never sell your data.">
 <link rel="canonical" href="https://rihla-website-self.vercel.app/privacy.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#080D1A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rihla">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Privacy Policy: what we collect and why — Rihla">
+<meta property="og:description" content="How Rihla collects and uses data: Google Analytics page views, QR scans and clicks, plus the details you type into forms. We never sell your data.">
+<meta property="og:url" content="https://rihla-website-self.vercel.app/privacy.html">
+<meta property="og:image" content="https://rihla-website-self.vercel.app/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Rihla: find halal food in NYC you can actually trust.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy: what we collect and why — Rihla">
+<meta name="twitter:description" content="How Rihla collects and uses data: Google Analytics page views, QR scans and clicks, plus the details you type into forms. We never sell your data.">
+<meta name="twitter:image" content="https://rihla-website-self.vercel.app/og-image.png">
+<meta name="twitter:image:alt" content="Rihla: find halal food in NYC you can actually trust.">
+
+<!-- Structured data: says what this page is and where it sits on the site. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://rihla-website-self.vercel.app/#website",
+      "url": "https://rihla-website-self.vercel.app/",
+      "name": "Rihla",
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rihla-website-self.vercel.app/privacy.html#webpage",
+      "url": "https://rihla-website-self.vercel.app/privacy.html",
+      "name": "Privacy Policy: what we collect and why — Rihla",
+      "description": "How Rihla collects and uses data: Google Analytics page views, QR scans and clicks, plus the details you type into forms. We never sell your data.",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@id": "https://rihla-website-self.vercel.app/#website"
+      },
+      "about": {
+        "@id": "https://rihla-website-self.vercel.app/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://rihla-website-self.vercel.app/privacy.html#breadcrumb"
+      },
+      "dateModified": "2026-11-11"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rihla-website-self.vercel.app/privacy.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Rihla",
+          "item": "https://rihla-website-self.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Privacy Policy"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Same font request as the homepage, so a visitor arriving from there already has it cached. -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #080D1A; color: #F5EDD6; font-family: 'Manrope', sans-serif; min-height: 100vh; overflow-x: hidden; }
@@ -25,50 +97,71 @@
   p.muted { color: #8A9BB0; }
   a { color: #E8B85C; }
   .back { display: inline-block; margin-top: 36px; background: #C8943C; color: #080D1A; font-size: 14px; font-weight: 700; padding: 13px 22px; border-radius: 10px; text-decoration: none; }
-  footer { border-top: 1px solid rgba(200,148,60,0.18); padding: 22px 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  footer { border-top: 1px solid rgba(200,148,60,0.18); padding: 16px 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
   footer p, footer a { font-size: 12px; color: #8A9BB0; text-decoration: none; }
+  footer a { display: inline-block; padding: 6px 0; }
   footer a:hover { color: #C8943C; }
   @media (max-width: 480px) { nav { padding: 14px 18px; } main { padding-top: 72px; } }
 </style>
+<!-- Google tag (gtag.js). Same tag and consent settings as the homepage. The visitor's
+     cookie choice is stored once for the whole site (rihla_consent). -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1235J90MCS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('consent', 'default', { 'analytics_storage': 'denied', 'ad_storage': 'denied', 'ad_user_data': 'denied', 'ad_personalization': 'denied' });
+  try {
+    if (localStorage.getItem('rihla_consent') === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  } catch (_) {}
+
+  gtag('config', 'G-1235J90MCS');
+</script>
 </head>
 <body>
 <nav>
   <a href="/">
-    <span class="nav-arabic">ر</span>
+    <span class="nav-arabic" lang="ar">ر</span>
     <span class="nav-en">Rihla</span>
   </a>
 </nav>
 <main>
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: October 28, 2026.</p>
+  <p class="updated">Last updated: <time datetime="2026-11-11">November 11, 2026</time>.</p>
 
-  <h2>What we collect</h2>
-  <p>When you visit Rihla, Google Analytics counts page views and QR scans, including which restaurant's QR code was scanned. If you fill in a form on the site, we receive the details you type, such as your name, restaurant name, email address, and phone number. That is everything.</p>
+  <h2 id="what-we-collect">What we collect</h2>
+  <p>When you visit Rihla, Google Analytics counts page views, QR scans and clicks on links in our emails, including which restaurant's QR code or email link it was. It also counts which buttons and links are clicked, when a form is sent, and which campaign link first brought you to the site. Google Analytics is never sent your name, email address or phone number. It does receive the restaurant name typed into the Halal Visibility Check box, and the neighbourhood chosen on the claim form.</p>
+  <p>If you fill in a form on the site, we receive the details you type, such as your name, restaurant name, email address, and phone number. That is everything.</p>
 
-  <h2>What we use it for</h2>
-  <p>Analytics lets us show restaurants how many customers came through their QR card, in the monthly proof report. Form details are used to contact restaurant owners about their free pilot, and to contact diners who asked for the NYC list. Nothing else.</p>
+  <h2 id="what-we-use-it-for">What we use it for</h2>
+  <p>Analytics lets us show restaurants how many customers came through their QR card, in the monthly proof report. It also shows us which pages, buttons and campaigns bring people in, so we can improve the site. Form details are used to contact restaurant owners about their free pilot, and to contact diners who asked for the NYC list. Nothing else.</p>
 
-  <h2>Cookies</h2>
+  <h2 id="cookies">Cookies</h2>
   <p>Google Analytics sets cookies to count visits, but only if you accept them in the cookie banner on the site. If you decline, we do not store analytics cookies. You can change your choice at any time by clearing your browser data for this site and choosing again when the banner reappears.</p>
+  <p>Your browser also keeps a few small notes for this site that are not cookies, such as your answer to the banner and the campaign link that first brought you here.</p>
 
-  <h2>What we do not do</h2>
+  <h2 id="what-we-do-not-do">What we do not do</h2>
   <p>We do not sell your data. We do not share it with advertisers. We do not use it to show you ads.</p>
 
-  <h2>Your choices</h2>
-  <p>You can ask us to delete your form details at any time by emailing <a href="mailto:rihla.enquiries@gmail.com">rihla.enquiries@gmail.com</a>. We will confirm once it is done.</p>
+  <h2 id="your-choices">Your choices</h2>
+  <p>You can ask us to delete your form details at any time by emailing <a href="mailto:rihla.enquiries@gmail.com" data-cta="privacy_delete_email">rihla.enquiries@gmail.com</a>. We will confirm once it is done.</p>
 
-  <h2>Contact</h2>
-  <p>Questions about this policy go to <a href="mailto:rihla.enquiries@gmail.com">rihla.enquiries@gmail.com</a>.</p>
+  <h2 id="contact">Contact</h2>
+  <p>Questions about this policy go to <a href="mailto:rihla.enquiries@gmail.com" data-cta="privacy_contact_email">rihla.enquiries@gmail.com</a>.</p>
 
-  <a class="back" href="/">Back to Rihla</a>
+  <a class="back" href="/" data-cta="privacy_home">Back to Rihla</a>
 </main>
 <footer>
-  <p>© 2026 Rihla &nbsp;·&nbsp; <a href="mailto:rihla.enquiries@gmail.com">rihla.enquiries@gmail.com</a></p>
+  <p>© 2026 Rihla &nbsp;·&nbsp; <a href="mailto:rihla.enquiries@gmail.com" data-cta="footer_email">rihla.enquiries@gmail.com</a></p>
   <p>
     <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp;
     <a href="/terms.html">Terms</a> &nbsp;·&nbsp;
-    <a href="https://www.instagram.com/rihla.nl" target="_blank" rel="noopener">@rihla.nl on Instagram</a>
+    <a href="https://www.instagram.com/rihla.nl" target="_blank" rel="noopener" data-cta="footer_instagram">@rihla.nl on Instagram</a>
   </p>
 </footer>
+<script src="/site.js" defer></script>
 </body>
 </html>

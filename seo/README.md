@@ -6,12 +6,14 @@ Everything is on branch `claude/practical-keller-adcqrc`. Nothing is live until 
 
 ## Pages
 
+Decision 2026-11-11: the owner chose to wait until every page is done before anything goes live. Ask again at the end (merge into `main`, or open a pull request).
+
 | # | Page | File | Status | Changelog |
 |---|------|------|--------|-----------|
 | 1 | Homepage `/` | `index.html` | **Done** 2026-11-11 | [01-home.pdf](changelogs/01-home.pdf) |
 | 2 | Demo monthly report `/demo.html` | `demo.html` | **Done** 2026-11-11 | [02-demo.pdf](changelogs/02-demo.pdf) |
 | 3 | Halal Visibility Check demo `/grader-demo.html` | `grader-demo.html` | **Done** 2026-11-11 | [03-grader-demo.pdf](changelogs/03-grader-demo.pdf) |
-| 4 | Privacy Policy `/privacy.html` | `privacy.html` | To do | |
+| 4 | Privacy Policy `/privacy.html` | `privacy.html` | **Done** 2026-11-11 | [04-privacy.pdf](changelogs/04-privacy.pdf) |
 | 5 | Terms of Use `/terms.html` | `terms.html` | To do | |
 | 6 | Login `/login.html` (noindex) | `login.html` | To do | |
 | 7 | Register `/register.html` (noindex) | `register.html` | To do | |
@@ -35,6 +37,9 @@ These came out of the audits and cannot be done from the repo. Details are in th
 | High | Set up Google Search Console and Bing Webmaster Tools, submit the sitemap. | 01-home |
 | Medium | GA4: mark `list_signup` and `spot_claim` as key events, register the custom dimensions. | 01-home |
 | Medium | Publish a page per verified restaurant and per neighborhood. That is what will rank. | 01-home |
+| High | The privacy policy leaves out Members Area accounts, the outside services that handle data, retention and a responsible party. | 04-privacy |
+| Medium | Add a "Change my cookie choice" link to the privacy page. | 04-privacy |
+| Low | `emails/README.md` still says $79/mo. | 04-privacy |
 | Low | Optional: draw the wordmark as an SVG, host the fonts yourself and preload Manrope (also removes the small jump when fonts load). | 01-home, 02-demo |
 
 ## Rules every page in this pass follows

@@ -4,31 +4,72 @@
   "page_file": "grader-demo.html",
   "page_url": "rihla-website-self.vercel.app/grader-demo.html",
   "index": 3,
-  "of": 11,
+  "of": 12,
   "date_long": "November 11, 2026",
   "status": "Done",
-
   "in_short": [
     "This is the page behind \"See a sample grade first\". Until the visitor clicks the button it showed 47 words, and it never said what the check actually looks at.",
     "Google Analytics was not on it. You could not see how many owners opened the sample grade, or how many clicked \"Book a free check\", which is the one contact route on the site that works today.",
     "15 changes are on the branch: 9 technical, 3 text, 3 tracking.",
     "The page looks the same down to the note under the button. One short section is new below it."
   ],
-
   "scorecard": [
-    { "metric": "Title tag", "before": "Halal Visibility Check demo — Rihla\n35 characters", "after": "Halal Visibility Check: see a sample grade — Rihla\n50 characters" },
-    { "metric": "Meta description", "before": "90 characters", "after": "138 characters, says what the check answers" },
-    { "metric": "Words visible before any click", "before": "47", "after": "96" },
-    { "metric": "Google Analytics", "before": "Not on the page", "after": "Same tag and consent settings as the homepage" },
-    { "metric": "Clicks tracked", "before": "0", "after": "7, including the sample-grade button and Book a free check" },
-    { "metric": "Cookie notice", "before": "None on this page", "after": "Shown until the visitor chooses" },
-    { "metric": "Share preview", "before": "No share tags at all", "after": "Title, description and the 1200 × 630 card" },
-    { "metric": "Structured data", "before": "None", "after": "WebSite, WebPage, BreadcrumbList" },
-    { "metric": "Sample grade in search results", "before": "Could be quoted as the page's description", "after": "Blocked with data-nosnippet" },
-    { "metric": "Layout shift while loading, lab test", "before": "0.01", "after": "0" },
-    { "metric": "Page weight on a first visit", "before": "132 KB, of which fonts 123 KB", "after": "142 KB, of which fonts 123 KB" }
+    {
+      "metric": "Title tag",
+      "before": "Halal Visibility Check demo — Rihla\n35 characters",
+      "after": "Halal Visibility Check: see a sample grade — Rihla\n50 characters"
+    },
+    {
+      "metric": "Meta description",
+      "before": "90 characters",
+      "after": "138 characters, says what the check answers"
+    },
+    {
+      "metric": "Words visible before any click",
+      "before": "47",
+      "after": "96"
+    },
+    {
+      "metric": "Google Analytics",
+      "before": "Not on the page",
+      "after": "Same tag and consent settings as the homepage"
+    },
+    {
+      "metric": "Clicks tracked",
+      "before": "0",
+      "after": "7, including the sample-grade button and Book a free check"
+    },
+    {
+      "metric": "Cookie notice",
+      "before": "None on this page",
+      "after": "Shown until the visitor chooses"
+    },
+    {
+      "metric": "Share preview",
+      "before": "No share tags at all",
+      "after": "Title, description and the 1200 × 630 card"
+    },
+    {
+      "metric": "Structured data",
+      "before": "None",
+      "after": "WebSite, WebPage, BreadcrumbList"
+    },
+    {
+      "metric": "Sample grade in search results",
+      "before": "Could be quoted as the page's description",
+      "after": "Blocked with data-nosnippet"
+    },
+    {
+      "metric": "Layout shift while loading, lab test",
+      "before": "0.01",
+      "after": "0"
+    },
+    {
+      "metric": "Page weight on a first visit",
+      "before": "132 KB, of which fonts 123 KB",
+      "after": "142 KB, of which fonts 123 KB"
+    }
   ],
-
   "needs_you_intro": "Nothing on this page needs you. One observation, because it touches the critical item from the homepage.",
   "needs_you": [
     {
@@ -39,7 +80,6 @@
       "effort": "none here"
     }
   ],
-
   "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`.",
   "changes": [
     {
@@ -141,7 +181,6 @@
       "why": "Both come with `site.js`. A visitor who lands here first is now asked about cookies, and a campaign link that points straight at this page is remembered for the lead events on the homepage."
     }
   ],
-
   "left_alone": [
     "**The button that reveals the grade.** It imitates the real flow: type a name, get a grade. Search engines read the hidden card anyway.",
     "**The H1, the badge and the note under the button.** \"Demo — sample data only\" and \"No real restaurant was graded\" are exactly what this page needs to say.",
@@ -149,19 +188,22 @@
     "**\"Book a free check\" as an email link.** It works, which the forms do not yet.",
     "**Canonical tag, indexing and sitemap entry.** Correct."
   ],
-
   "verify_intro": "Do these once the branch is merged and Vercel has deployed it.",
   "verify": [
     "Open the page in a private window. The cookie notice appears. Click Accept.",
     "In GA4, open Reports, then Realtime. Click \"See a sample grade\" on the page, then \"Book a free check\". Two `cta_click` events should appear.",
     "Run the page through [Google's Rich Results Test](https://search.google.com/test/rich-results). It should find the breadcrumb and report no errors."
   ],
-
   "files": [
-    { "path": "grader-demo.html", "change": "Head tags, structured data, Google tag, new section, link, click names" },
-    { "path": "sitemap.xml", "change": "Date for this page" }
+    {
+      "path": "grader-demo.html",
+      "change": "Head tags, structured data, Google tag, new section, link, click names"
+    },
+    {
+      "path": "sitemap.xml",
+      "change": "Date for this page"
+    }
   ],
-
   "method": [
     "Audited from the repository and rendered in headless Chrome at 390 px and 1366 px on a local copy of the site, with the sample grade closed and open. 29 automated checks pass.",
     "The live site is still unreachable from the audit sandbox, so nothing here was checked in production.",
