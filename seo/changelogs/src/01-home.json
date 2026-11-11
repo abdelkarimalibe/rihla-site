@@ -1,0 +1,253 @@
+{
+  "page_name": "Homepage",
+  "page_path": "/",
+  "page_file": "index.html",
+  "page_url": "rihla-website-self.vercel.app/",
+  "index": 1,
+  "of": 11,
+  "date_long": "November 11, 2026",
+  "status": "Done",
+
+  "in_short": [
+    "The page was sound but hard for machines to read. It had no structured data and no share image, its title led with the brand instead of the search phrase, and it gave diners about 40 words.",
+    "20 changes are on the branch: 9 technical, 5 text, 6 tracking. Each is listed below with its before and after.",
+    "The biggest finding is not about search. **Neither form sends the lead to you.** Read \"What I could not do for you\" first.",
+    "Nothing is live yet. Merge `claude/practical-keller-adcqrc` to publish."
+  ],
+
+  "scorecard": [
+    { "metric": "Title tag", "before": "Rihla — Halal food in NYC you can actually trust\n48 characters, brand first", "after": "Halal restaurants in NYC you can actually trust — Rihla\n55 characters, search phrase first" },
+    { "metric": "Meta description", "before": "118 characters, nothing for diners to do", "after": "152 characters, one next step each for diners and owners" },
+    { "metric": "Structured data", "before": "None", "after": "Organization, WebSite, WebPage, and 7 questions as FAQPage" },
+    { "metric": "Share preview (WhatsApp, iMessage, Instagram)", "before": "Plain text, no picture", "after": "1200 × 630 card with the wordmark and headline" },
+    { "metric": "Words on the page", "before": "454", "after": "734" },
+    { "metric": "Fonts downloaded", "before": "230 KB", "after": "125 KB" },
+    { "metric": "Page fully loaded, slow-4G lab test", "before": "1.9 s", "after": "1.4 s" },
+    { "metric": "Form submissions visible in GA4", "before": "0 of 2 forms", "after": "2 of 2 forms" },
+    { "metric": "Link and button clicks tracked", "before": "0", "after": "9" },
+    { "metric": "Icons", "before": "1 SVG that changes with the device's fonts", "after": "Fixed outline SVG, .ico, iPhone icon, 512 px logo" }
+  ],
+
+  "needs_you_intro": "These need your accounts, your money or a decision that is yours. They are in order of importance.",
+  "needs_you": [
+    {
+      "priority": "Critical",
+      "title": "Neither form sends you the lead",
+      "detail": "The email form and the Claim your spot form save what the visitor typed in that visitor's own browser (`localStorage`) and nowhere else. No email is sent and no database row is written. The page still answers \"You're on the list\" and \"Abdelkarim will call you within 24 hours\". A comment in the code mentions a pending \"claim-form fix\", so you may already know. From today GA4 counts each submission, but the name, phone number and email address are still lost.",
+      "action": "Write each submission to Supabase, which the Members Area already uses. I did not do it because it means creating a table in your live database. Tell me to and I will.",
+      "effort": "about 1 hour"
+    },
+    {
+      "priority": "High",
+      "title": "QR scans are undercounted",
+      "detail": "`qr_scan` fires as the page loads, before the visitor has answered the cookie banner. Analytics consent starts as denied, so GA4 shows a scan in its reports only when that visitor clicks Accept. Scans by everyone who declines or ignores the banner are missing. A page reload also counts as a second scan. This is the number in the monthly report you show restaurants.",
+      "action": "Count `?spot=` visits on the server, one Supabase row per scan with no cookie involved, and keep GA4 for the rest. I left the event itself unchanged so the pilot's numbers stay comparable.",
+      "effort": "about 2 hours"
+    },
+    {
+      "priority": "High",
+      "title": "Get a real domain",
+      "detail": "Every canonical tag, sitemap entry and share tag points at `rihla-website-self.vercel.app`. People trust and remember that less than a real domain, and every link Rihla earns now has to be redirected later. The address appears 38 times in 14 files.",
+      "action": "Buy the domain and add it to the project in Vercel. I will then switch all 38 references in one pass.",
+      "effort": "15 minutes once you have the domain"
+    },
+    {
+      "priority": "High",
+      "title": "Set up Google Search Console",
+      "detail": "The repo holds no verification tag or file, so I cannot tell whether Search Console is set up. Without it you cannot see which searches show Rihla, whether Google has indexed the page, or ask Google to crawl it again.",
+      "action": "Add the site as a URL-prefix property and choose the HTML tag method. Send me the tag and I will add it. Then submit `sitemap.xml` and request indexing of the homepage. Bing Webmaster Tools can import all of it from Search Console.",
+      "effort": "15 minutes"
+    },
+    {
+      "priority": "Medium",
+      "title": "Two settings in GA4",
+      "detail": "The new events reach GA4 without any setup, but GA4 hides their details until you register them.",
+      "action": "In Admin, Data display, Events: mark `list_signup` and `spot_claim` as key events. In Admin, Data display, Custom definitions: add event-scoped dimensions for `cta`, `area`, `first_source`, `first_medium` and `first_campaign`, and for `restaurant` if it is not there yet.",
+      "effort": "10 minutes"
+    },
+    {
+      "priority": "Medium",
+      "title": "The list itself is what will rank",
+      "detail": "One page cannot rank for \"halal restaurants in NYC\" on a promise. What ranks is a page for each verified restaurant (name, neighborhood, tier, check date) and a page for each neighborhood, such as \"Halal restaurants in Astoria\". The homepage already promises owners \"a verified page that Google and AI can actually read\". Those pages are not on the site yet.",
+      "action": "When the first checks are done, publish them as pages. I can build the template, with Restaurant structured data, when you are ready.",
+      "effort": "about a day for the template"
+    },
+    {
+      "priority": "Low",
+      "title": "Optional speed work",
+      "detail": "The bold Arabic wordmark still costs 100 KB of font for four letters. Drawing the wordmark as an SVG removes that download and the brief flash of a substitute font. Hosting the fonts on your own domain removes two outside connections and stops visitors' IP addresses going to Google Fonts.",
+      "effort": "1 to 2 hours"
+    }
+  ],
+
+  "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`. The page looks the same above the new questions section, apart from the two small differences noted in changes 4 and 14.",
+  "changes": [
+    {
+      "area": "Technical",
+      "title": "Share preview image",
+      "why": "A Rihla link pasted into WhatsApp, iMessage or Instagram showed as bare text, because the page had no `og:image`. It now shows a 1200 × 630 card that repeats the hero: wordmark, rule, headline. Also added the image's size and alt text and `og:locale`, and switched the X card to the large format.",
+      "before": "<meta name=\"twitter:card\" content=\"summary\">   (no og:image)",
+      "after": "<meta property=\"og:image\" content=\"https://rihla-website-self.vercel.app/og-image.png\">\n<meta name=\"twitter:card\" content=\"summary_large_image\">",
+      "note": "New brand asset, so please look at og-image.png. Its source is seo/tools/assets/og-image.html."
+    },
+    {
+      "area": "Technical",
+      "title": "Structured data",
+      "why": "Rihla sells restaurants \"a verified page AI can read\", yet its own homepage gave machines nothing to read. Added Organization (name, Arabic name, logo, email, Instagram, New York City), WebSite and WebPage as JSON-LD. The WebSite entry is how Google learns to show \"Rihla\" as the site name. Every value is already visible on the page.",
+      "before": "(none)",
+      "after": "<script type=\"application/ld+json\"> { \"@graph\": [ Organization, WebSite, WebPage ] }"
+    },
+    {
+      "area": "Technical",
+      "title": "Icons that look the same everywhere",
+      "why": "The favicon was an SVG that drew the letter ر in whatever serif font the device had, so it differed between iPhone, Android and Windows. It is now a fixed outline of that letter in Amiri Bold, the font of the wordmark. Added `favicon.ico` for browsers and crawlers that ignore SVG, `apple-touch-icon.png` for iPhone home screens, `icon-512.png` as the logo named in the structured data, and a `theme-color`.",
+      "before": "<link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\">",
+      "after": "<link rel=\"icon\" href=\"/favicon.ico\" sizes=\"32x32\">\n<link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\">\n<link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\">",
+      "note": "The letter is now larger and centered in the icon. Please look at it."
+    },
+    {
+      "area": "Technical",
+      "title": "Fonts: 230 KB down to 125 KB",
+      "why": "The page downloaded the whole regular-weight Amiri font, 109 KB, to draw one letter: the ر in \"carries the ر mark\". It now loads a one-letter version of 1.4 KB. The unused Manrope 500 weight is gone too. I tested cutting the bold wordmark font the same way. It changed the shape of the wordmark, so the bold font is untouched.",
+      "before": "family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700",
+      "after": "family=Amiri:wght@700&family=Manrope:wght@400;600;700\nfamily=Amiri:wght@400&text=%D8%B1",
+      "note": "Visible side effect: that one line of text sits 2 px lower."
+    },
+    {
+      "area": "Technical",
+      "title": "Language set to US English",
+      "why": "`lang=\"en\"` became `lang=\"en-US\"`, with a matching `og:locale`. It tells search engines and screen readers that the page is written for an American audience.",
+      "before": "<html lang=\"en\">",
+      "after": "<html lang=\"en-US\">"
+    },
+    {
+      "area": "Technical",
+      "title": "Two blocks kept out of search snippets",
+      "why": "The QR welcome card and the cookie banner are in the page's HTML on every visit, even when hidden. Google could have quoted \"You're at a Rihla-verified halal spot\" or the cookie notice as the description of the homepage. Both now carry `data-nosnippet`.",
+      "before": "<section class=\"spot-card\" id=\"spot-card\">",
+      "after": "<section class=\"spot-card\" id=\"spot-card\" data-nosnippet>"
+    },
+    {
+      "area": "Technical",
+      "title": "Taller tap areas on small links",
+      "why": "The footer links and two small gold text links were 17 to 18 px tall. They are now 29 to 30 px tall to tap, and the layout has not moved. Small links that sit close together are a standard mobile usability flag."
+    },
+    {
+      "area": "Technical",
+      "title": "Sitemap date",
+      "why": "The homepage entry in `sitemap.xml` now says it changed today, so crawlers know to fetch it again.",
+      "before": "<lastmod>2026-10-28</lastmod>",
+      "after": "<lastmod>2026-11-11</lastmod>"
+    },
+    {
+      "area": "Technical",
+      "title": "Internal files kept off the public site",
+      "why": "New file `.vercelignore`. It tells Vercel not to publish the `seo/` folder, which holds these changelogs, the tracker and the audit tools."
+    },
+    {
+      "area": "Text",
+      "title": "Title: search phrase first, brand last",
+      "why": "People scan the first words of a result, and Google cuts titles off at about 60 characters. Few people search for \"Rihla\" yet. Many search for \"halal restaurants in NYC\". The H1 keeps \"halal food\", so the page now covers both wordings.",
+      "before": "Rihla — Halal food in NYC you can actually trust",
+      "after": "Halal restaurants in NYC you can actually trust — Rihla"
+    },
+    {
+      "area": "Text",
+      "title": "Meta description",
+      "why": "This is the gray text under the link in search results. The old one gave diners nothing to do and stopped at 118 characters, where about 155 fit. The share preview uses the same text.",
+      "before": "Rihla hand-checks the best halal spots in New York. Restaurant owners: we send you Muslim customers, free for 30 days.",
+      "after": "Rihla hand-checks the best halal spots in New York City and shows how and when each was checked. Get the free NYC list. Restaurant owners: 30 days free."
+    },
+    {
+      "area": "Text",
+      "title": "New section: \"How Rihla works.\"",
+      "why": "Seven questions and answers above the footer, four for diners and three for owners. The page had about 40 words for diners. This adds 280 words on what people ask before they trust a halal claim: how the check works, what it costs, where Rihla operates, whether they need an app. Every sentence repeats something the site already says on the homepage, in the Terms or in the Members Area. Nothing new is claimed. The questions are marked up as FAQPage in the HTML itself, so there is one copy of the text to keep up to date.",
+      "after": "For diners: How does Rihla check that a restaurant is halal? · Is the NYC halal list free? · Which parts of New York does Rihla cover? · Do I need an app?\nFor owners: What does Rihla cost a restaurant? · What does a restaurant get? · What is the Halal Visibility Check?",
+      "note": "Please read the wording. It spells out the three tiers and repeats the $79 price, so change it here whenever the price, the tiers or the pilot area change."
+    },
+    {
+      "area": "Text",
+      "title": "Missing space in the H1 and H2",
+      "why": "Both headings break their line with `<br>` and had no space before it. Browsers hide that. Anything that reads plain text, such as some crawlers, AI tools and share scrapers, saw \"NYCyou\" and \"customers.Free\".",
+      "before": "Find halal food in NYC<br>you can",
+      "after": "Find halal food in NYC <br>you can"
+    },
+    {
+      "area": "Text",
+      "title": "Neighbourhood became Neighborhood",
+      "why": "The claim form label used the British spelling on a page written for New Yorkers.",
+      "note": "Visible change: one letter fewer in that label."
+    },
+    {
+      "area": "Tracking",
+      "title": "`list_signup`: the email form is now counted",
+      "why": "Fires once when a visitor joins the list. Until now GA4 had no record of the page's main goal. No email address is sent."
+    },
+    {
+      "area": "Tracking",
+      "title": "`spot_claim`: the claim form is now counted",
+      "why": "Fires once when an owner submits Claim your spot, with the chosen neighborhood as `area`. No name, phone number or restaurant name is sent."
+    },
+    {
+      "area": "Tracking",
+      "title": "Each lead carries the campaign that first brought it",
+      "why": "Both events include `first_source`, `first_medium` and `first_campaign`, read from the UTM values the page already saves. You can see which email or post produced each sign-up."
+    },
+    {
+      "area": "Tracking",
+      "title": "First-touch bug fixed",
+      "why": "The code comment said \"first-touch attribution\", but every later campaign link overwrote the saved value, which made it last-touch. The first campaign now stays. `utm_content` and `utm_term` are saved as well."
+    },
+    {
+      "area": "Tracking",
+      "title": "`cta_click` on 9 links and buttons",
+      "why": "Reports which one was clicked, in the `cta` parameter. It shows whether visitors go to the demo, to the sample grade or straight to the claim form.",
+      "after": "nav_demo · nav_login · nav_claim · sample_grade · demo_report · faq_demo_report · faq_sample_grade · footer_email · footer_instagram"
+    },
+    {
+      "area": "Tracking",
+      "title": "Consent Mode: all four signals",
+      "why": "Added `ad_user_data` and `ad_personalization`, both denied, beside the two signals already set. Google's Consent Mode v2 defines four. What is collected does not change.",
+      "before": "{ analytics_storage: 'denied', ad_storage: 'denied' }",
+      "after": "{ analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }"
+    }
+  ],
+
+  "left_alone": [
+    "**Canonical tag.** Correct. QR links (`?spot=`) and campaign links (`?utm_…`) all point back to `/`.",
+    "**robots.txt.** Allows everything and names the sitemap.",
+    "**Headings.** One H1, then H2 and H3 in order.",
+    "**The hero copy and the H1.** Clear, and they hold the main search phrase.",
+    "**Mobile layout.** No sideways scroll at 390 px, and 96% of the text is 12 px or larger.",
+    "**Layout stability and first paint.** 0.01 layout shift and about 0.6 s in the lab test. Already good.",
+    "**The Google Analytics tag.** Left where it is, in the form Google's own tools recognize.",
+    "**The `qr_scan` and `email_click` events.** Unchanged, so the pilot's numbers stay comparable.",
+    "**Addresses ending in .html.** Clean addresses would not help ranking and would put a redirect in front of every existing link.",
+    "**The email templates in /emails.** They are reachable on the site, but already marked noindex."
+  ],
+
+  "verify_intro": "Do these once the branch is merged and Vercel has deployed it.",
+  "verify": [
+    "Open [Google's Rich Results Test](https://search.google.com/test/rich-results) and enter the homepage address. It should find the FAQ and report no errors.",
+    "Paste the homepage link into a WhatsApp chat with yourself. The card with the wordmark should appear. WhatsApp remembers old previews, so add `?v=2` to the link if you tested it before.",
+    "In GA4, open Reports, then Realtime. On the site, click Accept on the cookie banner and submit each form once with test details. `list_signup` and `spot_claim` should appear within a minute.",
+    "Open `rihla-website-self.vercel.app/seo/README.md`. It must show the 404 page. If it shows a document, tell me.",
+    "Run the homepage through [PageSpeed Insights](https://pagespeed.web.dev) on Mobile and keep the score for comparison."
+  ],
+
+  "files": [
+    { "path": "index.html", "change": "Head tags, structured data, fonts, questions section, tracking" },
+    { "path": "favicon.svg", "change": "Redrawn as a fixed outline" },
+    { "path": "favicon.ico\napple-touch-icon.png\nicon-512.png\nog-image.png", "change": "New: icon fallbacks, logo and share image" },
+    { "path": "sitemap.xml", "change": "Homepage date" },
+    { "path": ".vercelignore", "change": "New: keeps seo/ off the public site" },
+    { "path": "seo/", "change": "New: the tracker (README.md), this changelog and the audit tools. Not published." }
+  ],
+
+  "method": [
+    "Audited from the repository and rendered in headless Chrome at 390 px and 1366 px on a local copy of the site. 37 automated checks of the forms, events, questions and structured data pass.",
+    "The live site could not be reached from the audit sandbox, whose network policy blocks `rihla-website-self.vercel.app`. Production headers, redirects, the 404 status and what Google has indexed were therefore not checked.",
+    "Lighthouse could not be run here and the PageSpeed Insights quota was used up, so there are no Lighthouse scores in this report.",
+    "Speed figures come from a lab run that imitates a mid-range phone on slow 4G (150 ms latency, 1.6 Mbps, 4× CPU slowdown). They are the median of 5 runs, without the Google Analytics script and with uncompressed HTML. Use them to compare before and after, not as absolute scores."
+  ]
+}
