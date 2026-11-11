@@ -1,0 +1,170 @@
+{
+  "page_name": "Halal Visibility Check demo",
+  "page_path": "/grader-demo.html",
+  "page_file": "grader-demo.html",
+  "page_url": "rihla-website-self.vercel.app/grader-demo.html",
+  "index": 3,
+  "of": 11,
+  "date_long": "November 11, 2026",
+  "status": "Done",
+
+  "in_short": [
+    "This is the page behind \"See a sample grade first\". Until the visitor clicks the button it showed 47 words, and it never said what the check actually looks at.",
+    "Google Analytics was not on it. You could not see how many owners opened the sample grade, or how many clicked \"Book a free check\", which is the one contact route on the site that works today.",
+    "15 changes are on the branch: 9 technical, 3 text, 3 tracking.",
+    "The page looks the same down to the note under the button. One short section is new below it."
+  ],
+
+  "scorecard": [
+    { "metric": "Title tag", "before": "Halal Visibility Check demo — Rihla\n35 characters", "after": "Halal Visibility Check: see a sample grade — Rihla\n50 characters" },
+    { "metric": "Meta description", "before": "90 characters", "after": "138 characters, says what the check answers" },
+    { "metric": "Words visible before any click", "before": "47", "after": "96" },
+    { "metric": "Google Analytics", "before": "Not on the page", "after": "Same tag and consent settings as the homepage" },
+    { "metric": "Clicks tracked", "before": "0", "after": "7, including the sample-grade button and Book a free check" },
+    { "metric": "Cookie notice", "before": "None on this page", "after": "Shown until the visitor chooses" },
+    { "metric": "Share preview", "before": "No share tags at all", "after": "Title, description and the 1200 × 630 card" },
+    { "metric": "Structured data", "before": "None", "after": "WebSite, WebPage, BreadcrumbList" },
+    { "metric": "Sample grade in search results", "before": "Could be quoted as the page's description", "after": "Blocked with data-nosnippet" },
+    { "metric": "Layout shift while loading, lab test", "before": "0.01", "after": "0" },
+    { "metric": "Page weight on a first visit", "before": "132 KB, of which fonts 123 KB", "after": "142 KB, of which fonts 123 KB" }
+  ],
+
+  "needs_you_intro": "Nothing on this page needs you. One observation, because it touches the critical item from the homepage.",
+  "needs_you": [
+    {
+      "priority": "Medium",
+      "title": "\"Book a free check\" is the only contact route that reaches you",
+      "detail": "The button on this page opens an email to rihla.enquiries@gmail.com. The two forms on the homepage still save their entries in the visitor's browser and nowhere else. So today an owner who reads this page and emails you is a lead you receive, and an owner who fills in Claim your spot is one you never see.",
+      "action": "Nothing to do on this page. It is one more reason to fix the homepage forms first. From today GA4 counts clicks on this button as `grader_book_check`.",
+      "effort": "none here"
+    }
+  ],
+
+  "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`.",
+  "changes": [
+    {
+      "area": "Technical",
+      "title": "Share tags",
+      "why": "The page had no Open Graph or X tags. A shared link now shows the title, the description and the 1200 × 630 Rihla card.",
+      "before": "(none)",
+      "after": "og:type, og:site_name, og:locale, og:title, og:description, og:url, og:image (+ size and alt), twitter:card = summary_large_image"
+    },
+    {
+      "area": "Technical",
+      "title": "Structured data",
+      "why": "Added WebSite, WebPage and a breadcrumb (Rihla, then Halal Visibility Check sample). Demo Diner is fictional, so it is deliberately not described as a restaurant, and the grade is not marked up as a rating.",
+      "before": "(none)",
+      "after": "<script type=\"application/ld+json\"> { \"@graph\": [ WebSite, WebPage, BreadcrumbList ] }"
+    },
+    {
+      "area": "Technical",
+      "title": "Sample grade kept out of search results",
+      "why": "The grade C, \"Certificate visible online: Not found\" and \"18 in the last 90 days\" are all invented. The card sits in the page's HTML even while hidden, and Google could have quoted it under a Rihla link. It now carries `data-nosnippet`. This follows your own rule from the email README: never show Demo Diner sample data as a real grade.",
+      "before": "<div class=\"grade-card\" id=\"grade-card\" style=\"display:none;\">",
+      "after": "<div class=\"grade-card\" id=\"grade-card\" style=\"display:none;\" data-nosnippet>"
+    },
+    {
+      "area": "Technical",
+      "title": "Missing spaces in the five result rows",
+      "why": "The label and its result had no space between them in the HTML. Anything reading plain text saw \"Google listing✓ Found\" and \"Certificate visible online✗ Not found\".",
+      "before": "<span>Google listing</span><span class=\"ok\">✓ Found</span>",
+      "after": "<span>Google listing</span> <span class=\"ok\">✓ Found</span>"
+    },
+    {
+      "area": "Technical",
+      "title": "Icons and language, as on the homepage",
+      "why": "Added the `favicon.ico` fallback, the iPhone icon and `theme-color`, set `lang=\"en-US\"`, and marked the Arabic letter in the top bar as Arabic.",
+      "before": "<html lang=\"en\">   ·   <span class=\"nav-arabic\">",
+      "after": "<html lang=\"en-US\">   ·   <span class=\"nav-arabic\" lang=\"ar\">"
+    },
+    {
+      "area": "Technical",
+      "title": "Same font request as the homepage",
+      "why": "The page now sends the identical request, so a visitor arriving from the homepage already has it cached. No bytes saved on a first visit.",
+      "before": "family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700",
+      "after": "family=Amiri:wght@700&family=Manrope:wght@400;600;700"
+    },
+    {
+      "area": "Technical",
+      "title": "Taller tap areas",
+      "why": "\"Back to Rihla\" in the top bar was 18 px tall and the footer links 17 px. They are now 42 px and 29 px to tap. Nothing moved. The top bar also stopped growing when the Arabic font arrives, which is why the layout shift is now 0."
+    },
+    {
+      "area": "Technical",
+      "title": "Shared script",
+      "why": "The page now loads `site.js`, the shared file introduced with the demo report page. It saves the first campaign, reports clicks and shows the cookie notice."
+    },
+    {
+      "area": "Technical",
+      "title": "Sitemap date",
+      "why": "The entry for this page in `sitemap.xml` now says it changed today.",
+      "before": "<lastmod>2026-10-28</lastmod>",
+      "after": "<lastmod>2026-11-11</lastmod>"
+    },
+    {
+      "area": "Text",
+      "title": "Title",
+      "why": "The old title ended in \"demo\", which says nothing about what the visitor gets. The new one says it: a sample grade.",
+      "before": "Halal Visibility Check demo — Rihla",
+      "after": "Halal Visibility Check: see a sample grade — Rihla"
+    },
+    {
+      "area": "Text",
+      "title": "Meta description",
+      "why": "It now leads with the question the check answers, in the homepage's own words, and says what the visitor will see. \"Sample data only\" stays in.",
+      "before": "Demo of the Rihla Halal Visibility Check. Sample data only, no real restaurant was graded.",
+      "after": "See a sample Halal Visibility Check: can diners and AI tell a restaurant is halal? Five signals, one grade, three fixes. Sample data only."
+    },
+    {
+      "area": "Text",
+      "title": "New section: \"What the check looks at\"",
+      "why": "Before the button was clicked, the page never said what is checked. A short list now does, between the note and the sample card. The five items are word for word the five rows of the card. The closing sentence is the homepage's promise: checked by hand, a call with your grade and three fixes. A link to the monthly report demo closes the page, so the two demos point at each other.",
+      "after": "What the check looks at\n1. Google listing\n2. Halal mentioned on the listing\n3. Certificate visible online\n4. Machine-readable halal info for AI\n5. Recent reviews mentioning halal\nA real check is done by hand, and we call you with your grade and three fixes.\n\nSee a demo of the monthly report →   (/demo.html)",
+      "note": "Please read it. If the five rows of the card ever change, change this list too."
+    },
+    {
+      "area": "Tracking",
+      "title": "Google Analytics added",
+      "why": "A visitor who clicked \"See a sample grade first\" on the homepage disappeared from GA4. The tag here is the homepage's, with the same consent defaults and the same stored choice.",
+      "before": "(no tag)",
+      "after": "gtag.js G-1235J90MCS, consent default denied, reads rihla_consent"
+    },
+    {
+      "area": "Tracking",
+      "title": "`cta_click` on 7 links and buttons",
+      "why": "Two matter. `grader_see_grade` counts how many visitors open the sample grade. `grader_book_check` counts how many go on to email you.",
+      "after": "nav_home · grader_see_grade · grader_book_check · grader_home · grader_demo_report · footer_email · footer_instagram"
+    },
+    {
+      "area": "Tracking",
+      "title": "Cookie notice and first campaign",
+      "why": "Both come with `site.js`. A visitor who lands here first is now asked about cookies, and a campaign link that points straight at this page is remembered for the lead events on the homepage."
+    }
+  ],
+
+  "left_alone": [
+    "**The button that reveals the grade.** It imitates the real flow: type a name, get a grade. Search engines read the hidden card anyway.",
+    "**The H1, the badge and the note under the button.** \"Demo — sample data only\" and \"No real restaurant was graded\" are exactly what this page needs to say.",
+    "**The sample grade and its three fixes.** Unchanged.",
+    "**\"Book a free check\" as an email link.** It works, which the forms do not yet.",
+    "**Canonical tag, indexing and sitemap entry.** Correct."
+  ],
+
+  "verify_intro": "Do these once the branch is merged and Vercel has deployed it.",
+  "verify": [
+    "Open the page in a private window. The cookie notice appears. Click Accept.",
+    "In GA4, open Reports, then Realtime. Click \"See a sample grade\" on the page, then \"Book a free check\". Two `cta_click` events should appear.",
+    "Run the page through [Google's Rich Results Test](https://search.google.com/test/rich-results). It should find the breadcrumb and report no errors."
+  ],
+
+  "files": [
+    { "path": "grader-demo.html", "change": "Head tags, structured data, Google tag, new section, link, click names" },
+    { "path": "sitemap.xml", "change": "Date for this page" }
+  ],
+
+  "method": [
+    "Audited from the repository and rendered in headless Chrome at 390 px and 1366 px on a local copy of the site, with the sample grade closed and open. 29 automated checks pass.",
+    "The live site is still unreachable from the audit sandbox, so nothing here was checked in production.",
+    "Speed and layout-shift figures come from a lab run that imitates a mid-range phone on slow 4G, median of 5 runs. Use them to compare before and after, not as absolute scores."
+  ]
+}

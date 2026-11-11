@@ -10,7 +10,7 @@ Everything is on branch `claude/practical-keller-adcqrc`. Nothing is live until 
 |---|------|------|--------|-----------|
 | 1 | Homepage `/` | `index.html` | **Done** 2026-11-11 | [01-home.pdf](changelogs/01-home.pdf) |
 | 2 | Demo monthly report `/demo.html` | `demo.html` | **Done** 2026-11-11 | [02-demo.pdf](changelogs/02-demo.pdf) |
-| 3 | Halal Visibility Check demo `/grader-demo.html` | `grader-demo.html` | To do | |
+| 3 | Halal Visibility Check demo `/grader-demo.html` | `grader-demo.html` | **Done** 2026-11-11 | [03-grader-demo.pdf](changelogs/03-grader-demo.pdf) |
 | 4 | Privacy Policy `/privacy.html` | `privacy.html` | To do | |
 | 5 | Terms of Use `/terms.html` | `terms.html` | To do | |
 | 6 | Login `/login.html` (noindex) | `login.html` | To do | |
