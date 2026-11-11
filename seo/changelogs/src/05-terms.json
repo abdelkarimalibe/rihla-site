@@ -1,0 +1,169 @@
+{
+  "page_name": "Terms of Use",
+  "page_path": "/terms.html",
+  "page_file": "terms.html",
+  "page_url": "rihla-website-self.vercel.app/terms.html",
+  "index": 5,
+  "of": 12,
+  "date_long": "November 11, 2026",
+  "status": "Done",
+
+  "in_short": [
+    "You changed the price in these terms today, but the date at the top still said November 2. The terms themselves say that date shows the latest version, so it is now November 11.",
+    "The terms never pointed to the Privacy Policy. One line now does.",
+    "12 changes are on the branch: 7 technical, 3 text, 2 tracking. No term was rewritten.",
+    "The new yearly plan raises questions the terms do not answer yet. They are under \"What I could not do for you\"."
+  ],
+
+  "scorecard": [
+    { "metric": "\"Last updated\" date", "before": "November 2, 2026, although the price changed on November 11", "after": "November 11, 2026, also readable by machines" },
+    { "metric": "Link to the Privacy Policy", "before": "None", "after": "One line, in a new \"Your data\" section" },
+    { "metric": "Title tag", "before": "Terms of Use — Rihla\n20 characters", "after": "Terms of Use: free pilot, price and verification — Rihla\n56 characters" },
+    { "metric": "Meta description", "before": "110 characters, with today's price", "after": "Unchanged. You rewrote it today." },
+    { "metric": "Google Analytics", "before": "Not on the page", "after": "Same tag and consent settings as the homepage" },
+    { "metric": "Cookie notice", "before": "None on this page", "after": "Shown until the visitor chooses" },
+    { "metric": "Share preview", "before": "No share tags at all", "after": "Title, description and the 1200 × 630 card" },
+    { "metric": "Structured data", "before": "None", "after": "WebSite, WebPage with its date, BreadcrumbList" },
+    { "metric": "Words in the terms", "before": "265", "after": "292" },
+    { "metric": "Layout shift while loading, lab test", "before": "0.04", "after": "0.05. Google's limit for good is 0.1." }
+  ],
+
+  "needs_you_intro": "These are questions about what you offer, so only you can answer them. I changed none of this wording.",
+  "needs_you": [
+    {
+      "priority": "High",
+      "title": "The yearly plan is paid upfront, and the terms do not say what happens if a restaurant stops",
+      "detail": "Today's change added \"$2,700 per year paid upfront, cancel anytime on the monthly plan\". A restaurant that pays for the year and leaves in month four will ask whether it gets money back. The terms are silent, and \"cancel anytime\" now applies to the monthly plan only.",
+      "action": "Decide the rule, for example no refund, or a refund of the unused months, and tell me. I will add one sentence.",
+      "effort": "your decision, then 5 minutes"
+    },
+    {
+      "priority": "Medium",
+      "title": "The homepage still says \"One flat price\" and \"no 12-month contract\"",
+      "detail": "The fine print under the claim form now reads \"$250/mo, or $2,700 a year\" and, one line below, \"One flat price. No per-cover fees, no paying per click, no 12-month contract.\" Both are defensible, since the yearly plan is a choice. A careful owner may still read two prices next to \"one flat price\" as a contradiction. The questions section I added repeats the same wording.",
+      "action": "Tell me if you want different words, for example \"No per-cover fees, no paying per click, no contract you cannot leave\".",
+      "effort": "5 minutes"
+    },
+    {
+      "priority": "Medium",
+      "title": "The founding rate is not written anywhere on the site",
+      "detail": "Your commit messages today mention a founding rate of $149 a month for the first 10 pilot restaurants. The site and these terms only state $250. If pilot restaurants are told $149, the terms they can read say something else.",
+      "action": "Either add the founding rate to the terms, or keep it as a private offer and accept that the public terms show the standard price. Your call.",
+      "effort": "5 minutes if you want it added"
+    },
+    {
+      "priority": "Medium",
+      "title": "Before you charge anyone, have the terms checked",
+      "detail": "The terms are clear and honest. They do not yet say who the contract is with, which law applies, or what Rihla is and is not liable for, and they do not mention Members Area accounts. That was fine for a free pilot. It matters once money changes hands.",
+      "action": "A short review by a lawyer. I can then put the result into the same plain style.",
+      "effort": "outside this pass"
+    }
+  ],
+
+  "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`. The page looks the same apart from the date and one new line.",
+  "changes": [
+    {
+      "area": "Text",
+      "title": "\"Last updated\" now matches the last change",
+      "why": "The section \"Changes to these terms\" says the date at the top shows the latest version. The paid tier changed from $79 to $250 with a yearly option on November 11, and the date still said November 2. It is corrected, and wrapped in a `<time>` tag so machines can read it. If you publish on a later day, set it to that day.",
+      "before": "Last updated: November 2, 2026.",
+      "after": "Last updated: <time datetime=\"2026-11-11\">November 11, 2026</time>."
+    },
+    {
+      "area": "Text",
+      "title": "New line: where the data rules are",
+      "why": "The terms and the Privacy Policy did not refer to each other. A reader of the terms now finds the policy in one click, and search engines get a link between the two pages. It is a pointer, not a new term.",
+      "after": "Your data\nHow Rihla collects and uses data is set out in the Privacy Policy.   (/privacy.html)",
+      "note": "Please read it. It sits just above \"Changes to these terms\"."
+    },
+    {
+      "area": "Text",
+      "title": "Title",
+      "why": "\"Terms of Use — Rihla\" was 20 characters. The new title names the three things people come here for. The meta description is yours from today and stays as it is.",
+      "before": "Terms of Use — Rihla",
+      "after": "Terms of Use: free pilot, price and verification — Rihla"
+    },
+    {
+      "area": "Technical",
+      "title": "Share tags",
+      "why": "The page had no Open Graph or X tags. A shared link now shows the title, the description and the Rihla card.",
+      "before": "(none)",
+      "after": "og:type, og:site_name, og:locale, og:title, og:description, og:url, og:image (+ size and alt), twitter:card = summary_large_image"
+    },
+    {
+      "area": "Technical",
+      "title": "Structured data",
+      "why": "Added WebSite, WebPage and a breadcrumb. The WebPage entry carries `dateModified`, so a search engine can see how current the terms are.",
+      "before": "(none)",
+      "after": "<script type=\"application/ld+json\"> { \"@graph\": [ WebSite, WebPage (dateModified 2026-11-11), BreadcrumbList ] }"
+    },
+    {
+      "area": "Technical",
+      "title": "Each section can be linked to",
+      "why": "The headings now have ids, so a link can open the terms at the right place, for example `/terms.html#the-free-pilot`. Useful when an owner asks about the price by email.",
+      "before": "<h2>The free pilot</h2>",
+      "after": "<h2 id=\"the-free-pilot\">The free pilot</h2>"
+    },
+    {
+      "area": "Technical",
+      "title": "Icons and language, as on the homepage",
+      "why": "Added the `favicon.ico` fallback, the iPhone icon and `theme-color`, set `lang=\"en-US\"`, and marked the Arabic letter in the top bar as Arabic."
+    },
+    {
+      "area": "Technical",
+      "title": "Same font request as the homepage",
+      "why": "The page now sends the identical request, so a visitor arriving from the homepage already has it cached.",
+      "before": "family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700",
+      "after": "family=Amiri:wght@700&family=Manrope:wght@400;600;700"
+    },
+    {
+      "area": "Technical",
+      "title": "Taller tap areas in the footer",
+      "why": "The footer links were 17 px tall. They are now 29 px to tap, and the footer is the same height as before."
+    },
+    {
+      "area": "Technical",
+      "title": "Sitemap date",
+      "why": "The entry for this page in `sitemap.xml` now says it changed today.",
+      "before": "<lastmod>2026-10-28</lastmod>",
+      "after": "<lastmod>2026-11-11</lastmod>"
+    },
+    {
+      "area": "Tracking",
+      "title": "Google Analytics and the cookie notice",
+      "why": "The page now carries the homepage's tag and loads `site.js`. A visit to the terms is counted, and a visitor who lands here first is asked about cookies."
+    },
+    {
+      "area": "Tracking",
+      "title": "`cta_click` on 5 links",
+      "why": "`terms_contact_email` shows how often the terms lead to a question by email. `terms_privacy` shows whether anyone follows the new link.",
+      "after": "terms_privacy · terms_contact_email · terms_home · footer_email · footer_instagram"
+    }
+  ],
+
+  "left_alone": [
+    "**Every existing term.** Not a word of the seven sections was changed.",
+    "**The meta description.** You rewrote it today with the new price. It is a good length and accurate.",
+    "**The price.** It now appears in five places: the homepage fine print, the homepage questions section, this page's text, this page's meta description and the owner email. The tracker lists them so the next change reaches all five.",
+    "**Indexing.** The page stays indexable and in the sitemap."
+  ],
+
+  "verify_intro": "Do these once the branch is published.",
+  "verify": [
+    "Open the live page and check the date at the top. Change it if you published on a different day.",
+    "Click the Privacy Policy link in \"Your data\". It should open the policy.",
+    "In GA4, open Reports, then Realtime, and open `/terms.html` after accepting cookies. A page view for it should appear."
+  ],
+
+  "files": [
+    { "path": "terms.html", "change": "Date, one new line, head tags, structured data, Google tag, section ids" },
+    { "path": "sitemap.xml", "change": "Date for this page" },
+    { "path": "seo/tools/perf.js", "change": "Layout shift now counts every shift during load; the four earlier changelogs carry the corrected figures" }
+  ],
+
+  "method": [
+    "Audited from the repository and rendered in headless Chrome at 390 px and 1366 px on a local copy of the site. 29 automated checks pass.",
+    "The live site is still unreachable from the audit sandbox, so nothing here was checked in production.",
+    "A correction to the earlier changelogs: my speed script had been leaving out one layout shift on some runs, which made the \"before\" figures on the demo, sample grade and privacy pages look better than they were. The script is fixed, all five pages were measured again before and after, and the four earlier PDFs now carry the corrected numbers. No page got worse except the privacy policy, 0.02 to 0.04, because it is longer."
+  ]
+}

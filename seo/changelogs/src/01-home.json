@@ -250,7 +250,7 @@
     "**Headings.** One H1, then H2 and H3 in order.",
     "**The hero copy and the H1.** Clear, and they hold the main search phrase.",
     "**Mobile layout.** No sideways scroll at 390 px, and 96% of the text is 12 px or larger.",
-    "**Layout stability and first paint.** 0.01 layout shift and about 0.6 s in the lab test. Already good.",
+    "**Layout stability and first paint.** 0.02 layout shift, before and after, and about 0.6 s in the lab test. Already good.",
     "**The Google Analytics tag.** Left where it is, in the form Google's own tools recognize.",
     "**The `qr_scan` and `email_click` events.** Unchanged, so the pilot's numbers stay comparable.",
     "**Addresses ending in .html.** Clean addresses would not help ranking and would put a redirect in front of every existing link.",

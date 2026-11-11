@@ -66,8 +66,8 @@
     },
     {
       "metric": "Layout shift while loading, lab test",
-      "before": "0.02 to 0.05, depending on the run",
-      "after": "0.05. Google's limit for good is 0.1."
+      "before": "0.05",
+      "after": "0.05, unchanged. Google's limit for good is 0.1."
     }
   ],
   "needs_you_intro": "Nothing new is blocking on this page. The site-wide items from the homepage changelog still stand, and one optional item came up here.",
@@ -75,7 +75,7 @@
     {
       "priority": "Low",
       "title": "Text jumps by a line when the fonts arrive",
-      "detail": "On a slow connection the page first paints in a system font, then switches to Manrope, which is wider. Two lines in the sample card wrap differently and the content below moves down about 40 px. That is the 0.05 layout shift in the scorecard. It was already there. In the lab it shows more consistently now, most likely because the analytics script changed the order in which files arrive. It is inside Google's limit.",
+      "detail": "On a slow connection the page first paints in a system font, then switches to Manrope, which is wider. Two lines in the sample card wrap differently and the content below moves down about 40 px. That is the 0.05 layout shift in the scorecard. It was there before this pass and is unchanged. It is inside Google's limit.",
       "action": "Host the two fonts on your own domain and preload Manrope. The jump goes away on every page, and the two connections to Google Fonts go with it. This is the same optional job listed in the homepage changelog.",
       "effort": "1 to 2 hours, once, for the whole site"
     }
@@ -235,6 +235,6 @@
   "method": [
     "Audited from the repository and rendered in headless Chrome at 390 px and 1366 px on a local copy of the site. 29 automated checks pass on this page, and the homepage's 37 still pass.",
     "The live site is still unreachable from the audit sandbox, so nothing here was checked in production.",
-    "Speed and layout-shift figures come from a lab run that imitates a mid-range phone on slow 4G, 5 to 7 runs each. The Google Analytics script cannot load in the sandbox, which changes the timing of everything after it, so treat the layout-shift figures as a guide."
+    "Speed and layout-shift figures come from a lab run that imitates a mid-range phone on slow 4G, median of 5 runs, counting every shift during load. Use them to compare before and after, not as absolute scores."
   ]
 }

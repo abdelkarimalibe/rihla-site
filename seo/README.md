@@ -14,7 +14,7 @@ Decision 2026-11-11: the owner chose to wait until every page is done before any
 | 2 | Demo monthly report `/demo.html` | `demo.html` | **Done** 2026-11-11 | [02-demo.pdf](changelogs/02-demo.pdf) |
 | 3 | Halal Visibility Check demo `/grader-demo.html` | `grader-demo.html` | **Done** 2026-11-11 | [03-grader-demo.pdf](changelogs/03-grader-demo.pdf) |
 | 4 | Privacy Policy `/privacy.html` | `privacy.html` | **Done** 2026-11-11 | [04-privacy.pdf](changelogs/04-privacy.pdf) |
-| 5 | Terms of Use `/terms.html` | `terms.html` | To do | |
+| 5 | Terms of Use `/terms.html` | `terms.html` | **Done** 2026-11-11 | [05-terms.pdf](changelogs/05-terms.pdf) |
 | 6 | Login `/login.html` (noindex) | `login.html` | To do | |
 | 7 | Register `/register.html` (noindex) | `register.html` | To do | |
 | 8 | Forgot password `/forgot-password.html` (noindex) | `forgot-password.html` | To do | |
@@ -39,6 +39,8 @@ These came out of the audits and cannot be done from the repo. Details are in th
 | Medium | Publish a page per verified restaurant and per neighborhood. That is what will rank. | 01-home |
 | High | The privacy policy leaves out Members Area accounts, the outside services that handle data, retention and a responsible party. | 04-privacy |
 | Medium | Add a "Change my cookie choice" link to the privacy page. | 04-privacy |
+| High | Terms: the yearly plan is paid upfront; say what happens if a restaurant stops. | 05-terms |
+| Medium | Homepage says "One flat price" and "no 12-month contract" beside a yearly option. Founding rate ($149) is not on the site. Have the terms checked before charging. | 05-terms |
 | Low | `emails/README.md` still says $79/mo. | 04-privacy |
 | Low | Optional: draw the wordmark as an SVG, host the fonts yourself and preload Manrope (also removes the small jump when fonts load). | 01-home, 02-demo |
 

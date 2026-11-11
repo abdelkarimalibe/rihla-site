@@ -61,8 +61,8 @@
     },
     {
       "metric": "Layout shift while loading, lab test",
-      "before": "0.01",
-      "after": "0"
+      "before": "0.02",
+      "after": "0.02, unchanged"
     },
     {
       "metric": "Page weight on a first visit",
@@ -127,7 +127,7 @@
     {
       "area": "Technical",
       "title": "Taller tap areas",
-      "why": "\"Back to Rihla\" in the top bar was 18 px tall and the footer links 17 px. They are now 42 px and 29 px to tap. Nothing moved. The top bar also stopped growing when the Arabic font arrives, which is why the layout shift is now 0."
+      "why": "\"Back to Rihla\" in the top bar was 18 px tall and the footer links 17 px. They are now 42 px and 29 px to tap. Nothing moved."
     },
     {
       "area": "Technical",

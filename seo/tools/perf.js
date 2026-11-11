@@ -45,7 +45,10 @@ async function once() {
       const e = l.getEntries().pop(); window.__p.lcp = e.startTime;
       window.__p.lcpEl = e.element ? (e.element.tagName + '.' + e.element.className) : null;
     }).observe({ type: 'largest-contentful-paint', buffered: true });
-    new PerformanceObserver((l) => { for (const e of l.getEntries()) if (!e.hadRecentInput) window.__p.cls += e.value; })
+    // Every shift counts. Nobody touches the page in a lab run, yet Chromium sometimes
+    // flags a shift as following "recent input" when it lands within 500 ms of the load
+    // event. Filtering on that flag hid the font-swap shift on some pages and not others.
+    new PerformanceObserver((l) => { for (const e of l.getEntries()) window.__p.cls += e.value; })
       .observe({ type: 'layout-shift', buffered: true });
   });
   await page.goto(url, { waitUntil: 'load', timeout: 90000 });
