@@ -1,0 +1,240 @@
+{
+  "page_name": "Demo monthly report",
+  "page_path": "/demo.html",
+  "page_file": "demo.html",
+  "page_url": "rihla-website-self.vercel.app/demo.html",
+  "index": 2,
+  "of": 11,
+  "date_long": "November 11, 2026",
+  "status": "Done",
+  "in_short": [
+    "This is the page owners open from \"See a demo\". Google Analytics was not on it, so you could not see whether anyone looked at the demo or went on to claim a spot.",
+    "It also had a title that said only \"Demo dashboard\", no share tags at all, and sample numbers that a search engine was free to quote as if they were real.",
+    "17 changes are on the branch: 10 technical, 3 text, 4 tracking.",
+    "One of them is visible: the mark in the sample card was drawn tiny and gray by mistake. It is now the gold mark the stylesheet asked for."
+  ],
+  "scorecard": [
+    {
+      "metric": "Title tag",
+      "before": "Demo dashboard — Rihla\n22 characters",
+      "after": "Sample monthly report for halal restaurants — Rihla\n51 characters"
+    },
+    {
+      "metric": "Meta description",
+      "before": "94 characters",
+      "after": "153 characters, names what the report shows"
+    },
+    {
+      "metric": "Google Analytics",
+      "before": "Not on the page. Visits were invisible.",
+      "after": "Same tag and consent settings as the homepage"
+    },
+    {
+      "metric": "Link clicks tracked",
+      "before": "0",
+      "after": "6, including Claim your spot"
+    },
+    {
+      "metric": "Cookie notice",
+      "before": "None on this page",
+      "after": "Shown until the visitor chooses"
+    },
+    {
+      "metric": "Share preview",
+      "before": "No share tags at all",
+      "after": "Title, description and the 1200 × 630 card"
+    },
+    {
+      "metric": "Structured data",
+      "before": "None",
+      "after": "WebSite, WebPage, BreadcrumbList"
+    },
+    {
+      "metric": "Sample numbers in search results",
+      "before": "Could be quoted as the page's description",
+      "after": "Blocked with data-nosnippet"
+    },
+    {
+      "metric": "Words on the page",
+      "before": "127",
+      "after": "152"
+    },
+    {
+      "metric": "Page weight on a first visit",
+      "before": "131 KB, of which fonts 123 KB",
+      "after": "140 KB, of which fonts 123 KB"
+    },
+    {
+      "metric": "Layout shift while loading, lab test",
+      "before": "0.02 to 0.05, depending on the run",
+      "after": "0.05. Google's limit for good is 0.1."
+    }
+  ],
+  "needs_you_intro": "Nothing new is blocking on this page. The site-wide items from the homepage changelog still stand, and one optional item came up here.",
+  "needs_you": [
+    {
+      "priority": "Low",
+      "title": "Text jumps by a line when the fonts arrive",
+      "detail": "On a slow connection the page first paints in a system font, then switches to Manrope, which is wider. Two lines in the sample card wrap differently and the content below moves down about 40 px. That is the 0.05 layout shift in the scorecard. It was already there. In the lab it shows more consistently now, most likely because the analytics script changed the order in which files arrive. It is inside Google's limit.",
+      "action": "Host the two fonts on your own domain and preload Manrope. The jump goes away on every page, and the two connections to Google Fonts go with it. This is the same optional job listed in the homepage changelog.",
+      "effort": "1 to 2 hours, once, for the whole site"
+    }
+  ],
+  "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`. Above the sample card the page is pixel-for-pixel what it was.",
+  "changes": [
+    {
+      "area": "Technical",
+      "title": "Share tags",
+      "why": "The page had no Open Graph or X tags, so a shared link showed whatever the app could guess. It now sends its title, description, address and the 1200 × 630 Rihla card.",
+      "before": "(none)",
+      "after": "og:type, og:site_name, og:locale, og:title, og:description, og:url, og:image (+ size and alt), twitter:card = summary_large_image"
+    },
+    {
+      "area": "Technical",
+      "title": "Structured data",
+      "why": "Added WebSite, WebPage and a breadcrumb (Rihla, then Sample monthly report), so search engines know what this page is and where it sits. Demo Diner is fictional, so it is deliberately not described as a restaurant.",
+      "before": "(none)",
+      "after": "<script type=\"application/ld+json\"> { \"@graph\": [ WebSite, WebPage, BreadcrumbList ] }"
+    },
+    {
+      "area": "Technical",
+      "title": "Sample numbers kept out of search results",
+      "why": "Every figure in the card is made up: 128 scans, 96 covers, the check dates. Google builds result descriptions from page text and could have shown \"128 Scans this month\" under a Rihla link with no sign that it is sample data. The card now carries `data-nosnippet`. It fits your own rule: never a number you cannot show.",
+      "before": "<div class=\"demo-card\">",
+      "after": "<div class=\"demo-card\" data-nosnippet>"
+    },
+    {
+      "area": "Technical",
+      "title": "The mark in the sample card was drawn wrong",
+      "why": "The stylesheet asks for a 40 px gold ر beside \"Demo Diner\". A later rule for the small gray text in the same row overrode it, so the mark came out 13 px and gray. The selector is now specific enough to win.",
+      "before": ".demo-mark { font-size: 40px; color: #C8943C; … }",
+      "after": ".demo-restaurant .demo-mark { font-size: 40px; color: #C8943C; … }",
+      "note": "Visible change: the mark in the card is now larger and gold."
+    },
+    {
+      "area": "Technical",
+      "title": "Missing spaces in the four stat tiles",
+      "why": "The number and its label had no space between them in the HTML. Browsers stack them, so it looked fine, but anything reading plain text saw \"128Scans this month\" and \"SaturdayBest day\".",
+      "before": "<strong>128</strong><span>Scans this month</span>",
+      "after": "<strong>128</strong> <span>Scans this month</span>"
+    },
+    {
+      "area": "Technical",
+      "title": "Icons and language, as on the homepage",
+      "why": "Added the `favicon.ico` fallback, the iPhone icon and `theme-color`, and set `lang=\"en-US\"`. The two Arabic marks now say they are Arabic (`lang=\"ar\"`), which the homepage already did.",
+      "before": "<html lang=\"en\">   ·   <span class=\"nav-arabic\">",
+      "after": "<html lang=\"en-US\">   ·   <span class=\"nav-arabic\" lang=\"ar\">"
+    },
+    {
+      "area": "Technical",
+      "title": "Same font request as the homepage",
+      "why": "The page asked Google Fonts for a different set of weights than the homepage, including two it never uses. It now sends the identical request, so a visitor arriving from the homepage already has the answer cached. No bytes saved on a first visit: browsers only ever fetched the weights the page uses.",
+      "before": "family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700",
+      "after": "family=Amiri:wght@700&family=Manrope:wght@400;600;700"
+    },
+    {
+      "area": "Technical",
+      "title": "Taller tap areas",
+      "why": "\"Back to Rihla\" in the top bar was 18 px tall and the footer links 17 px. They are now 42 px and 29 px to tap. Nothing moved. A side effect: the top bar used to grow by 14 px when the Arabic font arrived, and now grows by 3."
+    },
+    {
+      "area": "Technical",
+      "title": "Sitemap date",
+      "why": "The entry for this page in `sitemap.xml` now says it changed today.",
+      "before": "<lastmod>2026-10-28</lastmod>",
+      "after": "<lastmod>2026-11-11</lastmod>"
+    },
+    {
+      "area": "Technical",
+      "title": "New shared script: site.js",
+      "why": "The site has no build step, so every page carries its own copy of everything. Three small jobs now live in one file that every page loads: saving the first campaign that brought a visitor, reporting clicks, and showing the cookie notice. The homepage's copies of the first two moved there. Its 37 checks still pass. Nothing on a page depends on the file: if an ad blocker stops it, the page still works."
+    },
+    {
+      "area": "Text",
+      "title": "Title says what the page is",
+      "why": "\"Demo dashboard\" told a searcher nothing, and the site calls this thing a monthly report everywhere else. The new title leads with what it is and who it is for.",
+      "before": "Demo dashboard — Rihla",
+      "after": "Sample monthly report for halal restaurants — Rihla"
+    },
+    {
+      "area": "Text",
+      "title": "Meta description",
+      "why": "Now names the four things the report shows, in the words used on the page, and says plainly that the data is a sample.",
+      "before": "See a demo of the Rihla monthly report: scans, covers, and best day, from a sample restaurant.",
+      "after": "See what a Rihla monthly report shows a halal restaurant: QR scans, estimated covers, best day and first-visit offers. Sample data, fictional restaurant."
+    },
+    {
+      "area": "Text",
+      "title": "One sentence and one link added below the card",
+      "why": "The page never said in words what the report contains. Only the tiles did. The note under the card now starts with a sentence that does, using the tile labels. A new line under the buttons links to the other demo page, so the two demos point at each other. Both sit below the card, so the first screen is exactly as it was.",
+      "before": "When your card is live, these numbers are yours, …",
+      "after": "Every Rihla restaurant gets this report: QR scans, estimated covers, best day and first-visit offers shown. When your card is live, these numbers are yours, …\n\nSee a sample Halal Visibility Check →   (/grader-demo.html)",
+      "note": "Please read the new sentence. It repeats the homepage's \"a monthly report that proves it\" and the four tile labels."
+    },
+    {
+      "area": "Tracking",
+      "title": "Google Analytics added",
+      "why": "Only the homepage loaded the tag. A visitor who clicked \"See a demo\" disappeared from GA4 until they came back. The tag here is the homepage's, with the same four consent signals denied by default and the same stored choice.",
+      "before": "(no tag)",
+      "after": "gtag.js G-1235J90MCS, consent default denied, reads rihla_consent"
+    },
+    {
+      "area": "Tracking",
+      "title": "`cta_click` on 6 links",
+      "why": "The one that matters is `demo_claim`: it tells you how many people who saw the sample report went on to the claim form.",
+      "after": "nav_home · demo_claim · demo_home · demo_sample_grade · footer_email · footer_instagram"
+    },
+    {
+      "area": "Tracking",
+      "title": "First campaign is saved here too",
+      "why": "If a campaign link ever points straight at this page, the campaign is now remembered for the lead events on the homepage. Before, only the homepage saved it."
+    },
+    {
+      "area": "Tracking",
+      "title": "Cookie notice on this page",
+      "why": "The banner existed only on the homepage. A visitor who landed here first was never asked, so their visit could not be counted. `site.js` now shows the same notice, with the same wording and the same stored choice, on every page that has no banner of its own. One answer covers the whole site.",
+      "note": "If you change the banner wording on the homepage, change it in site.js too."
+    }
+  ],
+  "left_alone": [
+    "**The H1 and the badge.** \"Demo — sample data only\" is the first thing on the page. That is right.",
+    "**The sample figures.** Unchanged.",
+    "**Canonical tag, indexing and sitemap entry.** Correct. The page stays indexable: it is useful to an owner who searches for Rihla.",
+    "**The weekly table.** Each row already reads correctly as plain text.",
+    "**First paint.** About 0.5 s in the lab test, before and after."
+  ],
+  "verify_intro": "Do these once the branch is merged and Vercel has deployed it.",
+  "verify": [
+    "Open the page in a private window. The cookie notice should appear at the bottom. Click Accept, reload, and it should stay away.",
+    "In GA4, open Reports, then Realtime, and open `/demo.html` on the site. A page view for it should appear. Click \"Claim your spot\" and `cta_click` should follow.",
+    "Run the page through [Google's Rich Results Test](https://search.google.com/test/rich-results). It should find the breadcrumb and report no errors.",
+    "Paste the page's link into a WhatsApp chat with yourself. The Rihla card should appear with the new title."
+  ],
+  "files": [
+    {
+      "path": "demo.html",
+      "change": "Head tags, structured data, Google tag, card fix, one sentence, one link"
+    },
+    {
+      "path": "site.js",
+      "change": "New shared script: first campaign, click tracking, cookie notice"
+    },
+    {
+      "path": "index.html",
+      "change": "Uses site.js for the first two jobs; Neighbourhood label restored"
+    },
+    {
+      "path": "sitemap.xml",
+      "change": "Date for this page"
+    },
+    {
+      "path": "seo/tools/check-page.js",
+      "change": "New: the 29 checks every remaining page must pass"
+    }
+  ],
+  "method": [
+    "Audited from the repository and rendered in headless Chrome at 390 px and 1366 px on a local copy of the site. 29 automated checks pass on this page, and the homepage's 37 still pass.",
+    "The live site is still unreachable from the audit sandbox, so nothing here was checked in production.",
+    "Speed and layout-shift figures come from a lab run that imitates a mid-range phone on slow 4G, 5 to 7 runs each. The Google Analytics script cannot load in the sandbox, which changes the timing of everything after it, so treat the layout-shift figures as a guide."
+  ]
+}

@@ -782,7 +782,7 @@
           <input type="tel" id="owner-phone" aria-describedby="owner-error" placeholder="(718) 555-0123" required>
         </div>
         <div class="form-field">
-          <label for="neighbourhood">Neighborhood</label>
+          <label for="neighbourhood">Neighbourhood</label>
           <select id="neighbourhood" aria-describedby="owner-error" required>
             <option value="" disabled selected>Select your area</option>
             <option>Astoria, Queens</option>
@@ -910,8 +910,9 @@
 
   /* ── TRACKING ────────────────────────────────────── */
   /* Lead events carry the first campaign that brought the visitor (saved as
-     rihla_utm by the script at the bottom of this page), so GA4 shows which
-     campaign produced each sign-up. No name, email or phone number is ever sent. */
+     rihla_utm by /site.js), so GA4 shows which campaign produced each sign-up.
+     No name, email or phone number is ever sent. Clicks on anything with a
+     data-cta attribute are reported by /site.js as cta_click. */
   function firstTouch() {
     try {
       var u = JSON.parse(localStorage.getItem('rihla_utm') || 'null');
@@ -929,11 +930,6 @@
     for (var k in params) { if (Object.prototype.hasOwnProperty.call(params, k)) p[k] = params[k]; }
     gtag('event', name, p);
   }
-  /* Any link or button with a data-cta attribute reports a cta_click. */
-  document.addEventListener('click', function (e) {
-    var el = e.target && e.target.closest ? e.target.closest('[data-cta]') : null;
-    if (el && typeof gtag === 'function') gtag('event', 'cta_click', { cta: el.getAttribute('data-cta') });
-  });
 
   /* ── TRAVELLER FORM ──────────────────────────────── */
   document.getElementById('traveller-form').addEventListener('submit', function (e) {
@@ -1070,27 +1066,8 @@
   document.getElementById('cookie-decline').addEventListener('click', function () { choose('denied'); });
 })();
 </script>
-<script>
-  // First-touch attribution: save UTM parameters so the claim-form fix can
-  // attach them to every lead. GA4 already captures session source/medium
-  // from the landing URL; this persists it past the first page.
-  // First touch means the first campaign wins: a later campaign link does not
-  // overwrite it. The list_signup and spot_claim events above read this value.
-  (function () {
-    try {
-      if (localStorage.getItem('rihla_utm')) return;
-      var params = new URLSearchParams(window.location.search);
-      var utm = {};
-      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
-        var v = params.get(k);
-        if (v) utm[k] = v;
-      });
-      if (Object.keys(utm).length) {
-        utm.first_touch = new Date().toISOString();
-        localStorage.setItem('rihla_utm', JSON.stringify(utm));
-      }
-    } catch (e) { /* storage unavailable, ignore */ }
-  })();
-</script>
+<!-- First-touch campaign capture (for the claim-form fix) and cta_click tracking
+     live in /site.js, shared by every page. -->
+<script src="/site.js" defer></script>
 </body>
 </html>

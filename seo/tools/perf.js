@@ -69,6 +69,7 @@ async function once() {
     cls: Math.round(median(runs.map((r) => r.cls)) * 1000) / 1000,
     transfer_kb: Math.round(median(runs.map((r) => r.bytes)) / 102.4) / 10,
     font_kb: Math.round(median(runs.map((r) => r.fontBytes)) / 102.4) / 10,
+    cls_runs: runs.map((r) => Math.round(r.cls * 1000) / 1000),
     requests: pick('count'), failed_requests: pick('failed'), lcp_element: runs[0].lcpEl,
   }, null, 2));
 })().catch((e) => { console.error(e); process.exit(1); });

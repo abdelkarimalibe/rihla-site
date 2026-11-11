@@ -9,7 +9,7 @@ Everything is on branch `claude/practical-keller-adcqrc`. Nothing is live until 
 | # | Page | File | Status | Changelog |
 |---|------|------|--------|-----------|
 | 1 | Homepage `/` | `index.html` | **Done** 2026-11-11 | [01-home.pdf](changelogs/01-home.pdf) |
-| 2 | Demo monthly report `/demo.html` | `demo.html` | To do | |
+| 2 | Demo monthly report `/demo.html` | `demo.html` | **Done** 2026-11-11 | [02-demo.pdf](changelogs/02-demo.pdf) |
 | 3 | Halal Visibility Check demo `/grader-demo.html` | `grader-demo.html` | To do | |
 | 4 | Privacy Policy `/privacy.html` | `privacy.html` | To do | |
 | 5 | Terms of Use `/terms.html` | `terms.html` | To do | |
@@ -34,26 +34,27 @@ These came out of the audits and cannot be done from the repo. Details are in th
 | High | Set up Google Search Console and Bing Webmaster Tools, submit the sitemap. | 01-home |
 | Medium | GA4: mark `list_signup` and `spot_claim` as key events, register the custom dimensions. | 01-home |
 | Medium | Publish a page per verified restaurant and per neighborhood. That is what will rank. | 01-home |
-| Low | Optional: draw the wordmark as an SVG, host the fonts yourself. | 01-home |
+| Low | Optional: draw the wordmark as an SVG, host the fonts yourself and preload Manrope (also removes the small jump when fonts load). | 01-home, 02-demo |
 
 ## Rules every page in this pass follows
 
 Copy
 - Nothing new is claimed. Added text only repeats what the site already says.
 - No store name, number, location or offer unless that store confirmed it (rule of 2026-11-02).
-- US spelling. Titles put the search phrase first and end with `— Rihla`.
+- Spelling stays as the site has it. The owner confirmed "Neighbourhood" stays (2026-11-11), so do not Americanize existing copy.
+- Titles put the search phrase first and end with `— Rihla`.
 
 Head
 - `<html lang="en-US">`, the three icon links plus `theme-color`, as on the homepage.
 - Indexable pages get the share tags with `/og-image.png` and a JSON-LD `WebPage` that points at `#website` and `#organization` on the homepage.
-- Fonts: the bold wordmark (the full Arabic word, on the homepage and the 404 page) needs the full Amiri Bold. A cut-down bold changes its shape. A single ر on its own can use a one-letter font (`&text=%D8%B1`). Check the screenshots match before keeping it.
+- Fonts: every page other than the homepage sends the same request as the homepage's first font link (`family=Amiri:wght@700&family=Manrope:wght@400;600;700`), so the files are shared from cache. The bold wordmark needs the full Amiri Bold: a cut-down bold changes its shape, and a one-letter font moves the line by 2 px.
 - When a page changes, update its `lastmod` in `sitemap.xml`.
 
 Tracking
-- Only the homepage loads Google Analytics today, so visits to every other page are invisible. Each page gets the same tag as it is done.
-- The homepage tag stays inline and unmodified in `<head>`, in the form Google's tools recognize.
+- Before this pass only the homepage loaded Google Analytics. Each page gets the same inline tag in `<head>` as it is done, in the form Google's tools recognize.
+- Each page also loads `/site.js` with `defer`. It saves the first campaign, reports `cta_click`, and shows the cookie notice on pages that have no banner of their own.
 - `qr_scan` and `email_click` are not touched, so the pilot's numbers stay comparable.
-- Links worth counting get a `data-cta` name and report `cta_click`.
+- Links worth counting get a `data-cta` name, unique on the page.
 - No name, email address or phone number is ever sent to GA4.
 
 Noted for later pages
@@ -69,7 +70,8 @@ Run from the repo root. They need the Node and Python that ship with the Claude 
 | `python3 -m http.server 8765 --bind 127.0.0.1` | Serves the site locally for the two scripts below |
 | `node seo/tools/audit.js http://127.0.0.1:8765/ <out-dir> <label>` | On-page audit in headless Chrome: tags, headings, links, tap targets, requests, screenshots |
 | `node seo/tools/perf.js http://127.0.0.1:8765/ 5` | Speed test on an emulated mid-range phone, median of 5 runs |
+| `node seo/tools/check-page.js http://127.0.0.1:8765/demo.html` | The checks every page must pass: tag, consent, clicks, structured data, share tags, links |
 | `node seo/tools/render-assets.js && python3 seo/tools/make-ico.py` | Re-renders `og-image.png` and the icons from their sources |
 | `python3 seo/tools/build_changelog.py seo/changelogs/src/<page>.json` | Builds that page's changelog PDF |
 
-Analytics requests are blocked in both scripts, so an audit never adds traffic to GA4.
+Analytics requests are blocked in all three scripts, so an audit never adds traffic to GA4.

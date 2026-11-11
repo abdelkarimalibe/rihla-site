@@ -7,27 +7,65 @@
   "of": 11,
   "date_long": "November 11, 2026",
   "status": "Done",
-
   "in_short": [
     "The page was sound but hard for machines to read. It had no structured data and no share image, its title led with the brand instead of the search phrase, and it gave diners about 40 words.",
-    "20 changes are on the branch: 9 technical, 5 text, 6 tracking. Each is listed below with its before and after.",
+    "19 changes are on the branch: 9 technical, 4 text, 6 tracking. Each is listed below with its before and after.",
     "The biggest finding is not about search. **Neither form sends the lead to you.** Read \"What I could not do for you\" first.",
-    "Nothing is live yet. Merge `claude/practical-keller-adcqrc` to publish."
+    "Nothing is live yet. Merge `claude/practical-keller-adcqrc` to publish.",
+    "Updated after your review: the Neighbourhood label keeps its spelling, and two tracking helpers moved to a shared file, `site.js`, with no change in what they do."
   ],
-
   "scorecard": [
-    { "metric": "Title tag", "before": "Rihla — Halal food in NYC you can actually trust\n48 characters, brand first", "after": "Halal restaurants in NYC you can actually trust — Rihla\n55 characters, search phrase first" },
-    { "metric": "Meta description", "before": "118 characters, nothing for diners to do", "after": "152 characters, one next step each for diners and owners" },
-    { "metric": "Structured data", "before": "None", "after": "Organization, WebSite, WebPage, and 7 questions as FAQPage" },
-    { "metric": "Share preview (WhatsApp, iMessage, Instagram)", "before": "Plain text, no picture", "after": "1200 × 630 card with the wordmark and headline" },
-    { "metric": "Words on the page", "before": "454", "after": "734" },
-    { "metric": "Fonts downloaded", "before": "230 KB", "after": "125 KB" },
-    { "metric": "Page fully loaded, slow-4G lab test", "before": "1.9 s", "after": "1.4 s" },
-    { "metric": "Form submissions visible in GA4", "before": "0 of 2 forms", "after": "2 of 2 forms" },
-    { "metric": "Link and button clicks tracked", "before": "0", "after": "9" },
-    { "metric": "Icons", "before": "1 SVG that changes with the device's fonts", "after": "Fixed outline SVG, .ico, iPhone icon, 512 px logo" }
+    {
+      "metric": "Title tag",
+      "before": "Rihla — Halal food in NYC you can actually trust\n48 characters, brand first",
+      "after": "Halal restaurants in NYC you can actually trust — Rihla\n55 characters, search phrase first"
+    },
+    {
+      "metric": "Meta description",
+      "before": "118 characters, nothing for diners to do",
+      "after": "152 characters, one next step each for diners and owners"
+    },
+    {
+      "metric": "Structured data",
+      "before": "None",
+      "after": "Organization, WebSite, WebPage, and 7 questions as FAQPage"
+    },
+    {
+      "metric": "Share preview (WhatsApp, iMessage, Instagram)",
+      "before": "Plain text, no picture",
+      "after": "1200 × 630 card with the wordmark and headline"
+    },
+    {
+      "metric": "Words on the page",
+      "before": "454",
+      "after": "734"
+    },
+    {
+      "metric": "Fonts downloaded",
+      "before": "230 KB",
+      "after": "125 KB"
+    },
+    {
+      "metric": "Page fully loaded, slow-4G lab test",
+      "before": "1.9 s",
+      "after": "1.4 s"
+    },
+    {
+      "metric": "Form submissions visible in GA4",
+      "before": "0 of 2 forms",
+      "after": "2 of 2 forms"
+    },
+    {
+      "metric": "Link and button clicks tracked",
+      "before": "0",
+      "after": "9"
+    },
+    {
+      "metric": "Icons",
+      "before": "1 SVG that changes with the device's fonts",
+      "after": "Fixed outline SVG, .ico, iPhone icon, 512 px logo"
+    }
   ],
-
   "needs_you_intro": "These need your accounts, your money or a decision that is yours. They are in order of importance.",
   "needs_you": [
     {
@@ -79,8 +117,7 @@
       "effort": "1 to 2 hours"
     }
   ],
-
-  "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`. The page looks the same above the new questions section, apart from the two small differences noted in changes 4 and 14.",
+  "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`. The page looks the same above the new questions section, apart from the one small difference noted in change 4.",
   "changes": [
     {
       "area": "Technical",
@@ -173,12 +210,6 @@
       "after": "Find halal food in NYC <br>you can"
     },
     {
-      "area": "Text",
-      "title": "Neighbourhood became Neighborhood",
-      "why": "The claim form label used the British spelling on a page written for New Yorkers.",
-      "note": "Visible change: one letter fewer in that label."
-    },
-    {
       "area": "Tracking",
       "title": "`list_signup`: the email form is now counted",
       "why": "Fires once when a visitor joins the list. Until now GA4 had no record of the page's main goal. No email address is sent."
@@ -191,17 +222,17 @@
     {
       "area": "Tracking",
       "title": "Each lead carries the campaign that first brought it",
-      "why": "Both events include `first_source`, `first_medium` and `first_campaign`, read from the UTM values the page already saves. You can see which email or post produced each sign-up."
+      "why": "Both events include `first_source`, `first_medium` and `first_campaign`, read from the UTM values the site already saves. You can see which email or post produced each sign-up."
     },
     {
       "area": "Tracking",
       "title": "First-touch bug fixed",
-      "why": "The code comment said \"first-touch attribution\", but every later campaign link overwrote the saved value, which made it last-touch. The first campaign now stays. `utm_content` and `utm_term` are saved as well."
+      "why": "The code comment said \"first-touch attribution\", but every later campaign link overwrote the saved value, which made it last-touch. The first campaign now stays. `utm_content` and `utm_term` are saved as well. This code now lives in `site.js`, so every page saves the campaign, not only the homepage."
     },
     {
       "area": "Tracking",
       "title": "`cta_click` on 9 links and buttons",
-      "why": "Reports which one was clicked, in the `cta` parameter. It shows whether visitors go to the demo, to the sample grade or straight to the claim form.",
+      "why": "Reports which one was clicked, in the `cta` parameter. It shows whether visitors go to the demo, to the sample grade or straight to the claim form. The listener lives in `site.js` and works on every page.",
       "after": "nav_demo · nav_login · nav_claim · sample_grade · demo_report · faq_demo_report · faq_sample_grade · footer_email · footer_instagram"
     },
     {
@@ -212,7 +243,6 @@
       "after": "{ analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }"
     }
   ],
-
   "left_alone": [
     "**Canonical tag.** Correct. QR links (`?spot=`) and campaign links (`?utm_…`) all point back to `/`.",
     "**robots.txt.** Allows everything and names the sitemap.",
@@ -223,9 +253,9 @@
     "**The Google Analytics tag.** Left where it is, in the form Google's own tools recognize.",
     "**The `qr_scan` and `email_click` events.** Unchanged, so the pilot's numbers stay comparable.",
     "**Addresses ending in .html.** Clean addresses would not help ranking and would put a redirect in front of every existing link.",
-    "**The email templates in /emails.** They are reachable on the site, but already marked noindex."
+    "**The email templates in /emails.** They are reachable on the site, but already marked noindex.",
+    "**The Neighbourhood label.** The first version of this pass changed it to the US spelling. It is back to Neighbourhood, as you asked."
   ],
-
   "verify_intro": "Do these once the branch is merged and Vercel has deployed it.",
   "verify": [
     "Open [Google's Rich Results Test](https://search.google.com/test/rich-results) and enter the homepage address. It should find the FAQ and report no errors.",
@@ -234,16 +264,36 @@
     "Open `rihla-website-self.vercel.app/seo/README.md`. It must show the 404 page. If it shows a document, tell me.",
     "Run the homepage through [PageSpeed Insights](https://pagespeed.web.dev) on Mobile and keep the score for comparison."
   ],
-
   "files": [
-    { "path": "index.html", "change": "Head tags, structured data, fonts, questions section, tracking" },
-    { "path": "favicon.svg", "change": "Redrawn as a fixed outline" },
-    { "path": "favicon.ico\napple-touch-icon.png\nicon-512.png\nog-image.png", "change": "New: icon fallbacks, logo and share image" },
-    { "path": "sitemap.xml", "change": "Homepage date" },
-    { "path": ".vercelignore", "change": "New: keeps seo/ off the public site" },
-    { "path": "seo/", "change": "New: the tracker (README.md), this changelog and the audit tools. Not published." }
+    {
+      "path": "index.html",
+      "change": "Head tags, structured data, fonts, questions section, tracking"
+    },
+    {
+      "path": "site.js",
+      "change": "New shared script: first-touch campaign capture and click tracking, used by every page"
+    },
+    {
+      "path": "favicon.svg",
+      "change": "Redrawn as a fixed outline"
+    },
+    {
+      "path": "favicon.ico\napple-touch-icon.png\nicon-512.png\nog-image.png",
+      "change": "New: icon fallbacks, logo and share image"
+    },
+    {
+      "path": "sitemap.xml",
+      "change": "Homepage date"
+    },
+    {
+      "path": ".vercelignore",
+      "change": "New: keeps seo/ off the public site"
+    },
+    {
+      "path": "seo/",
+      "change": "New: the tracker (README.md), this changelog and the audit tools. Not published."
+    }
   ],
-
   "method": [
     "Audited from the repository and rendered in headless Chrome at 390 px and 1366 px on a local copy of the site. 37 automated checks of the forms, events, questions and structured data pass.",
     "The live site could not be reached from the audit sandbox, whose network policy blocks `rihla-website-self.vercel.app`. Production headers, redirects, the 404 status and what Google has indexed were therefore not checked.",
