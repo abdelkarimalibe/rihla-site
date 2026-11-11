@@ -1,0 +1,134 @@
+{
+  "page_name": "Login",
+  "page_path": "/login.html",
+  "page_file": "login.html",
+  "page_url": "rihla-website-self.vercel.app/login.html",
+  "index": 6,
+  "of": 12,
+  "date_long": "November 11, 2026",
+  "status": "Done",
+
+  "in_short": [
+    "The login page is kept out of search on purpose, and that is right. There was nothing to change for ranking or in the text.",
+    "The work here is tracking and safety. The most important change reaches every page: **Google Analytics no longer receives anything that follows a # in a page address.** Supabase puts session tokens there in its sign-in and password links.",
+    "8 changes are on the branch: 3 technical, 5 tracking.",
+    "One question for you under \"What I could not do for you\": where Supabase sends owners after they confirm their email."
+  ],
+
+  "scorecard": [
+    { "metric": "Kept out of search", "before": "Yes: noindex, not in the sitemap", "after": "Unchanged. Correct for a login page." },
+    { "metric": "Session tokens and Analytics", "before": "Anything after # in the address could be sent, on every page with the tag", "after": "Never sent, on every page" },
+    { "metric": "Google Analytics", "before": "Not on the page", "after": "Same tag and consent settings as the homepage" },
+    { "metric": "Logins counted", "before": "No", "after": "login and login_failed, with no personal data" },
+    { "metric": "Link clicks tracked", "before": "0", "after": "6" },
+    { "metric": "Cookie notice", "before": "None on this page", "after": "Shown until the visitor chooses" },
+    { "metric": "Layout shift while loading, lab test", "before": "0.05", "after": "0.05, unchanged" }
+  ],
+
+  "needs_you_intro": "The first item is a setting in your Supabase account that I cannot see from the code.",
+  "needs_you": [
+    {
+      "priority": "High",
+      "title": "Check where Supabase sends owners after they confirm their email",
+      "detail": "When an owner registers, Supabase emails a confirmation link. Clicking it lands on your \"Site URL\" with session tokens after a # in the address. The register page does not name a landing page, so Supabase uses whatever is set in your dashboard. If that is the homepage, those tokens arrived on a page that already ran Google Analytics, and Analytics records the page address, which can include what follows the #. From this branch on that part is cut off before anything is sent. What may already have been recorded I cannot see.",
+      "action": "In Supabase, open Authentication, then URL Configuration, and set the Site URL to the login page. In GA4, open Reports, Engagement, Pages and screens, switch the table to page location if it is offered, and search for \"access_token\". If nothing shows, there is nothing to clean up. The tokens are short-lived either way.",
+      "effort": "10 minutes"
+    },
+    {
+      "priority": "Medium",
+      "title": "The sign-in library is loaded without a fixed version",
+      "detail": "All five Members Area pages load Supabase's library from a public CDN as \"version 2, whatever is newest\". A page that handles passwords should load one exact version, with a fingerprint the browser checks, so a changed file cannot run.",
+      "action": "Tell me to pin it. I need the CDN reachable to compute the fingerprint, which it is not from this sandbox, so it is a short job in a session with open network access.",
+      "effort": "15 minutes"
+    },
+    {
+      "priority": "Low",
+      "title": "A misleading message when the library fails to load",
+      "detail": "If the library is blocked or the CDN is down, the page says \"The Members Area is being set up. Login opens once the project is connected.\" and disables the form. An owner with an ad blocker would read that as \"not open yet\".",
+      "action": "If you want, I change the wording for that case to something like \"Login could not load. Refresh the page or try another browser.\"",
+      "effort": "5 minutes"
+    }
+  ],
+
+  "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`. The page looks the same.",
+  "changes": [
+    {
+      "area": "Tracking",
+      "title": "Analytics never gets what follows # in the address (all pages)",
+      "why": "Supabase's confirmation and password links end in `#access_token=…&refresh_token=…`. Those tokens are a logged-in session. Google Analytics is told the address of every page it sees. The tag on every page now passes the address cut off at the #, so a token can never be sent. Campaign and QR details sit before the # and are kept. This applies to the homepage and the four pages done earlier as well, and to every page still to come.",
+      "before": "gtag('config', 'G-1235J90MCS');",
+      "after": "gtag('config', 'G-1235J90MCS', { page_location: location.href.split('#')[0] });",
+      "note": "Checked on every finished page with a test address carrying a fake token: nothing after the # reaches the tag."
+    },
+    {
+      "area": "Tracking",
+      "title": "Google Analytics added to the login page",
+      "why": "You could not see how many owners reach the login page. The tag is the homepage's, with the same consent defaults and the same stored choice.",
+      "before": "(no tag)",
+      "after": "gtag.js G-1235J90MCS, consent default denied, reads rihla_consent"
+    },
+    {
+      "area": "Tracking",
+      "title": "`login` and `login_failed`",
+      "why": "`login` fires when a sign-in works, just before the owner is taken to the Members Area. `login_failed` fires when Supabase rejects it. Together they show whether owners get in. Neither carries the email address or the password.",
+      "after": "gtag('event', 'login', { method: 'password' })   ·   gtag('event', 'login_failed')"
+    },
+    {
+      "area": "Tracking",
+      "title": "`cta_click` on 6 links",
+      "why": "`login_forgot` and `login_register` show how often owners need a new password or do not have an account yet.",
+      "after": "nav_home · login_forgot · login_register · login_demo · footer_email · footer_instagram"
+    },
+    {
+      "area": "Tracking",
+      "title": "Cookie notice and first campaign",
+      "why": "Both come with `site.js`, which this page now loads."
+    },
+    {
+      "area": "Technical",
+      "title": "Icons and language, as on the homepage",
+      "why": "Added the `favicon.ico` fallback, the iPhone icon and `theme-color`, and set `lang=\"en-US\"`. Owners who save the login page to their phone's home screen now get the Rihla icon."
+    },
+    {
+      "area": "Technical",
+      "title": "Same font request as the homepage",
+      "why": "The page now sends the identical request, so a visitor arriving from the homepage already has it cached.",
+      "before": "family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700",
+      "after": "family=Amiri:wght@700&family=Manrope:wght@400;600;700"
+    },
+    {
+      "area": "Technical",
+      "title": "Taller tap areas",
+      "why": "\"Back to Rihla\" in the top bar was 18 px tall and the footer links 17 px. They are now 42 px and 29 px to tap. Nothing moved."
+    }
+  ],
+
+  "left_alone": [
+    "**noindex, nofollow.** Correct. A login page has no business in search results, and it is not in the sitemap.",
+    "**Title and description.** \"Login — Rihla\" only ever shows in the browser tab. It is clear.",
+    "**Share tags and structured data.** Left out on purpose: they are for pages that should be found and shared.",
+    "**The text.** \"Welcome back.\" and the three links below the form say what is needed.",
+    "**The sign-in code.** Untouched apart from the two Analytics lines."
+  ],
+
+  "verify_intro": "Do these once the branch is published.",
+  "verify": [
+    "Log in with a real account. You should land in the Members Area as before.",
+    "In GA4, open Reports, then Realtime, after accepting cookies. A `login` event should appear when you log in.",
+    "Open `/login.html#test123` and look at the page in Realtime. The address shown should end at `login.html`, with no `#test123`."
+  ],
+
+  "files": [
+    { "path": "login.html", "change": "Google tag, two events, click names, icons, fonts, tap areas" },
+    { "path": "index.html\ndemo.html\ngrader-demo.html\nprivacy.html\nterms.html", "change": "Tag now sends the page address without anything after #" },
+    { "path": "seo/tools/supabase-stub.js", "change": "New: stand-in for the sign-in library, so checks never touch the live Members Area" },
+    { "path": "seo/tools/check-page.js", "change": "Checks the # rule on every page; accepts short titles on noindex pages" }
+  ],
+
+  "method": [
+    "Audited from the repository and rendered in headless Chrome on a local copy of the site. 26 common checks and 6 sign-in checks pass: right password, wrong password, library blocked.",
+    "The sign-in checks run against a stand-in for Supabase's library, not against your live project. Nothing was sent to your Supabase account and no test user was created.",
+    "The live site and the public CDN are unreachable from the audit sandbox, so nothing here was checked in production.",
+    "Layout shift and speed were measured with the stand-in library, so they compare before and after but leave out the real library's download."
+  ]
+}

@@ -15,7 +15,7 @@ Decision 2026-11-11: the owner chose to wait until every page is done before any
 | 3 | Halal Visibility Check demo `/grader-demo.html` | `grader-demo.html` | **Done** 2026-11-11 | [03-grader-demo.pdf](changelogs/03-grader-demo.pdf) |
 | 4 | Privacy Policy `/privacy.html` | `privacy.html` | **Done** 2026-11-11 | [04-privacy.pdf](changelogs/04-privacy.pdf) |
 | 5 | Terms of Use `/terms.html` | `terms.html` | **Done** 2026-11-11 | [05-terms.pdf](changelogs/05-terms.pdf) |
-| 6 | Login `/login.html` (noindex) | `login.html` | To do | |
+| 6 | Login `/login.html` (noindex) | `login.html` | **Done** 2026-11-11 | [06-login.pdf](changelogs/06-login.pdf) |
 | 7 | Register `/register.html` (noindex) | `register.html` | To do | |
 | 8 | Forgot password `/forgot-password.html` (noindex) | `forgot-password.html` | To do | |
 | 9 | Reset password `/reset-password.html` (noindex) | `reset-password.html` | To do | |
@@ -41,6 +41,8 @@ These came out of the audits and cannot be done from the repo. Details are in th
 | Medium | Add a "Change my cookie choice" link to the privacy page. | 04-privacy |
 | High | Terms: the yearly plan is paid upfront; say what happens if a restaurant stops. | 05-terms |
 | Medium | Homepage says "One flat price" and "no 12-month contract" beside a yearly option. Founding rate ($149) is not on the site. Have the terms checked before charging. | 05-terms |
+| High | Supabase: set the Site URL to the login page, and check GA4 for page addresses containing "access_token". | 06-login |
+| Medium | Pin the Supabase library to one version with an integrity hash (needs open network access). | 06-login |
 | Low | `emails/README.md` still says $79/mo. | 04-privacy |
 | Low | Optional: draw the wordmark as an SVG, host the fonts yourself and preload Manrope (also removes the small jump when fonts load). | 01-home, 02-demo |
 
@@ -64,6 +66,9 @@ Tracking
 - `qr_scan` and `email_click` are not touched, so the pilot's numbers stay comparable.
 - Links worth counting get a `data-cta` name, unique on the page.
 - No name, email address or phone number is ever sent to GA4.
+- The tag sends the page address cut off at `#` (`page_location: location.href.split('#')[0]`). Supabase links carry session tokens after the `#`. Never remove this.
+- Noindex pages (the Members Area) get the tag, `site.js`, icons and fonts, but no share tags or structured data.
+- Checks on sign-in pages run against `seo/tools/supabase-stub.js`, never against the live Supabase project.
 
 Prices
 - The price appears in the homepage fine print, the homepage questions section, `terms.html` (text and meta description) and the owner email. When it changes, change all of them. As of 2026-11-11: $250 a month or $2,700 a year.

@@ -19,6 +19,14 @@ const results = [];
 const ok = (name, cond, extra) => results.push({ name, pass: !!cond, extra });
 const layer = (page) => page.evaluate(() => (window.dataLayer || []).map((a) => Array.from(a)));
 const BLOCK = /google-analytics|googletagmanager|doubleclick/;
+const STUB = require('fs').readFileSync(require('path').join(__dirname, 'supabase-stub.js'), 'utf8');
+// Blocks analytics and answers the Supabase CDN with a local stand-in.
+const handle = (r) => {
+  const u = r.request().url();
+  if (BLOCK.test(u)) return r.abort();
+  if (/cdn\.jsdelivr\.net\/npm\/@supabase/.test(u)) return r.fulfill({ status: 200, contentType: 'application/javascript', body: STUB });
+  return r.continue();
+};
 
 (async () => {
   const launch = { args: ['--no-sandbox'] };
@@ -29,7 +37,7 @@ const BLOCK = /google-analytics|googletagmanager|doubleclick/;
   // ── A: first visit, arriving from a campaign link ─────────────────────────
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const page = await ctx.newPage();
-  await page.route('**/*', (r) => (BLOCK.test(r.request().url()) ? r.abort() : r.continue()));
+  await page.route('**/*', handle);
   page.on('pageerror', (e) => errors.push(e.message));
   const sep = url.includes('?') ? '&' : '?';
   await page.goto(url + sep + 'utm_source=check&utm_medium=email&utm_campaign=first', { waitUntil: 'load' });
@@ -39,6 +47,13 @@ const BLOCK = /google-analytics|googletagmanager|doubleclick/;
   const def = dl.find((e) => e[0] === 'consent' && e[1] === 'default');
   ok('consent defaults: all four signals denied', def && ['analytics_storage', 'ad_storage', 'ad_user_data', 'ad_personalization'].every((k) => def[2][k] === 'denied'), def);
   ok('config comes after the consent default', dl.findIndex((e) => e[0] === 'config') > dl.findIndex((e) => e[0] === 'consent'));
+  // A sign-in link from Supabase puts session tokens after "#". They must not reach Analytics.
+  await page.goto(url + sep + 'utm_source=check#access_token=SECRET&refresh_token=SECRET2&type=recovery', { waitUntil: 'load' });
+  const cfg = (await layer(page)).find((e) => e[0] === 'config');
+  ok('Analytics never gets what follows "#" in the address', cfg && cfg[2] && typeof cfg[2].page_location === 'string' && !cfg[2].page_location.includes('#') && !JSON.stringify(await layer(page)).includes('SECRET') && cfg[2].page_location.includes('utm_source=check'), cfg);
+  await page.evaluate(() => localStorage.removeItem('rihla_utm'));
+  await page.goto(url + sep + 'utm_source=check&utm_medium=email&utm_campaign=first', { waitUntil: 'load' });
+  dl = await layer(page);
   ok('no consent update without a stored choice', !dl.some((e) => e[0] === 'consent' && e[1] === 'update'));
   let utm = await page.evaluate(() => JSON.parse(localStorage.getItem('rihla_utm') || 'null'));
   ok('first-touch campaign saved by /site.js', utm && utm.utm_source === 'check' && utm.utm_campaign === 'first', utm);
@@ -81,8 +96,13 @@ const BLOCK = /google-analytics|googletagmanager|doubleclick/;
   const noindex = /noindex/.test(head.robots || '');
   ok('lang is en-US', head.lang === 'en-US', head.lang);
   ok('exactly one H1', head.h1.length === 1, head.h1);
-  ok('title 30 to 60 characters', head.title.length >= 30 && head.title.length <= 60, head.title.length + ': ' + head.title);
-  ok('description 110 to 158 characters', head.desc && head.desc.length >= 110 && head.desc.length <= 158, (head.desc || '').length);
+  if (noindex) {
+    // Kept out of search on purpose, so lengths do not matter: a title and a description must exist.
+    ok('noindex page has a title and a description', head.title.length > 0 && (head.desc || '').length > 0);
+  } else {
+    ok('title 30 to 60 characters', head.title.length >= 30 && head.title.length <= 60, head.title.length + ': ' + head.title);
+    ok('description 110 to 158 characters', head.desc && head.desc.length >= 110 && head.desc.length <= 158, (head.desc || '').length);
+  }
   ok('canonical points at this page on the production host', head.canonical === 'https://rihla-website-self.vercel.app' + new URL(url).pathname.replace(/\/index\.html$/, '/'), head.canonical);
   ok('three icon links', head.icons.length === 3, head.icons);
   if (!noindex) {
@@ -105,7 +125,7 @@ const BLOCK = /google-analytics|googletagmanager|doubleclick/;
   // ── B: phone, storage blocked ────────────────────────────────────────────
   const ctx2 = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const p2 = await ctx2.newPage();
-  await p2.route('**/*', (r) => (BLOCK.test(r.request().url()) ? r.abort() : r.continue()));
+  await p2.route('**/*', handle);
   p2.on('pageerror', (e) => errors.push('storage-blocked: ' + e.message));
   await p2.addInitScript(() => { Object.defineProperty(window, 'localStorage', { get() { throw new Error('blocked'); } }); });
   await p2.goto(url, { waitUntil: 'load' });
@@ -116,7 +136,7 @@ const BLOCK = /google-analytics|googletagmanager|doubleclick/;
   for (const choice of ['granted', 'denied']) {
     const c3 = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
     const p3 = await c3.newPage();
-    await p3.route('**/*', (r) => (BLOCK.test(r.request().url()) ? r.abort() : r.continue()));
+    await p3.route('**/*', handle);
     p3.on('pageerror', (e) => errors.push('notice: ' + e.message));
     await p3.goto(url, { waitUntil: 'load' });
     const own = await p3.evaluate(() => !!document.getElementById('cookie-banner'));

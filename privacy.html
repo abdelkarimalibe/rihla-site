@@ -118,7 +118,10 @@
     }
   } catch (_) {}
 
-  gtag('config', 'G-1235J90MCS');
+  // The page address goes to Analytics without anything after "#". Sign-in and
+  // password links from Supabase carry session tokens there, and those must
+  // never reach a third party.
+  gtag('config', 'G-1235J90MCS', { page_location: location.href.split('#')[0] });
 </script>
 </head>
 <body>

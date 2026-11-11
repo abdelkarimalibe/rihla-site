@@ -16,6 +16,7 @@ const RUNS = parseInt(runsArg || '5', 10);
 if (!url) { console.error('usage: node perf.js <url> [runs]'); process.exit(2); }
 
 const ANALYTICS = /(google-analytics\.com|analytics\.google\.com|doubleclick\.net)/;
+const STUB = require('fs').readFileSync(require('path').join(__dirname, 'supabase-stub.js'), 'utf8');
 const median = (a) => { const s = a.slice().sort((x, y) => x - y); return s[Math.floor(s.length / 2)]; };
 
 async function once() {
@@ -24,7 +25,14 @@ async function once() {
   const browser = await chromium.launch(launch);
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
   const page = await context.newPage();
-  await page.route('**/*', (r) => (ANALYTICS.test(r.request().url()) ? r.abort() : r.continue()));
+  await page.route('**/*', (r) => {
+    const u = r.request().url();
+    if (ANALYTICS.test(u)) return r.abort();
+    // The Supabase CDN is unreachable from the sandbox: answer it with the local stand-in,
+    // so sign-in pages render as they do in production instead of showing their fallback notice.
+    if (/cdn\.jsdelivr\.net\/npm\/@supabase/.test(u)) return r.fulfill({ status: 200, contentType: 'application/javascript', body: STUB });
+    return r.continue();
+  });
   const cdp = await context.newCDPSession(page);
   await cdp.send('Network.enable');
   await cdp.send('Network.emulateNetworkConditions', {
