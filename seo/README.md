@@ -19,6 +19,7 @@ Everything is on branch `claude/practical-keller-adcqrc`. Nothing is live until 
 | 9 | Reset password `/reset-password.html` (noindex) | `reset-password.html` | To do | |
 | 10 | Members Area `/members.html` (noindex) | `members.html` | To do | |
 | 11 | Not found page | `404.html` | To do | |
+| 12 | Sales Control Panel `/sales.html` (internal, noindex, added on `main` 2026-11-11) | `sales.html` | To do | |
 
 The two files in `/emails` are Mailchimp templates, not site pages. They already carry `noindex`, so they are not in this list.
 
@@ -56,6 +57,9 @@ Tracking
 - `qr_scan` and `email_click` are not touched, so the pilot's numbers stay comparable.
 - Links worth counting get a `data-cta` name, unique on the page.
 - No name, email address or phone number is ever sent to GA4.
+
+Prices
+- The price appears in the homepage fine print, the homepage questions section, `terms.html` (text and meta description) and the owner email. When it changes, change all of them. As of 2026-11-11: $250 a month or $2,700 a year.
 
 Noted for later pages
 - `members.html` and the diner email template still say "15% off", which the public site dropped on 2026-11-02.

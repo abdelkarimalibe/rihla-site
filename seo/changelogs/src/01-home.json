@@ -12,7 +12,8 @@
     "19 changes are on the branch: 9 technical, 4 text, 6 tracking. Each is listed below with its before and after.",
     "The biggest finding is not about search. **Neither form sends the lead to you.** Read \"What I could not do for you\" first.",
     "Nothing is live yet. Merge `claude/practical-keller-adcqrc` to publish.",
-    "Updated after your review: the Neighbourhood label keeps its spelling, and two tracking helpers moved to a shared file, `site.js`, with no change in what they do."
+    "Updated after your review: the Neighbourhood label keeps its spelling, and two tracking helpers moved to a shared file, `site.js`, with no change in what they do.",
+    "Updated again the same day: your price change on `main` is merged in, so the questions section states the current price, $250 a month or $2,700 a year."
   ],
   "scorecard": [
     {
@@ -200,7 +201,7 @@
       "title": "New section: \"How Rihla works.\"",
       "why": "Seven questions and answers above the footer, four for diners and three for owners. The page had about 40 words for diners. This adds 280 words on what people ask before they trust a halal claim: how the check works, what it costs, where Rihla operates, whether they need an app. Every sentence repeats something the site already says on the homepage, in the Terms or in the Members Area. Nothing new is claimed. The questions are marked up as FAQPage in the HTML itself, so there is one copy of the text to keep up to date.",
       "after": "For diners: How does Rihla check that a restaurant is halal? · Is the NYC halal list free? · Which parts of New York does Rihla cover? · Do I need an app?\nFor owners: What does Rihla cost a restaurant? · What does a restaurant get? · What is the Halal Visibility Check?",
-      "note": "Please read the wording. It spells out the three tiers and repeats the $79 price, so change it here whenever the price, the tiers or the pilot area change."
+      "note": "Please read the wording. It spells out the three tiers and repeats the price ($250 a month or $2,700 a year), so change it here whenever the price, the tiers or the pilot area change."
     },
     {
       "area": "Text",
