@@ -1,5 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- The Rihla mark: the Arabic letter reh, drawn as an outline (Amiri Bold, SIL Open Font License)
+       so it looks the same on every device instead of depending on installed fonts. -->
   <rect width="64" height="64" rx="14" fill="#080D1A"/>
   <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#C8943C" stroke-width="2"/>
-  <text x="32" y="44" font-family="Georgia, 'Times New Roman', serif" font-size="36" font-weight="700" fill="#E8B85C" text-anchor="middle">ر</text>
+  <path fill="#E8B85C" d="M37.76 16.35Q37.88 15.8 38.18 15.68Q38.85 15.5 40.13 17.08Q41.11 18.24 41.96 19.95Q42.82 21.65 43.42 23.97Q46.29 34.21 39.77 42.61Q35.99 47.49 30.51 48.95Q28.5 49.5 27.09 48.83Q24.41 47.67 22.31 46.73Q20.21 45.78 18.69 45.05Q17.71 44.5 18.02 43.83Q18.38 43.1 19.36 43.35Q23.5 44.56 25.94 43.96Q28.56 43.28 32.64 40.85Q39.83 36.52 41.35 32.44Q41.41 32.32 41.41 32.07Q40.87 29.21 36.23 24.4Q35.81 23.97 35.99 23.24Z"/>
 </svg>

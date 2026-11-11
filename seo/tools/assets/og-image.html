@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Source for /og-image.png, the 1200x630 picture shown when a Rihla link is shared.
+     It repeats the homepage hero. To change it, edit this file and run:
+     node seo/tools/render-assets.js -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    background: #080D1A; color: #F5EDD6;
+    font-family: 'Manrope', sans-serif;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .frame { position: absolute; inset: 26px; border: 1px solid rgba(200,148,60,.32); border-radius: 18px; }
+  .arabic { font-family: 'Amiri', serif; font-weight: 700; font-size: 188px; line-height: 1; direction: rtl; margin-top: -26px; }
+  .translit { font-size: 15px; letter-spacing: .42em; text-transform: uppercase; opacity: .55; margin: 22px 0 24px; padding-left: .42em; }
+  .rule { display: flex; align-items: center; gap: 12px; width: 180px; margin-bottom: 30px; }
+  .rule span { flex: 1; height: 1px; background: #C8943C; opacity: .5; }
+  .rule i { width: 7px; height: 7px; background: #C8943C; transform: rotate(45deg); }
+  .headline { font-size: 56px; font-weight: 700; line-height: 1.2; letter-spacing: -.01em; }
+  .headline em { color: #C8943C; font-style: normal; }
+</style>
+</head>
+<body>
+  <div class="frame"></div>
+  <div class="arabic" lang="ar">رحلة</div>
+  <div class="translit">R · I · H · L · A</div>
+  <div class="rule"><span></span><i></i><span></span></div>
+  <div class="headline">Find halal food in NYC<br>you can <em>actually</em> trust.</div>
+</body>
+</html>

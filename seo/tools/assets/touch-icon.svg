@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Source for /apple-touch-icon.png (the iPhone home-screen icon). Full-bleed square:
+       iOS rounds the corners itself. Same outline as /favicon.svg. -->
+  <rect width="64" height="64" fill="#080D1A"/>
+  <path fill="#E8B85C" d="M37.93 15.88Q38.05 15.31 38.37 15.19Q39.06 15 40.37 16.63Q41.38 17.82 42.26 19.58Q43.13 21.34 43.76 23.72Q46.71 34.26 40 42.91Q36.11 47.93 30.46 49.44Q28.39 50 26.95 49.31Q24.19 48.12 22.03 47.15Q19.86 46.17 18.29 45.42Q17.29 44.86 17.6 44.17Q17.98 43.41 18.98 43.66Q23.25 44.92 25.76 44.29Q28.46 43.6 32.66 41.09Q40.06 36.64 41.63 32.44Q41.69 32.31 41.69 32.06Q41.13 29.11 36.36 24.16Q35.92 23.72 36.11 22.97Z"/>
+</svg>
