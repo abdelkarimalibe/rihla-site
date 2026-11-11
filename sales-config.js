@@ -25,8 +25,9 @@ var SALES_STAGES = [
 ];
 
 var SALES_CADENCE_DAYS = 5;      // a deal is stale after this many days with no touch
-var SALES_MONTHLY_PRICE = 79;    // flat price per restaurant, per month
-var SALES_WHALE_MONTHLY = 237;   // deals at or above this monthly value are whales (3+ locations)
+var SALES_MONTHLY_PRICE = 250;   // standard price per restaurant, per month (same as the site and terms)
+var SALES_ANNUAL_PRICE = 2700;   // annual option, paid upfront
+var SALES_WHALE_MONTHLY = 750;   // deals at or above this monthly value are whales (3+ locations)
 var SALES_TRIAL_WARN_DAYS = 7;   // show free trials ending within this many days
 
 // Excel reader/writer, loaded only when you import or export a workbook.

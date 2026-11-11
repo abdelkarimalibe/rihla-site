@@ -165,6 +165,12 @@
   function dealById(id) { return S.deals.filter(function (d) { return d.id === id; })[0] || null; }
   function who(d) { return d.contact && d.restaurant ? d.contact + ' (' + d.restaurant + ')' : (d.contact || d.restaurant); }
   function isWhale(d) { return Number(d.value) >= SALES_WHALE_MONTHLY; }
+  // The price to quote: the deal's own monthly value, plus the annual option when it is on the standard price.
+  function priceLine(d) {
+    var n = Math.max(1, Number(d.locations) || 1), per = (Number(d.value) || 0) / n;
+    if (per === SALES_MONTHLY_PRICE) return money(d.value) + '/mo, or $' + (SALES_ANNUAL_PRICE * n).toLocaleString('en-US') + ' a year upfront';
+    return money(d.value) + '/mo';
+  }
   function openDeals() { return S.deals.filter(function (d) { return stageOf(d).open; }); }
   function lastTouch(d) {
     var g = d.email ? G.last[lower(d.email)] : '';
@@ -271,7 +277,7 @@
     if (d.stage === 'trial') {
       var n = d.trialEnds ? dayDiff(T, d.trialEnds) : null;
       out.push((n == null ? 'Free trial running. ' : n < 0 ? 'Free trial ended ' + plural(-n, 'day') + ' ago. ' : n === 0 ? 'Free trial ends today. ' : 'Free trial ends in ' + plural(n, 'day') + '. ') +
-        'Bring the scans and first-visit offers shown, then ask for the $' + SALES_MONTHLY_PRICE + '/mo decision.');
+        'Bring the scans and first-visit offers shown, then ask for the decision: ' + priceLine(d) + '.');
     }
     if (d.stage === 'paying') out.push('Walk through this month\'s report (scans, estimated covers, best day) and ask which nearby owner they would introduce.');
     if (Number(d.locations) > 1) out.push(d.locations + ' locations. Agree which one starts first and who signs off for the group.');
@@ -692,7 +698,7 @@
         ['Edit the Deals, Commitments and Calls sheets, then import this file on the Sales Control Panel.'],
         [''],
         ['Stage must be one of:'].concat(STAGES.map(function (s) { return s.label; })),
-        ['Monthly value is in dollars per month. Leave it empty to use Locations x $' + SALES_MONTHLY_PRICE + '.'],
+        ['Monthly value is in dollars per month. Leave it empty to use Locations x $' + SALES_MONTHLY_PRICE + ', or type the agreed price if it differs.'],
         ['Email is how the panel finds Gmail threads and calendar events for a deal.'],
         ['Next meeting (date and time) is only used when Google Calendar is not connected.'],
         ['Commitments: Source is Email or Call. Link is the email or call-notes URL. Done on is the date you kept the promise.'],
