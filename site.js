@@ -30,6 +30,20 @@
     }
   } catch (e) { /* storage unavailable, ignore */ }
 
+  /* The first campaign as event parameters, for events that mark a new lead or account
+     (the register page's sign_up uses it). Empty when no campaign brought the visitor. */
+  window.rihlaFirstTouch = function () {
+    try {
+      var u = JSON.parse(localStorage.getItem('rihla_utm') || 'null');
+      if (!u) return {};
+      return {
+        first_source: u.utm_source || '(none)',
+        first_medium: u.utm_medium || '(none)',
+        first_campaign: u.utm_campaign || '(none)'
+      };
+    } catch (err) { return {}; }
+  };
+
   document.addEventListener('click', function (e) {
     var el = e.target && e.target.closest ? e.target.closest('[data-cta]') : null;
     if (el && typeof gtag === 'function') gtag('event', 'cta_click', { cta: el.getAttribute('data-cta') });

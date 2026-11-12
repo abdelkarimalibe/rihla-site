@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +7,14 @@
 <meta name="description" content="Create a Rihla Members Area account for your restaurant. Free for 30 days, no card required.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://rihla-website-self.vercel.app/register.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#080D1A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Same font request as the homepage, so a visitor arriving from there already has it cached. -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #080D1A; color: #F5EDD6; font-family: 'Manrope', sans-serif; min-height: 100vh; overflow-x: hidden; }
@@ -18,7 +22,7 @@
   nav a { text-decoration: none; }
   .nav-arabic { font-family: 'Amiri', serif; font-size: 24px; font-weight: 700; color: #F5EDD6; direction: rtl; }
   .nav-en { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #C8943C; }
-  .nav-back { font-size: 13px; font-weight: 600; color: #8A9BB0; }
+  .nav-back { display: inline-block; padding: 12px 0; font-size: 13px; font-weight: 600; color: #8A9BB0; }
   .nav-back:hover { color: #C8943C; }
   main { max-width: 440px; margin: 0 auto; padding: 96px 24px 88px; }
   h1 { font-size: clamp(26px, 5.5vw, 34px); font-weight: 700; line-height: 1.2; margin-bottom: 10px; text-align: center; }
@@ -40,11 +44,32 @@
   .auth-notice { display: none; font-size: 13px; line-height: 1.6; color: #8A9BB0; text-align: center; background: rgba(255,255,255,.04); border: 1px solid rgba(200,148,60,.25); border-radius: 10px; padding: 14px; margin-bottom: 18px; }
   .auth-links { text-align: center; font-size: 13px; color: #8A9BB0; margin-top: 20px; line-height: 2; }
   .auth-links a { color: #E8B85C; text-decoration: none; }
-  footer { border-top: 1px solid rgba(200,148,60,0.18); padding: 22px 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  footer { border-top: 1px solid rgba(200,148,60,0.18); padding: 16px 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
   footer p, footer a { font-size: 12px; color: #8A9BB0; text-decoration: none; }
+  footer a { display: inline-block; padding: 6px 0; }
   footer a:hover { color: #C8943C; }
   @media (max-width: 480px) { nav { padding: 14px 18px; } main { padding-top: 72px; } .auth-card { padding: 22px 18px; } }
 </style>
+<!-- Google tag (gtag.js). Same tag and consent settings as the homepage. The visitor's
+     cookie choice is stored once for the whole site (rihla_consent). -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1235J90MCS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('consent', 'default', { 'analytics_storage': 'denied', 'ad_storage': 'denied', 'ad_user_data': 'denied', 'ad_personalization': 'denied' });
+  try {
+    if (localStorage.getItem('rihla_consent') === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  } catch (_) {}
+
+  // The page address goes to Analytics without anything after "#". Sign-in and
+  // password links from Supabase carry session tokens there, and those must
+  // never reach a third party.
+  gtag('config', 'G-1235J90MCS', { page_location: location.href.split('#')[0] });
+</script>
 </head>
 <body>
 <nav>
@@ -52,7 +77,7 @@
     <span class="nav-arabic" lang="ar">ر</span>
     <span class="nav-en">Rihla</span>
   </a>
-  <a class="nav-back" href="/">Back to Rihla</a>
+  <a class="nav-back" href="/" data-cta="nav_home">Back to Rihla</a>
 </nav>
 <main>
   <h1>Create your account.</h1>
@@ -73,18 +98,19 @@
     </form>
   </div>
   <p class="auth-links">
-    <a href="/login.html">Already have an account? Log in</a><br>
-    <a href="/demo.html">Just looking? See a demo of the monthly report →</a>
+    <a href="/login.html" data-cta="register_login">Already have an account? Log in</a><br>
+    <a href="/demo.html" data-cta="register_demo">Just looking? See a demo of the monthly report →</a>
   </p>
 </main>
 <footer>
-  <p>© 2026 Rihla &nbsp;·&nbsp; <a href="mailto:rihla.enquiries@gmail.com">rihla.enquiries@gmail.com</a></p>
+  <p>© 2026 Rihla &nbsp;·&nbsp; <a href="mailto:rihla.enquiries@gmail.com" data-cta="footer_email">rihla.enquiries@gmail.com</a></p>
   <p>
     <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp;
     <a href="/terms.html">Terms</a> &nbsp;·&nbsp;
-    <a href="https://www.instagram.com/rihla.nl" target="_blank" rel="noopener">@rihla.nl on Instagram</a>
+    <a href="https://www.instagram.com/rihla.nl" target="_blank" rel="noopener" data-cta="footer_instagram">@rihla.nl on Instagram</a>
   </p>
 </footer>
+<script src="/site.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/supabase-config.js"></script>
 <script>
@@ -109,7 +135,19 @@
         password: document.getElementById('password').value,
         options: { data: { restaurant_name: document.getElementById('restaurant').value.trim() } }
       });
-      if (res.error) { showError(res.error.message); return; }
+      // Analytics learns only that a registration worked or failed, and which campaign
+      // first brought the owner. Never the restaurant name, the email or the password.
+      if (res.error) {
+        if (typeof gtag === 'function') gtag('event', 'sign_up_failed');
+        showError(res.error.message);
+        return;
+      }
+      if (typeof gtag === 'function') {
+        // rihlaFirstTouch (from /site.js) adds the campaign that first brought this owner.
+        var params = window.rihlaFirstTouch ? window.rihlaFirstTouch() : {};
+        params.method = 'password';
+        gtag('event', 'sign_up', params);
+      }
       success.classList.add('show');
       form.querySelector('button').disabled = true;
     });
