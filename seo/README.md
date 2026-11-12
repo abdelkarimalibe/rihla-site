@@ -17,8 +17,8 @@ Decision 2026-11-11: the owner chose to wait until every page is done before any
 | 5 | Terms of Use `/terms.html` | `terms.html` | **Done** 2026-11-11 | [05-terms.pdf](changelogs/05-terms.pdf) |
 | 6 | Login `/login.html` (noindex) | `login.html` | **Done** 2026-11-11 | [06-login.pdf](changelogs/06-login.pdf) |
 | 7 | Register `/register.html` (noindex) | `register.html` | **Done** 2026-11-12 | [07-register.pdf](changelogs/07-register.pdf) |
-| 8 | Forgot password `/forgot-password.html` (noindex) | `forgot-password.html` | To do | |
-| 9 | Reset password `/reset-password.html` (noindex) | `reset-password.html` | To do | |
+| 8 | Forgot password `/forgot-password.html` (noindex) | `forgot-password.html` | **Done** 2026-11-12 | [08-forgot-password.pdf](changelogs/08-forgot-password.pdf) |
+| 9 | Reset password `/reset-password.html` (noindex) | `reset-password.html` | **Done** 2026-11-12 | [09-reset-password.pdf](changelogs/09-reset-password.pdf) |
 | 10 | Members Area `/members.html` (noindex) | `members.html` | To do | |
 | 11 | Not found page | `404.html` | To do | |
 | 12 | Sales Control Panel `/sales.html` (internal, noindex, added on `main` 2026-11-11) | `sales.html` | To do | |
