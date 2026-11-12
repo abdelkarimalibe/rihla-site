@@ -19,7 +19,7 @@ Decision 2026-11-11: the owner chose to wait until every page is done before any
 | 7 | Register `/register.html` (noindex) | `register.html` | **Done** 2026-11-12 | [07-register.pdf](changelogs/07-register.pdf) |
 | 8 | Forgot password `/forgot-password.html` (noindex) | `forgot-password.html` | **Done** 2026-11-12 | [08-forgot-password.pdf](changelogs/08-forgot-password.pdf) |
 | 9 | Reset password `/reset-password.html` (noindex) | `reset-password.html` | **Done** 2026-11-12 | [09-reset-password.pdf](changelogs/09-reset-password.pdf) |
-| 10 | Members Area `/members.html` (noindex) | `members.html` | To do | |
+| 10 | Members Area `/members.html` (noindex) | `members.html` | **Done** 2026-11-12 | [10-members.pdf](changelogs/10-members.pdf) |
 | 11 | Not found page | `404.html` | To do | |
 | 12 | Sales Control Panel `/sales.html` (internal, noindex, added on `main` 2026-11-11) | `sales.html` | To do | |
 
@@ -43,6 +43,7 @@ These came out of the audits and cannot be done from the repo. Details are in th
 | Medium | Homepage says "One flat price" and "no 12-month contract" beside a yearly option. Founding rate ($149) is not on the site. Have the terms checked before charging. | 05-terms |
 | High | Supabase: set the Site URL to the login page, and check GA4 for page addresses containing "access_token". | 06-login |
 | Medium | Pin the Supabase library to one version with an integrity hash (needs open network access). | 06-login |
+| High | Members Area Offers tab still says "Standard first-visit offer: 15% off", against the 2026-11-02 rule and the terms. | 10-members |
 | Medium | Register form: decide whether it should point to, or require agreement with, the Terms and Privacy Policy. | 07-register |
 | Low | `emails/README.md` still says $79/mo. | 04-privacy |
 | Low | Optional: draw the wordmark as an SVG, host the fonts yourself and preload Manrope (also removes the small jump when fonts load). | 01-home, 02-demo |

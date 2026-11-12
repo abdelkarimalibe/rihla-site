@@ -13,7 +13,9 @@
 const { chromium } = require('playwright');
 
 const url = process.argv[2];
-if (!url) { console.error('usage: node check-page.js <url>'); process.exit(2); }
+// --session: pretend an owner is signed in (the stand-in library reads window.__stubSession).
+const SESSION = process.argv.includes('--session');
+if (!url) { console.error('usage: node check-page.js <url> [--session]'); process.exit(2); }
 const origin = new URL(url).origin;
 const results = [];
 const ok = (name, cond, extra) => results.push({ name, pass: !!cond, extra });
@@ -32,6 +34,14 @@ const handle = (r) => {
   const launch = { args: ['--no-sandbox'] };
   if (process.env.HTTPS_PROXY) launch.proxy = { server: process.env.HTTPS_PROXY, bypass: '127.0.0.1,localhost' };
   const browser = await chromium.launch(launch);
+  if (SESSION) {
+    const newContext = browser.newContext.bind(browser);
+    browser.newContext = async (o) => {
+      const cx = await newContext(o);
+      await cx.addInitScript(() => { window.__stubSession = { user: { email: 'owner@example.com', user_metadata: { restaurant_name: 'Test Kitchen' } } }; });
+      return cx;
+    };
+  }
   const errors = [];
 
   // ── A: first visit, arriving from a campaign link ─────────────────────────
@@ -70,12 +80,14 @@ const handle = (r) => {
   const ctas = await page.evaluate(() => Array.from(document.querySelectorAll('[data-cta]')).map((el) => el.getAttribute('data-cta')));
   ok('page has data-cta elements, all named uniquely', ctas.length > 0 && new Set(ctas).size === ctas.length, ctas);
   await page.evaluate(() => document.addEventListener('click', (e) => { if (e.target.closest('a')) e.preventDefault(); }, true));
-  for (const name of ctas) {
+  // A log-out link really logs out and leaves the page, so it is exercised in the page's own test.
+  const clickable = ctas.filter((n) => !/_logout$/.test(n));
+  for (const name of clickable) {
     await page.evaluate((n) => document.querySelector('[data-cta="' + n + '"]').click(), name);
   }
   dl = await layer(page);
   const clicked = dl.filter((e) => e[0] === 'event' && e[1] === 'cta_click').map((e) => e[2].cta);
-  ok('cta_click fires for each: ' + ctas.join(', '), ctas.every((c) => clicked.includes(c)) && clicked.length === ctas.length, clicked);
+  ok('cta_click fires for each: ' + clickable.join(', '), clickable.every((c) => clicked.includes(c)) && clicked.length === clickable.length, clicked);
 
   // ── head: structured data and share tags agree with the title and description ──
   const head = await page.evaluate(() => {

@@ -24,6 +24,8 @@ async function once() {
   if (process.env.HTTPS_PROXY) launch.proxy = { server: process.env.HTTPS_PROXY, bypass: '127.0.0.1,localhost' };
   const browser = await chromium.launch(launch);
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
+  // STUB_SESSION=1: pretend an owner is signed in, for pages behind the login.
+  if (process.env.STUB_SESSION) await context.addInitScript(() => { window.__stubSession = { user: { email: 'owner@example.com', user_metadata: { restaurant_name: 'Test Kitchen' } } }; });
   const page = await context.newPage();
   await page.route('**/*', (r) => {
     const u = r.request().url();

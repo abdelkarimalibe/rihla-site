@@ -1,0 +1,117 @@
+{
+  "page_name": "Members Area",
+  "page_path": "/members.html",
+  "page_file": "members.html",
+  "page_url": "rihla-website-self.vercel.app/members.html",
+  "index": 10,
+  "of": 12,
+  "date_long": "November 12, 2026",
+  "status": "Done",
+
+  "in_short": [
+    "The dashboard is kept out of search on purpose, and that is right. Nothing changed for ranking.",
+    "One real fault is fixed: while the page checked who was logged in, the footer sat at the top of the screen and then jumped to the bottom. The page's layout-shift score was 0.12, over Google's limit of 0.1. It is now 0.02.",
+    "You can now see whether owners come back to their dashboard and which tabs they open. Nothing about the owner is sent.",
+    "7 changes are on the branch: 4 technical, 3 tracking. **I left one line of text alone that you should look at: the Offers tab still says 15% off.**"
+  ],
+
+  "scorecard": [
+    { "metric": "Kept out of search", "before": "Yes: noindex, not in the sitemap", "after": "Unchanged. Correct for this page." },
+    { "metric": "Layout shift while loading, lab test", "before": "0.12, over Google's limit of 0.1", "after": "0.02" },
+    { "metric": "Google Analytics", "before": "Not on the page", "after": "Same tag and consent settings as the homepage" },
+    { "metric": "Owner details sent to Analytics", "before": "None", "after": "None. Checked: no email, no restaurant name." },
+    { "metric": "Clicks tracked", "before": "0", "after": "9: log out, four tabs, two buttons, two footer links" },
+    { "metric": "Cookie notice", "before": "None on this page", "after": "Shown until the visitor chooses" }
+  ],
+
+  "needs_you_intro": "Both items are about what the dashboard tells owners. I changed neither.",
+  "needs_you": [
+    {
+      "priority": "High",
+      "title": "The Offers tab still says \"Standard first-visit offer: 15% off\"",
+      "detail": "On November 2 you removed the 15% offer from the public site, with the rule that offers are agreed with each store and never promised by Rihla. The terms say the same: \"Rihla does not set a discount on a restaurant's behalf.\" Every owner who logs in still reads that their standard offer is 15% off. The diner email template says \"15% off\" too. Either the dashboard is out of date, or 15% is still the default you agree with each store, in which case the wording should say that it was agreed.",
+      "action": "Tell me which it is. If it is out of date, I suggest: \"Your first-visit offer is the one you agreed with Rihla. You can change it when offer edits arrive with the next update.\"",
+      "effort": "5 minutes"
+    },
+    {
+      "priority": "Low",
+      "title": "\"Covers\" here, \"Estimated covers\" on the demo report",
+      "detail": "The dashboard says \"Covers are counted when a scanned diner visits.\" The demo report shows the same figure as \"Estimated covers\". Counted and estimated are different promises. The dashboard also has \"Redemptions\", which the demo report does not show.",
+      "action": "Pick one word for each figure and I will make the dashboard, the demo report and the homepage agree.",
+      "effort": "10 minutes"
+    }
+  ],
+
+  "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`. Once loaded, the dashboard looks the same.",
+  "changes": [
+    {
+      "area": "Technical",
+      "title": "The footer no longer jumps",
+      "why": "The dashboard is hidden until the page has checked the login. Until then the page was just the top bar and the footer, so the footer showed near the top and then dropped below the dashboard. The main area now always fills the first screen, so the footer starts out of sight and stays there. Layout shift went from 0.12 to 0.02.",
+      "before": "main { max-width: 680px; margin: 0 auto; … }",
+      "after": "main { max-width: 680px; min-height: calc(100vh - 60px); margin: 0 auto; … }"
+    },
+    {
+      "area": "Technical",
+      "title": "Icons and language, as on the homepage",
+      "why": "Added the `favicon.ico` fallback, the iPhone icon and `theme-color`, set `lang=\"en-US\"`, and marked the two Arabic marks as Arabic. Owners who save the dashboard to their phone's home screen now get the Rihla icon.",
+      "before": "<html lang=\"en\">   ·   <div class=\"trust-mark\">",
+      "after": "<html lang=\"en-US\">   ·   <div class=\"trust-mark\" lang=\"ar\">"
+    },
+    {
+      "area": "Technical",
+      "title": "Same font request as the homepage",
+      "why": "The page now sends the identical request, so the fonts come from cache for anyone who has seen another page.",
+      "before": "family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700",
+      "after": "family=Amiri:wght@700&family=Manrope:wght@400;600;700"
+    },
+    {
+      "area": "Technical",
+      "title": "Taller tap areas",
+      "why": "\"Log out\" in the top bar was 18 px tall and the footer links 17 px. They are now 42 px and 29 px to tap. Nothing moved."
+    },
+    {
+      "area": "Tracking",
+      "title": "Google Analytics added, with nothing about the owner",
+      "why": "A page view of the dashboard is the simplest sign that an owner came back. The tag sends the fixed page title, \"Members Area — Rihla\", and the page address. The restaurant name and email shown on the page are never sent, and a check confirms it.",
+      "before": "(no tag)",
+      "after": "gtag.js G-1235J90MCS, consent default denied, reads rihla_consent"
+    },
+    {
+      "area": "Tracking",
+      "title": "`cta_click` on 9 buttons and links",
+      "why": "The four tab names show what owners look for first: scans, covers, trust or offers. `members_logout` and `members_demo` show how a visit ends.",
+      "after": "members_logout · members_tab_scans · members_tab_covers · members_tab_trust · members_tab_offers · members_demo · members_home · footer_email · footer_instagram"
+    },
+    {
+      "area": "Tracking",
+      "title": "Cookie notice",
+      "why": "Comes with `site.js`, which this page now loads. An owner who has already chosen on another page is not asked again."
+    }
+  ],
+
+  "left_alone": [
+    "**noindex, nofollow.** Correct, and the page is not in the sitemap.",
+    "**All the text**, including the Offers tab. See above.",
+    "**The three tier definitions.** The homepage's new questions section repeats them word for word, so change both together.",
+    "**Share tags and structured data.** Left out on purpose.",
+    "**The login check and the log-out code.** Untouched."
+  ],
+
+  "verify_intro": "Do these once the branch is published.",
+  "verify": [
+    "Log in and open the Members Area. It should look as before, and the footer should not flash at the top while it loads.",
+    "In GA4, open Reports, then Realtime, after accepting cookies. Click a tab: `cta_click` should appear. The page shown should be \"Members Area — Rihla\", with no restaurant name."
+  ],
+
+  "files": [
+    { "path": "members.html", "change": "One layout rule, Google tag, click names, icons, fonts, tap areas" },
+    { "path": "seo/tools/check-page.js\nseo/tools/perf.js", "change": "Can now check pages behind the login, with a pretend session" }
+  ],
+
+  "method": [
+    "Audited from the repository and rendered in headless Chrome on a local copy of the site, as a signed-in owner and as a visitor. 26 common checks and 7 page checks pass.",
+    "The signed-in view uses a stand-in for Supabase's library and a pretend session. Nobody logged in to your real Members Area.",
+    "The live site and the public CDN are unreachable from the audit sandbox, so nothing here was checked in production."
+  ]
+}
