@@ -133,7 +133,9 @@
         return;
       }
       if (typeof gtag === 'function') gtag('event', 'login', { method: 'password' });
-      window.location.href = '/members.html';
+      // The owner's account goes to the sales panel, which checks the account again before showing anything.
+      var signedIn = res.data && res.data.user;
+      window.location.href = signedIn && signedIn.app_metadata && signedIn.app_metadata.sales_admin === true ? '/sales.html' : '/members.html';
     });
   })();
 </script>

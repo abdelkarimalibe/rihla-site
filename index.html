@@ -1069,6 +1069,23 @@
   document.getElementById('cookie-decline').addEventListener('click', function () { choose('denied'); });
 })();
 </script>
+<script>
+/* Owner shortcut. In a browser where the owner is signed in and has opened the sales
+   panel, the nav's Login link becomes a link to the panel. Every other visitor sees
+   the page unchanged. The link gives nobody access: /sales.html checks the signed-in
+   account with Supabase before it shows anything. */
+(function () {
+  try {
+    if (localStorage.getItem('rihla_owner') !== '1') return;
+    var signedIn = Object.keys(localStorage).some(function (k) { return /^sb-.+-auth-token$/.test(k); });
+    var link = document.querySelector('.nav-login-link');
+    if (!signedIn || !link) return;
+    link.textContent = 'Sales panel';
+    link.setAttribute('href', '/sales.html');
+    link.removeAttribute('data-cta');
+  } catch (e) { /* storage unavailable: leave the nav as it is */ }
+})();
+</script>
 <!-- First-touch campaign capture (for the claim-form fix) and cta_click tracking
      live in /site.js, shared by every page. -->
 <script src="/site.js" defer></script>

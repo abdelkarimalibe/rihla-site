@@ -45,7 +45,7 @@ These came out of the audits and cannot be done from the repo. Details are in th
 | High | Supabase: set the Site URL to the login page, and check GA4 for page addresses containing "access_token". | 06-login |
 | Medium | Pin the Supabase library to one version with an integrity hash (needs open network access). | 06-login |
 | High | Members Area Offers tab still says "Standard first-visit offer: 15% off", against the 2026-11-02 rule and the terms. | 10-members |
-| Medium | `/sales.html` is out of search but open to anyone with the address; `sales-config.js` shows the pipeline settings. Decide whether to protect it. | 12-sales |
+| Low | `/sales.html` now opens for the owner's account only (2026-11-12, `sales_admin` mark in Supabase). The static files `sales.js` and `sales-config.js` can still be read by address; they hold code, pipeline settings and fictional sample data, never real data. Hiding them too needs a server-side check. | 12-sales |
 | Medium | Register form: decide whether it should point to, or require agreement with, the Terms and Privacy Policy. | 07-register |
 | Low | `emails/README.md` still says $79/mo. | 04-privacy |
 | Low | Optional: draw the wordmark as an SVG, host the fonts yourself and preload Manrope (also removes the small jump when fonts load). | 01-home, 02-demo |
