@@ -15,6 +15,7 @@ window.supabase = {
         updateUser: async function (c) {
           return /^wrong/.test(c.password) ? { data: {}, error: { message: 'Update failed' } } : { data: {}, error: null };
         },
+        getUser: async function () { var s = window.__stubSession || null; return { data: { user: s ? s.user : null }, error: s ? null : { status: 401, message: 'No session' } }; },
         getSession: async function () { return { data: { session: window.__stubSession || null }, error: null }; },
         signOut: async function () { return { error: null }; },
         onAuthStateChange: function () { return { data: { subscription: { unsubscribe: function () {} } } }; }

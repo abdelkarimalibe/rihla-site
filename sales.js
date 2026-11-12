@@ -869,15 +869,77 @@
   }
   $('btn-google').addEventListener('click', function () { if (G.token) syncGoogle(); else connectGoogle(); });
 
-  /* ── Start ──────────────────────────────────────── */
-  $('origin').textContent = location.origin;
-  savePlan();
-  render();
-  if (SALES_GOOGLE_CLIENT_ID) {
-    loadScript('https://accounts.google.com/gsi/client').catch(function () { G.error = 'Could not load Google sign-in.'; render(); });
-    try {
-      var saved = JSON.parse(sessionStorage.getItem(TOKEN_KEY) || 'null');
-      if (saved && saved.t && saved.exp > Date.now()) { G.token = saved.t; syncGoogle(); }
-    } catch (_) {}
+  /* ── Access: the owner's account only ───────────
+     The panel stays hidden until Supabase confirms who is signed in and that the
+     account carries the sales_admin mark. That mark lives in app_metadata, which
+     only the project owner can set (a member cannot give it to themselves).
+     OWNER_FLAG only tells the landing page to show the shortcut link in this
+     browser; it grants nothing, because this check runs again on every visit. */
+  var OWNER_FLAG = 'rihla_owner';
+  var auth = null;
+  function setOwnerFlag(on) {
+    try { if (on) localStorage.setItem(OWNER_FLAG, '1'); else localStorage.removeItem(OWNER_FLAG); } catch (_) {}
   }
+  function gateSay(text, linkText, href) {
+    $('gate-text').textContent = text;
+    var link = $('gate-link');
+    link.hidden = !linkText;
+    if (linkText) { link.textContent = linkText; link.setAttribute('href', href); }
+  }
+  function checkAccess() {
+    if (typeof SUPABASE_CONFIGURED === 'undefined' || !SUPABASE_CONFIGURED || typeof supabase === 'undefined') {
+      gateSay('Could not load the sign-in check. Reload the page to try again.', 'Back to Rihla', '/');
+      return Promise.resolve(false);
+    }
+    auth = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY).auth;
+    return auth.getSession().then(function (res) {
+      if (!res.data || !res.data.session) { setOwnerFlag(false); window.location.replace('/login.html'); return false; }
+      // getUser asks Supabase directly, so a stale or edited copy in this browser is not trusted.
+      return auth.getUser().then(function (r) {
+        var user = r.data && r.data.user;
+        if (r.error || !user) {
+          var status = r.error && r.error.status;
+          if (status === 401 || status === 403) {
+            setOwnerFlag(false);
+            return auth.signOut().then(function () { window.location.replace('/login.html'); return false; });
+          }
+          gateSay('Could not check your sign-in. Check your connection and reload.', 'Back to Rihla', '/');
+          return false;
+        }
+        if (!(user.app_metadata && user.app_metadata.sales_admin === true)) {
+          setOwnerFlag(false);
+          gateSay('This page is private.', 'Go to the Members Area', '/members.html');
+          return false;
+        }
+        setOwnerFlag(true);
+        return true;
+      });
+    }).catch(function () {
+      gateSay('Could not check your sign-in. Check your connection and reload.', 'Back to Rihla', '/');
+      return false;
+    });
+  }
+  $('btn-logout').addEventListener('click', function () {
+    setOwnerFlag(false);
+    disconnect();
+    var leave = function () { window.location.href = '/'; };
+    if (auth) auth.signOut().then(leave, leave); else leave();
+  });
+
+  /* ── Start ──────────────────────────────────────── */
+  function start() {
+    $('gate').hidden = true;
+    $('app').hidden = false;
+    $('origin').textContent = location.origin;
+    savePlan();
+    render();
+    if (SALES_GOOGLE_CLIENT_ID) {
+      loadScript('https://accounts.google.com/gsi/client').catch(function () { G.error = 'Could not load Google sign-in.'; render(); });
+      try {
+        var saved = JSON.parse(sessionStorage.getItem(TOKEN_KEY) || 'null');
+        if (saved && saved.t && saved.exp > Date.now()) { G.token = saved.t; syncGoogle(); }
+      } catch (_) {}
+    }
+  }
+  checkAccess().then(function (ok) { if (ok) start(); });
 })();
