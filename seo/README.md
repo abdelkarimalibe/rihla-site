@@ -2,7 +2,7 @@
 
 One page at a time: audit it, change what needs changing (technical, text, tracking), write a changelog PDF, mark it done here, move to the next.
 
-Everything is on branch `claude/practical-keller-adcqrc`. Nothing is live until that branch is merged. This folder is not published with the site (see `/.vercelignore`).
+All 12 pages are done (2026-11-12). Everything is on branch `claude/practical-keller-adcqrc`. Nothing is live until that branch is merged. This folder is not published with the site (see `/.vercelignore`).
 
 ## Pages
 
@@ -21,7 +21,7 @@ Decision 2026-11-11: the owner chose to wait until every page is done before any
 | 9 | Reset password `/reset-password.html` (noindex) | `reset-password.html` | **Done** 2026-11-12 | [09-reset-password.pdf](changelogs/09-reset-password.pdf) |
 | 10 | Members Area `/members.html` (noindex) | `members.html` | **Done** 2026-11-12 | [10-members.pdf](changelogs/10-members.pdf) |
 | 11 | Not found page | `404.html` | **Done** 2026-11-12 | [11-not-found.pdf](changelogs/11-not-found.pdf) |
-| 12 | Sales Control Panel `/sales.html` (internal, noindex, added on `main` 2026-11-11) | `sales.html` | To do | |
+| 12 | Sales Control Panel `/sales.html` (internal, noindex, added on `main` 2026-11-11) | `sales.html` | **Done** 2026-11-12 | [12-sales.pdf](changelogs/12-sales.pdf) |
 
 The two files in `/emails` are Mailchimp templates, not site pages. They already carry `noindex`, so they are not in this list.
 
@@ -45,6 +45,7 @@ These came out of the audits and cannot be done from the repo. Details are in th
 | High | Supabase: set the Site URL to the login page, and check GA4 for page addresses containing "access_token". | 06-login |
 | Medium | Pin the Supabase library to one version with an integrity hash (needs open network access). | 06-login |
 | High | Members Area Offers tab still says "Standard first-visit offer: 15% off", against the 2026-11-02 rule and the terms. | 10-members |
+| Medium | `/sales.html` is out of search but open to anyone with the address; `sales-config.js` shows the pipeline settings. Decide whether to protect it. | 12-sales |
 | Medium | Register form: decide whether it should point to, or require agreement with, the Terms and Privacy Policy. | 07-register |
 | Low | `emails/README.md` still says $79/mo. | 04-privacy |
 | Low | Optional: draw the wordmark as an SVG, host the fonts yourself and preload Manrope (also removes the small jump when fonts load). | 01-home, 02-demo |
@@ -74,7 +75,7 @@ Tracking
 - Checks on sign-in pages run against `seo/tools/supabase-stub.js`, never against the live Supabase project.
 
 Prices
-- The price appears in the homepage fine print, the homepage questions section, `terms.html` (text and meta description) and the owner email. When it changes, change all of them. As of 2026-11-11: $250 a month or $2,700 a year.
+- The price appears in six places: the homepage fine print, the homepage questions section, `terms.html` (text and meta description), the owner email and `sales-config.js`. When it changes, change all of them. As of 2026-11-11: $250 a month or $2,700 a year.
 
 Noted for later pages
 - `members.html` and the diner email template still say "15% off", which the public site dropped on 2026-11-02.

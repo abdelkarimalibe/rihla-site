@@ -1,0 +1,100 @@
+{
+  "page_name": "Sales Control Panel",
+  "page_path": "/sales.html",
+  "page_file": "sales.html",
+  "page_url": "rihla-website-self.vercel.app/sales.html",
+  "index": 12,
+  "of": 12,
+  "date_long": "November 12, 2026",
+  "status": "Done",
+
+  "in_short": [
+    "This page arrived on `main` during the pass. It is your internal sales tool, not a page for visitors, and it is set up correctly for that: kept out of search, linked from nowhere, absent from the sitemap.",
+    "So the right amount of search work here is almost none. I made three small changes that cannot affect how it works, and deliberately added no analytics.",
+    "One thing around it did need fixing: the site was publishing a README that describes the panel and names its address.",
+    "4 changes are on the branch: 4 technical. No text, no tracking."
+  ],
+
+  "scorecard": [
+    { "metric": "Kept out of search", "before": "Yes: noindex, nofollow", "after": "Unchanged" },
+    { "metric": "Linked from the site or the sitemap", "before": "No", "after": "No" },
+    { "metric": "Analytics on the page", "before": "None", "after": "None, on purpose" },
+    { "metric": "README naming the panel's address", "before": "Published at /README.md", "after": "Kept out of the published site" },
+    { "metric": "How the panel looks and works", "before": "", "after": "Identical: zero pixels differ, no script errors" }
+  ],
+
+  "needs_you_intro": "Two things to know about this page. Neither is a fault in the panel.",
+  "needs_you": [
+    {
+      "priority": "Medium",
+      "title": "\"Not in search\" is not \"private\"",
+      "detail": "Anyone who types `/sales.html` can open the panel. They would see an empty panel, because your pipeline lives in your own browser and Gmail and Calendar ask for your own Google login. They would also see `sales-config.js`: your stages, the chance you give each one of paying, and the $750 threshold for a large deal. Your README says you know everything in the repo is published. I am noting it because noindex only keeps a page out of search results.",
+      "action": "If you want the panel private, the simple way is Vercel's password protection for that path, or moving the panel to its own private project. Tell me if you want either looked into.",
+      "effort": "30 minutes"
+    },
+    {
+      "priority": "Low",
+      "title": "The price now lives in six places",
+      "detail": "`sales-config.js` holds $250 and $2,700 for the forecast. The other five are the homepage fine print, the homepage questions section, the terms text, the terms description and the owner email. `emails/README.md` still says $79.",
+      "action": "Nothing now. The tracker lists all six, so the next price change can reach each one.",
+      "effort": "none"
+    }
+  ],
+
+  "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`.",
+  "changes": [
+    {
+      "area": "Technical",
+      "title": "Internal notes are no longer published",
+      "why": "Vercel publishes every file in the repo. That included `README.md`, which describes the sales panel and gives its address, and `emails/README.md`, which describes your Mailchimp setup. Search engines can list such files. Both are now in `.vercelignore`, next to the `seo/` folder. They stay in the repo.",
+      "before": "seo",
+      "after": "seo\nREADME.md\nemails/README.md"
+    },
+    {
+      "area": "Technical",
+      "title": "Icons, as on the rest of the site",
+      "why": "Added the `favicon.ico` fallback, the iPhone icon and `theme-color`. If you keep the panel on your phone's home screen it now shows the Rihla icon. The page's security policy already allows images from the site itself.",
+      "before": "<link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\">",
+      "after": "<link rel=\"icon\" href=\"/favicon.ico\" sizes=\"32x32\">\n<link rel=\"icon\" type=\"image/svg+xml\" href=\"/favicon.svg\">\n<link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\">"
+    },
+    {
+      "area": "Technical",
+      "title": "Same font request as the rest of the site",
+      "why": "The panel uses bold Amiri for the mark and Manrope in three weights, the same set every other page now asks for. Sending the identical request means the fonts come from cache.",
+      "before": "family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700",
+      "after": "family=Amiri:wght@700&family=Manrope:wght@400;600;700"
+    },
+    {
+      "area": "Technical",
+      "title": "Language tag",
+      "why": "`lang=\"en\"` became `lang=\"en-US\"`, like every other page.",
+      "before": "<html lang=\"en\">",
+      "after": "<html lang=\"en-US\">"
+    }
+  ],
+
+  "left_alone": [
+    "**No Google Analytics, no cookie notice, no click names.** This is your own tool. Counting your own visits would add noise to the numbers you show restaurants, and the page's security policy rightly allows no outside script except Google sign-in and the Excel reader.",
+    "**noindex, nofollow and no-referrer.** All correct for an internal page.",
+    "**robots.txt.** I did not add a rule for this page. A rule there would announce the address to anyone who reads the file, and would stop search engines from seeing the noindex tag.",
+    "**The security policy, the panel's code and its text.** Untouched.",
+    "**Share tags and structured data.** Left out on purpose."
+  ],
+
+  "verify_intro": "Do these once the branch is published.",
+  "verify": [
+    "Open `/sales.html`. It should look and work exactly as before.",
+    "Open `/README.md` on the live site. It should show the not-found page. If it shows the README, tell me."
+  ],
+
+  "files": [
+    { "path": "sales.html", "change": "Language tag, three icon links, font request" },
+    { "path": ".vercelignore", "change": "README.md and emails/README.md no longer published" }
+  ],
+
+  "method": [
+    "Read the page, `sales.js` and `sales-config.js` in the repository, and rendered the panel in headless Chrome on a local copy before and after. The two screenshots are identical, with no script errors and no complaints from the page's security policy.",
+    "The panel was opened without a workbook and without a Google login. No pipeline data, mail or calendar was read.",
+    "The live site is unreachable from the audit sandbox, so whether Vercel honours `.vercelignore` for these files was not checked in production. The second check above settles it."
+  ]
+}

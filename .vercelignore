@@ -1,3 +1,7 @@
 # Internal SEO working files (audit changelogs, tracker, tools).
 # Kept in the repo, never published with the site.
 seo
+
+# Internal notes. The root README describes the internal sales panel and names its address.
+README.md
+emails/README.md
