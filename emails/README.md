@@ -22,4 +22,4 @@ Two Mailchimp templates. One shape: big type, one image or one grade, short copy
 ## Measuring
 Links carry `utm_source=mailchimp&utm_medium=email`, and the site saves them for first-touch attribution. Diner links use `?spot=<slug>`. These log as `email_click` in GA, not `qr_scan`, so the scan count stays QR-only.
 
-Weekly check: time spent, QR scans, email clicks, paying ($79/mo) customers.
+Weekly check: time spent, QR scans, email clicks, paying customers.

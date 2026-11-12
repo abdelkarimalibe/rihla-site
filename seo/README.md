@@ -75,7 +75,8 @@ Tracking
 - Checks on sign-in pages run against `seo/tools/supabase-stub.js`, never against the live Supabase project.
 
 Prices
-- The price appears in six places: the homepage fine print, the homepage questions section, `terms.html` (text and meta description), the owner email and `sales-config.js`. When it changes, change all of them. As of 2026-11-11: $250 a month or $2,700 a year.
+- The price appears in six places: the homepage fine print, the homepage questions section, `terms.html` (text and the four descriptions in its head), the owner email and `sales-config.js`. When it changes, change all of them. As of 2026-11-12: Basic $149 a month, Full $250 a month, Full $2,700 a year.
+- Since 2026-11-12 the site is inbound-first: owners claim online and are verified from documents. Copy must not promise a visit, a phone call within a set time, or a hand-delivered card.
 
 Noted for later pages
 - `members.html` and the diner email template still say "15% off", which the public site dropped on 2026-11-02.
