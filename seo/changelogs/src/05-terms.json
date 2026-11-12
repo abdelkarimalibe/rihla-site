@@ -7,27 +7,64 @@
   "of": 12,
   "date_long": "November 11, 2026",
   "status": "Done",
-
   "in_short": [
-    "You changed the price in these terms today, but the date at the top still said November 2. The terms themselves say that date shows the latest version, so it is now November 11.",
+    "You changed the price in these terms on November 11, but the date at the top still said November 2. The terms themselves say that date shows the latest version. It now shows November 12, the day this was published.",
     "The terms never pointed to the Privacy Policy. One line now does.",
     "12 changes are on the branch: 7 technical, 3 text, 2 tracking. No term was rewritten.",
     "The new yearly plan raises questions the terms do not answer yet. They are under \"What I could not do for you\"."
   ],
-
   "scorecard": [
-    { "metric": "\"Last updated\" date", "before": "November 2, 2026, although the price changed on November 11", "after": "November 11, 2026, also readable by machines" },
-    { "metric": "Link to the Privacy Policy", "before": "None", "after": "One line, in a new \"Your data\" section" },
-    { "metric": "Title tag", "before": "Terms of Use — Rihla\n20 characters", "after": "Terms of Use: free pilot, price and verification — Rihla\n56 characters" },
-    { "metric": "Meta description", "before": "110 characters, with today's price", "after": "Unchanged. You rewrote it today." },
-    { "metric": "Google Analytics", "before": "Not on the page", "after": "Same tag and consent settings as the homepage" },
-    { "metric": "Cookie notice", "before": "None on this page", "after": "Shown until the visitor chooses" },
-    { "metric": "Share preview", "before": "No share tags at all", "after": "Title, description and the 1200 × 630 card" },
-    { "metric": "Structured data", "before": "None", "after": "WebSite, WebPage with its date, BreadcrumbList" },
-    { "metric": "Words in the terms", "before": "265", "after": "292" },
-    { "metric": "Layout shift while loading, lab test", "before": "0.04", "after": "0.05. Google's limit for good is 0.1." }
+    {
+      "metric": "\"Last updated\" date",
+      "before": "November 2, 2026, although the price changed on November 11",
+      "after": "November 12, 2026, the day this was published, also readable by machines"
+    },
+    {
+      "metric": "Link to the Privacy Policy",
+      "before": "None",
+      "after": "One line, in a new \"Your data\" section"
+    },
+    {
+      "metric": "Title tag",
+      "before": "Terms of Use — Rihla\n20 characters",
+      "after": "Terms of Use: free pilot, price and verification — Rihla\n56 characters"
+    },
+    {
+      "metric": "Meta description",
+      "before": "110 characters, with today's price",
+      "after": "Unchanged. You rewrote it today."
+    },
+    {
+      "metric": "Google Analytics",
+      "before": "Not on the page",
+      "after": "Same tag and consent settings as the homepage"
+    },
+    {
+      "metric": "Cookie notice",
+      "before": "None on this page",
+      "after": "Shown until the visitor chooses"
+    },
+    {
+      "metric": "Share preview",
+      "before": "No share tags at all",
+      "after": "Title, description and the 1200 × 630 card"
+    },
+    {
+      "metric": "Structured data",
+      "before": "None",
+      "after": "WebSite, WebPage with its date, BreadcrumbList"
+    },
+    {
+      "metric": "Words in the terms",
+      "before": "265",
+      "after": "292"
+    },
+    {
+      "metric": "Layout shift while loading, lab test",
+      "before": "0.04",
+      "after": "0.05. Google's limit for good is 0.1."
+    }
   ],
-
   "needs_you_intro": "These are questions about what you offer, so only you can answer them. I changed none of this wording.",
   "needs_you": [
     {
@@ -59,15 +96,14 @@
       "effort": "outside this pass"
     }
   ],
-
   "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`. The page looks the same apart from the date and one new line.",
   "changes": [
     {
       "area": "Text",
       "title": "\"Last updated\" now matches the last change",
-      "why": "The section \"Changes to these terms\" says the date at the top shows the latest version. The paid tier changed from $79 to $250 with a yearly option on November 11, and the date still said November 2. It is corrected, and wrapped in a `<time>` tag so machines can read it. If you publish on a later day, set it to that day.",
+      "why": "The section \"Changes to these terms\" says the date at the top shows the latest version. The paid tier changed from $79 to $250 with a yearly option on November 11, and the date still said November 2. It now shows November 12, 2026, the day the branch was published, wrapped in a `<time>` tag so machines can read it.",
       "before": "Last updated: November 2, 2026.",
-      "after": "Last updated: <time datetime=\"2026-11-11\">November 11, 2026</time>."
+      "after": "Last updated: <time datetime=\"2026-11-12\">November 12, 2026</time>."
     },
     {
       "area": "Text",
@@ -95,7 +131,7 @@
       "title": "Structured data",
       "why": "Added WebSite, WebPage and a breadcrumb. The WebPage entry carries `dateModified`, so a search engine can see how current the terms are.",
       "before": "(none)",
-      "after": "<script type=\"application/ld+json\"> { \"@graph\": [ WebSite, WebPage (dateModified 2026-11-11), BreadcrumbList ] }"
+      "after": "<script type=\"application/ld+json\"> { \"@graph\": [ WebSite, WebPage (dateModified 2026-11-12), BreadcrumbList ] }"
     },
     {
       "area": "Technical",
@@ -140,27 +176,32 @@
       "after": "terms_privacy · terms_contact_email · terms_home · footer_email · footer_instagram"
     }
   ],
-
   "left_alone": [
     "**Every existing term.** Not a word of the seven sections was changed.",
     "**The meta description.** You rewrote it today with the new price. It is a good length and accurate.",
     "**The price.** It now appears in five places: the homepage fine print, the homepage questions section, this page's text, this page's meta description and the owner email. The tracker lists them so the next change reaches all five.",
     "**Indexing.** The page stays indexable and in the sitemap."
   ],
-
   "verify_intro": "Do these once the branch is published.",
   "verify": [
     "Open the live page and check the date at the top. Change it if you published on a different day.",
     "Click the Privacy Policy link in \"Your data\". It should open the policy.",
     "In GA4, open Reports, then Realtime, and open `/terms.html` after accepting cookies. A page view for it should appear."
   ],
-
   "files": [
-    { "path": "terms.html", "change": "Date, one new line, head tags, structured data, Google tag, section ids" },
-    { "path": "sitemap.xml", "change": "Date for this page" },
-    { "path": "seo/tools/perf.js", "change": "Layout shift now counts every shift during load; the four earlier changelogs carry the corrected figures" }
+    {
+      "path": "terms.html",
+      "change": "Date, one new line, head tags, structured data, Google tag, section ids"
+    },
+    {
+      "path": "sitemap.xml",
+      "change": "Date for this page"
+    },
+    {
+      "path": "seo/tools/perf.js",
+      "change": "Layout shift now counts every shift during load; the four earlier changelogs carry the corrected figures"
+    }
   ],
-
   "method": [
     "Audited from the repository and rendered in headless Chrome at 390 px and 1366 px on a local copy of the site. 29 automated checks pass.",
     "The live site is still unreachable from the audit sandbox, so nothing here was checked in production.",

@@ -32,7 +32,7 @@
     {
       "metric": "Last updated",
       "before": "October 28, 2026",
-      "after": "November 11, 2026, also readable by machines"
+      "after": "November 12, 2026, the day it was published, also readable by machines"
     },
     {
       "metric": "Words in the policy",
@@ -129,9 +129,9 @@
     {
       "area": "Text",
       "title": "\"Last updated\" date",
-      "why": "The wording changed, so the date did. It is now November 11, 2026, and wrapped in a `<time>` tag so machines can read it. If the branch is published on a later day, change it to that day.",
+      "why": "The wording changed, so the date did. It shows November 12, 2026, the day the branch was published, and is wrapped in a `<time>` tag so machines can read it.",
       "before": "Last updated: October 28, 2026.",
-      "after": "Last updated: <time datetime=\"2026-11-11\">November 11, 2026</time>."
+      "after": "Last updated: <time datetime=\"2026-11-12\">November 12, 2026</time>."
     },
     {
       "area": "Technical",
@@ -145,7 +145,7 @@
       "title": "Structured data",
       "why": "Added WebSite, WebPage and a breadcrumb. The WebPage entry carries `dateModified`, so a search engine can see how current the policy is.",
       "before": "(none)",
-      "after": "<script type=\"application/ld+json\"> { \"@graph\": [ WebSite, WebPage (dateModified 2026-11-11), BreadcrumbList ] }"
+      "after": "<script type=\"application/ld+json\"> { \"@graph\": [ WebSite, WebPage (dateModified 2026-11-12), BreadcrumbList ] }"
     },
     {
       "area": "Technical",

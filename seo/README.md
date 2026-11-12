@@ -2,11 +2,11 @@
 
 One page at a time: audit it, change what needs changing (technical, text, tracking), write a changelog PDF, mark it done here, move to the next.
 
-All 12 pages are done (2026-11-12). Everything is on branch `claude/practical-keller-adcqrc`. Nothing is live until that branch is merged. This folder is not published with the site (see `/.vercelignore`).
+All 12 pages are done (2026-11-12) and were merged into `main` the same day, at the owner's request. The work was done on branch `claude/practical-keller-adcqrc`. This folder is not published with the site (see `/.vercelignore`).
 
 ## Pages
 
-Decision 2026-11-11: the owner chose to wait until every page is done before anything goes live. Ask again at the end (merge into `main`, or open a pull request).
+Decision 2026-11-11: wait until every page is done before anything goes live. Decision 2026-11-12: merge into `main`.
 
 | # | Page | File | Status | Changelog |
 |---|------|------|--------|-----------|
