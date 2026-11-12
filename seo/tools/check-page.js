@@ -115,7 +115,12 @@ const handle = (r) => {
     ok('title 30 to 60 characters', head.title.length >= 30 && head.title.length <= 60, head.title.length + ': ' + head.title);
     ok('description 110 to 158 characters', head.desc && head.desc.length >= 110 && head.desc.length <= 158, (head.desc || '').length);
   }
-  ok('canonical points at this page on the production host', head.canonical === 'https://rihla-website-self.vercel.app' + new URL(url).pathname.replace(/\/index\.html$/, '/'), head.canonical);
+  if (/\/404\.html$/.test(new URL(url).pathname)) {
+    // The error page is served at every missing address, so it must not name one canonical address.
+    ok('error page: no canonical, and noindex', head.canonical === null && noindex, head.canonical);
+  } else {
+    ok('canonical points at this page on the production host', head.canonical === 'https://rihla-website-self.vercel.app' + new URL(url).pathname.replace(/\/index\.html$/, '/'), head.canonical);
+  }
   ok('three icon links', head.icons.length === 3, head.icons);
   if (!noindex) {
     ok('share tags present and equal to title/description', head.ogTitle && head.ogDesc === head.desc && head.twDesc === head.desc && head.ogUrl === head.canonical && /og-image\.png$/.test(head.ogImage || '') && head.twCard === 'summary_large_image', head);

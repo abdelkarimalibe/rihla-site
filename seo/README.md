@@ -20,7 +20,7 @@ Decision 2026-11-11: the owner chose to wait until every page is done before any
 | 8 | Forgot password `/forgot-password.html` (noindex) | `forgot-password.html` | **Done** 2026-11-12 | [08-forgot-password.pdf](changelogs/08-forgot-password.pdf) |
 | 9 | Reset password `/reset-password.html` (noindex) | `reset-password.html` | **Done** 2026-11-12 | [09-reset-password.pdf](changelogs/09-reset-password.pdf) |
 | 10 | Members Area `/members.html` (noindex) | `members.html` | **Done** 2026-11-12 | [10-members.pdf](changelogs/10-members.pdf) |
-| 11 | Not found page | `404.html` | To do | |
+| 11 | Not found page | `404.html` | **Done** 2026-11-12 | [11-not-found.pdf](changelogs/11-not-found.pdf) |
 | 12 | Sales Control Panel `/sales.html` (internal, noindex, added on `main` 2026-11-11) | `sales.html` | To do | |
 
 The two files in `/emails` are Mailchimp templates, not site pages. They already carry `noindex`, so they are not in this list.
@@ -35,7 +35,8 @@ These came out of the audits and cannot be done from the repo. Details are in th
 | High | QR scans only show in GA4 when the visitor accepts cookies. Count them on the server. | 01-home |
 | High | Buy a real domain. `rihla-website-self.vercel.app` appears 38 times in 14 files. | 01-home |
 | High | Set up Google Search Console and Bing Webmaster Tools, submit the sitemap. | 01-home |
-| Medium | GA4: mark `list_signup` and `spot_claim` as key events, register the custom dimensions. | 01-home |
+| Medium | GA4: mark `list_signup`, `spot_claim` and `sign_up` as key events. Register custom dimensions: `cta`, `area`, `restaurant`, `first_source`, `first_medium`, `first_campaign`, `missing_path`, `came_from`. | 01-home, 07-register, 11-not-found |
+| Medium | After publishing, confirm a missing address answers 404 and shows the error page. | 11-not-found |
 | Medium | Publish a page per verified restaurant and per neighborhood. That is what will rank. | 01-home |
 | High | The privacy policy leaves out Members Area accounts, the outside services that handle data, retention and a responsible party. | 04-privacy |
 | Medium | Add a "Change my cookie choice" link to the privacy page. | 04-privacy |

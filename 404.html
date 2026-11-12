@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page not found — Rihla</title>
 <meta name="description" content="This Rihla page does not exist. Head back to the homepage.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#080D1A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Same font request as the homepage, so a visitor arriving from there already has it cached. -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #080D1A; color: #F5EDD6; font-family: 'Manrope', sans-serif; min-height: 100vh; overflow-x: hidden; }
@@ -21,32 +26,71 @@
   h1 { font-size: clamp(24px, 5vw, 34px); font-weight: 700; line-height: 1.25; margin-bottom: 14px; }
   p { font-size: 15px; line-height: 1.7; color: #8A9BB0; margin-bottom: 32px; }
   .back { display: inline-block; background: #C8943C; color: #080D1A; font-size: 14px; font-weight: 700; padding: 13px 22px; border-radius: 10px; text-decoration: none; }
-  footer { border-top: 1px solid rgba(200,148,60,0.18); padding: 22px 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .more { margin: 22px 0 0; font-size: 13px; line-height: 2; color: #8A9BB0; }
+  .more a { display: inline-block; padding: 4px 0; color: #E8B85C; font-weight: 600; text-decoration: none; }
+  footer { border-top: 1px solid rgba(200,148,60,0.18); padding: 16px 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
   footer p, footer a { font-size: 12px; color: #8A9BB0; text-decoration: none; }
+  footer a { display: inline-block; padding: 6px 0; }
   footer a:hover { color: #C8943C; }
   @media (max-width: 480px) { nav { padding: 14px 18px; } main { padding-top: 96px; } }
 </style>
+<!-- Google tag (gtag.js). Same tag and consent settings as the homepage. The visitor's
+     cookie choice is stored once for the whole site (rihla_consent). -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1235J90MCS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('consent', 'default', { 'analytics_storage': 'denied', 'ad_storage': 'denied', 'ad_user_data': 'denied', 'ad_personalization': 'denied' });
+  try {
+    if (localStorage.getItem('rihla_consent') === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  } catch (_) {}
+
+  // The page address goes to Analytics without anything after "#". Sign-in and
+  // password links from Supabase carry session tokens there, and those must
+  // never reach a third party.
+  gtag('config', 'G-1235J90MCS', { page_location: location.href.split('#')[0] });
+</script>
 </head>
 <body>
 <nav>
   <a href="/">
-    <span class="nav-arabic">ر</span>
+    <span class="nav-arabic" lang="ar">ر</span>
     <span class="nav-en">Rihla</span>
   </a>
 </nav>
 <main>
-  <p class="arabic">رحلة</p>
+  <p class="arabic" lang="ar">رحلة</p>
   <h1>This page is not on the menu.</h1>
   <p>The link you followed does not lead to a Rihla page. It may have moved, or the address may have a typo.</p>
-  <a class="back" href="/">Back to Rihla</a>
+  <a class="back" href="/" data-cta="404_home">Back to Rihla</a>
+  <p class="more">
+    <a href="/demo.html" data-cta="404_demo">See a demo of the monthly report →</a><br>
+    <a href="/grader-demo.html" data-cta="404_sample_grade">See a sample grade →</a><br>
+    <a href="/login.html" data-cta="404_login">Login</a>
+  </p>
 </main>
 <footer>
-  <p>© 2026 Rihla &nbsp;·&nbsp; <a href="mailto:rihla.enquiries@gmail.com">rihla.enquiries@gmail.com</a></p>
+  <p>© 2026 Rihla &nbsp;·&nbsp; <a href="mailto:rihla.enquiries@gmail.com" data-cta="footer_email">rihla.enquiries@gmail.com</a></p>
   <p>
     <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp;
     <a href="/terms.html">Terms</a> &nbsp;·&nbsp;
-    <a href="https://www.instagram.com/rihla.nl" target="_blank" rel="noopener">@rihla.nl on Instagram</a>
+    <a href="https://www.instagram.com/rihla.nl" target="_blank" rel="noopener" data-cta="footer_instagram">@rihla.nl on Instagram</a>
   </p>
 </footer>
+<script src="/site.js" defer></script>
+<script>
+  // Tells Analytics which address was missing and where the visitor came from, so broken
+  // links can be found and fixed. Only the path is sent: no query string, nothing after "#".
+  if (typeof gtag === 'function') {
+    gtag('event', 'page_not_found', {
+      missing_path: location.pathname,
+      came_from: (document.referrer || '(direct)').split('?')[0].split('#')[0]
+    });
+  }
+</script>
 </body>
 </html>

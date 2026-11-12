@@ -1,0 +1,124 @@
+{
+  "page_name": "Page not found",
+  "page_path": "/404.html",
+  "page_file": "404.html",
+  "page_url": "shown at every address that does not exist",
+  "index": 11,
+  "of": 12,
+  "date_long": "November 12, 2026",
+  "status": "Done",
+
+  "in_short": [
+    "This is the page a visitor gets from a broken link. It was a dead end: one button, back to the homepage, and no record that anyone had landed there.",
+    "It now tells you which address was missing and where the visitor came from, so broken links can be found and fixed. That is the most useful thing an error page can do for search.",
+    "It also offers three ways forward besides the homepage.",
+    "8 changes are on the branch: 4 technical, 1 text, 3 tracking."
+  ],
+
+  "scorecard": [
+    { "metric": "Broken links you can see", "before": "None. Nothing was recorded.", "after": "Every one: the missing address and the page that linked to it" },
+    { "metric": "Ways forward for the visitor", "before": "1: Back to Rihla", "after": "4: homepage, monthly report demo, sample grade, login" },
+    { "metric": "Kept out of search", "before": "Relied on the server's 404 answer alone", "after": "Also marked noindex, in case the file is opened directly" },
+    { "metric": "Google Analytics", "before": "Not on the page", "after": "Same tag and consent settings as the homepage" },
+    { "metric": "Cookie notice", "before": "None on this page", "after": "Shown until the visitor chooses" },
+    { "metric": "Layout shift while loading, lab test", "before": "0.02", "after": "0.02, unchanged" }
+  ],
+
+  "needs_you_intro": "One thing I could not check from here, and one question about the look.",
+  "needs_you": [
+    {
+      "priority": "Medium",
+      "title": "Check that a missing page really answers \"404\"",
+      "detail": "Search engines only drop a dead address when the server answers with the code 404. Vercel does this by default when a file named `404.html` exists, and nothing in the repo changes that. I could not confirm it, because the live site is unreachable from the audit sandbox.",
+      "action": "After publishing, open an address that does not exist, such as `/abc`. You should see this page. If you want certainty about the code, tell me to check it in a session that can reach the live site.",
+      "effort": "2 minutes"
+    },
+    {
+      "priority": "Low",
+      "title": "The wordmark is gray on this page",
+      "detail": "On the homepage the Arabic wordmark is ivory. Here it comes out gray, because a general rule for paragraph text also applies to it. It may be a deliberate muted look. It may be the same kind of slip as the tiny mark on the demo page. I left it.",
+      "action": "Tell me if it should be ivory. It is a one-line change.",
+      "effort": "2 minutes"
+    }
+  ],
+
+  "changes_intro": "Everything below is committed on `claude/practical-keller-adcqrc`. The page looks the same down to the button. Three links are new below it.",
+  "changes": [
+    {
+      "area": "Tracking",
+      "title": "`page_not_found`: which address was missing, and who linked to it",
+      "why": "Every time this page is shown, Analytics gets the path that does not exist and the page the visitor came from. A link you mistyped in an email, a QR card printed with a wrong address, a page another site links to that you have since renamed: each shows up as a row. Only the path is sent, without anything after a ? or a #.",
+      "after": "gtag('event', 'page_not_found', { missing_path: '/the/missing/address', came_from: 'https://the-page-that-linked-here' })",
+      "note": "To see the two details in GA4, register `missing_path` and `came_from` as custom dimensions, in the same place as the others."
+    },
+    {
+      "area": "Tracking",
+      "title": "Google Analytics and the cookie notice",
+      "why": "The page now carries the homepage's tag and loads `site.js`.",
+      "before": "(no tag)",
+      "after": "gtag.js G-1235J90MCS, consent default denied, reads rihla_consent"
+    },
+    {
+      "area": "Tracking",
+      "title": "`cta_click` on 6 links",
+      "why": "Shows where visitors go from a dead end.",
+      "after": "404_home · 404_demo · 404_sample_grade · 404_login · footer_email · footer_instagram"
+    },
+    {
+      "area": "Text",
+      "title": "Three more ways forward",
+      "why": "A visitor who followed a broken link wanted something. Below the button the page now links to the two demos and the login, with the same link texts the rest of the site uses. No new wording.",
+      "before": "Back to Rihla",
+      "after": "Back to Rihla\nSee a demo of the monthly report →\nSee a sample grade →\nLogin"
+    },
+    {
+      "area": "Technical",
+      "title": "Marked noindex",
+      "why": "The server's 404 answer already keeps missing addresses out of search. If someone opens `/404.html` itself, the server may answer \"found\". The tag makes sure the error page is never listed either way. It has no canonical address, and should not: it stands in for every missing one.",
+      "before": "(no robots tag)",
+      "after": "<meta name=\"robots\" content=\"noindex\">"
+    },
+    {
+      "area": "Technical",
+      "title": "Icons and language, as on the homepage",
+      "why": "Added the `favicon.ico` fallback, the iPhone icon and `theme-color`, set `lang=\"en-US\"`, and marked the Arabic wordmark and the letter in the top bar as Arabic.",
+      "before": "<p class=\"arabic\">",
+      "after": "<p class=\"arabic\" lang=\"ar\">"
+    },
+    {
+      "area": "Technical",
+      "title": "Same font request as the homepage",
+      "why": "This page shows the full wordmark, so it needs the same bold Arabic font as the homepage. It now sends the identical request and shares the cached files.",
+      "before": "family=Amiri:wght@400;700&family=Manrope:wght@400;500;600;700",
+      "after": "family=Amiri:wght@700&family=Manrope:wght@400;600;700"
+    },
+    {
+      "area": "Technical",
+      "title": "Taller tap areas in the footer",
+      "why": "The footer links were 17 px tall. They are now 29 px to tap."
+    }
+  ],
+
+  "left_alone": [
+    "**The headline.** \"This page is not on the menu.\" is good.",
+    "**The explanation under it.** Clear and honest.",
+    "**No canonical tag.** Correct for an error page.",
+    "**Not in the sitemap.** Correct."
+  ],
+
+  "verify_intro": "Do these once the branch is published.",
+  "verify": [
+    "Open an address that does not exist, such as `/abc`. This page should appear with its four links.",
+    "In GA4, open Reports, then Realtime, after accepting cookies. `page_not_found` should appear for that visit."
+  ],
+
+  "files": [
+    { "path": "404.html", "change": "Google tag, one event, three links, noindex, icons, fonts, tap areas" },
+    { "path": "seo/tools/check-page.js", "change": "Knows that the error page must have no canonical address" }
+  ],
+
+  "method": [
+    "Audited from the repository and rendered in headless Chrome on a local copy of the site. 26 automated checks pass, plus a test that the new event carries the path only and nothing after a ? or a #.",
+    "The local server does not imitate Vercel's handling of missing addresses, and the live site is unreachable from the audit sandbox. Whether a missing address answers with the code 404 was not checked."
+  ]
+}
