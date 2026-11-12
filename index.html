@@ -539,7 +539,9 @@
 
 <!-- ══ SPOT WELCOME CARD — shown on ?spot= visits from QR counter cards ══ -->
 <!-- Generic by rule (2026-11-02): no store name, number or location is shown
-     unless that specific store has confirmed. -->
+     unless that specific store has confirmed.
+     Verified claim only for placed cards (2026-11-12): the card shows only
+     for slugs in PLACED_SPOTS (currently mokafe). -->
 <main id="main">
 <section class="spot-card" id="spot-card">
   <p class="spot-eyebrow">✓ Rihla-verified halal spot</p>
@@ -557,7 +559,7 @@
     Find halal food in NYC<br>you can <em>actually</em> trust.
   </h1>
   <p class="hero-sub">
-    Rihla is hand-checking the 50 best halal spots in New York.
+    Rihla is hand-checking the best halal spots in New York.
   </p>
 
   <form class="hero-form" id="traveller-form" novalidate>
@@ -577,7 +579,7 @@
     <p class="form-error" id="traveller-error" role="alert">Please enter a valid email address.</p>
     <p class="hero-note">Join New York Muslims getting the list. Free. No spam, ever.</p>
     <div class="success-msg" id="traveller-success" role="status">
-      ✓ You're on the list — halal NYC coming to your inbox soon.
+      ✓ You're on the list. We'll send the NYC guide when it's ready.
     </div>
   </form>
 </section>
@@ -593,7 +595,7 @@
     We send halal restaurants customers.<br>Free for 30 days.
   </h2>
   <p class="owner-oneliner">
-    Rihla helps halal restaurants get found by Muslim diners, with a verified mark AI can read and a monthly report that proves it.
+    Rihla helps halal restaurants get found by Muslim diners, with a verified mark diners trust and a monthly report that proves it.
   </p>
   <p class="owner-sub">
     No app. No tablet. No contract. One QR code on your counter —
@@ -628,8 +630,8 @@
     <div class="bullet">
       <div class="bullet-icon" aria-hidden="true">🔁</div>
       <div class="bullet-text">
-        <h3>Get them back — your list, not a delivery app's</h3>
-        <span>Every scanner joins your list, not a delivery app's, so you can bring them back without paying commission on every order. The monthly report shows the scans, so you see it working.</span>
+        <h3>Get them back — proof every month</h3>
+        <span>Every scan is counted, and your monthly report shows exactly what the card earned you. You see it working, month after month.</span>
       </div>
     </div>
   </div>
@@ -639,7 +641,7 @@
   <div class="proof-row">
     <div class="proof-tile"><h3>The tier</h3><span>Hand-Checked, Document-Verified or Community-Reported. Diners see exactly how it was checked.</span></div>
     <div class="proof-tile"><h3>The date</h3><span>Every check shows when it was done, and expires after 12 months.</span></div>
-    <div class="proof-tile"><h3>The count</h3><span>Every scan and every first-visit offer is counted, so your report shows which diners Rihla sent.</span></div>
+    <div class="proof-tile"><h3>The count</h3><span>Every scan is counted, so your report shows how many diners Rihla sent.</span></div>
   </div>
 
   <p class="owner-eyebrow">How it works</p>
@@ -688,7 +690,7 @@
     </form>
 
     <div class="claim-success" id="owner-success" role="status">
-      ✓ Spot claimed! Abdelkarim will call you within 24 hours to drop off your QR card and window sticker.
+      ✓ Spot claimed! We'll be in touch about your verification and your QR card.
     </div>
 
     <p class="owner-fine-print">
@@ -819,7 +821,7 @@
 
     this.style.display = 'none';
     document.getElementById('owner-success').style.display = 'block';
-    toast('✓ Spot claimed — watch for a call!');
+    toast('✓ Spot claimed!');
   });
 
   /* ── TOAST ───────────────────────────────────────── */
@@ -833,10 +835,13 @@
   /* ── SPOT WELCOME CARD (?spot= visits from QR counter cards) ── */
   /* Generic by rule (2026-11-02): no store name, number or location is shown
      unless that specific store has confirmed. The ?spot= slug is still used
-     for the GA4 qr_scan event above, which is analytics only, not public. */
+     for the GA4 qr_scan event above, which is analytics only, not public.
+     Verified claim only for placed cards (2026-11-12): the card shows only
+     for slugs in PLACED_SPOTS. Add a slug here when its card is placed. */
+  var PLACED_SPOTS = ['mokafe'];
   (function () {
     var spot = new URLSearchParams(window.location.search).get('spot');
-    if (!spot) return;
+    if (!spot || PLACED_SPOTS.indexOf(spot) === -1) return;
     document.getElementById('spot-card').classList.add('show');
   })();
 
