@@ -406,6 +406,7 @@
   @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
 
   .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field-wide { grid-column: 1 / -1; }
   .form-field label {
     font-size: 10px; font-weight: 700;
     letter-spacing: .1em; text-transform: uppercase;
@@ -799,6 +800,10 @@
           <input type="tel" id="owner-phone" aria-describedby="owner-error" placeholder="(718) 555-0123" required>
         </div>
         <div class="form-field">
+          <label for="owner-email">Email</label>
+          <input type="email" id="owner-email" aria-describedby="owner-error" placeholder="ahmed@alnourkitchen.com" autocomplete="email" required>
+        </div>
+        <div class="form-field form-field-wide">
           <label for="neighbourhood">Neighbourhood</label>
           <select id="neighbourhood" aria-describedby="owner-error" required>
             <option value="" disabled selected>Select your area</option>
@@ -943,6 +948,8 @@
 
 <div id="toast" role="status"></div>
 
+<!-- Supabase project address and public key, used by the forms below to save leads. -->
+<script src="/supabase-config.js"></script>
 <script>
 (function () {
 
@@ -969,6 +976,40 @@
     gtag('event', name, p);
   }
 
+  /* ── SAVING A LEAD ───────────────────────────────── */
+  /* Sends one row to the "leads" table in Supabase (project and key come from
+     /supabase-config.js). The site's public key may only ADD rows: it cannot read,
+     change or delete them. The promise resolves when the row is saved and rejects
+     when it is not, so a visitor is never told "claimed" when nothing arrived.
+     Read the leads in the Supabase dashboard, under Table Editor > leads. */
+  var SEND_FAILED = 'That did not go through. Please try again, or email rihla.enquiries@gmail.com.';
+  function saveLead(row) {
+    if (typeof SUPABASE_CONFIGURED === 'undefined' || !SUPABASE_CONFIGURED) {
+      return Promise.reject(new Error('Supabase is not configured'));
+    }
+    try {
+      var u = JSON.parse(localStorage.getItem('rihla_utm') || 'null');
+      if (u) {
+        row.first_source = u.utm_source || null;
+        row.first_medium = u.utm_medium || null;
+        row.first_campaign = u.utm_campaign || null;
+      }
+    } catch (_) { /* storage unavailable: save the lead without a campaign */ }
+    row.page = location.href.split('#')[0].slice(0, 500);
+    return fetch(SUPABASE_URL + '/rest/v1/leads', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(row)
+    }).then(function (res) {
+      if (!res.ok) throw new Error('Lead not saved: HTTP ' + res.status);
+    });
+  }
+
   /* ── TRAVELLER FORM ──────────────────────────────── */
   document.getElementById('traveller-form').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -980,6 +1021,7 @@
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       emailInput.classList.add('field-invalid');
       emailInput.setAttribute('aria-invalid', 'true');
+      travErr.textContent = 'Please enter a valid email address.';
       travErr.classList.add('show');
       emailInput.focus();
       return;
@@ -989,18 +1031,22 @@
     travErr.classList.remove('show');
     this.dataset.submitted = '1';
 
-    try {
-      const list = JSON.parse(localStorage.getItem('rihla_travellers') || '[]');
-      list.push({ email, ts: new Date().toISOString() });
-      localStorage.setItem('rihla_travellers', JSON.stringify(list));
-    } catch (_) {}
-
-    trackLead('list_signup', {});
-
-    document.getElementById('traveller-success').style.display = 'block';
-    this.querySelector('.hero-form-row').style.display = 'none';
-    this.querySelector('.hero-note').style.display = 'none';
-    toast('✓ You\'re on the list!');
+    // Success is shown, and counted in Analytics, only once the email is really saved.
+    var form = this;
+    var button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    saveLead({ kind: 'diner_list', email: email }).then(function () {
+      trackLead('list_signup', {});
+      document.getElementById('traveller-success').style.display = 'block';
+      form.querySelector('.hero-form-row').style.display = 'none';
+      form.querySelector('.hero-note').style.display = 'none';
+      toast('✓ You\'re on the list!');
+    }).catch(function () {
+      delete form.dataset.submitted;
+      button.disabled = false;
+      travErr.textContent = SEND_FAILED;
+      travErr.classList.add('show');
+    });
   });
 
   /* ── OWNER FORM ──────────────────────────────────── */
@@ -1010,6 +1056,9 @@
     var field = document.getElementById('restaurant-name');
     if (name) field.value = name;
     gtag('event', 'visibility_check_start', { restaurant: name });
+    // Saved so you can see which restaurants asked for a check. The contact details
+    // arrive with the claim form below. A failure here must not get in the visitor's way.
+    if (name) saveLead({ kind: 'visibility_check', restaurant: name }).catch(function () {});
     field.closest('.claim-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
     setTimeout(function () { document.getElementById(name ? 'owner-name' : 'restaurant-name').focus({ preventScroll: true }); }, 500);
   });
@@ -1020,8 +1069,8 @@
       restaurant: document.getElementById('restaurant-name').value.trim(),
       name:       document.getElementById('owner-name').value.trim(),
       phone:      document.getElementById('owner-phone').value.trim(),
-      area:       document.getElementById('neighbourhood').value,
-      ts:         new Date().toISOString()
+      email:      document.getElementById('owner-email').value.trim(),
+      area:       document.getElementById('neighbourhood').value
     };
     if (this.querySelector('.hp').value) return;
     if (this.dataset.submitted) return;
@@ -1030,6 +1079,7 @@
       ['restaurant-name', data.restaurant],
       ['owner-name', data.name],
       ['owner-phone', data.phone],
+      ['owner-email', data.email],
       ['neighbourhood', data.area]
     ];
     var firstMissing = null;
@@ -1045,24 +1095,45 @@
       }
     });
     if (firstMissing) {
+      ownerErr.textContent = 'Please fill in every field.';
       ownerErr.classList.add('show');
       firstMissing.focus();
+      return;
+    }
+    var emailField = document.getElementById('owner-email');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      emailField.classList.add('field-invalid');
+      emailField.setAttribute('aria-invalid', 'true');
+      ownerErr.textContent = 'Please enter a valid email address.';
+      ownerErr.classList.add('show');
+      emailField.focus();
       return;
     }
     ownerErr.classList.remove('show');
     this.dataset.submitted = '1';
 
-    try {
-      const list = JSON.parse(localStorage.getItem('rihla_owners') || '[]');
-      list.push(data);
-      localStorage.setItem('rihla_owners', JSON.stringify(list));
-    } catch (_) {}
-
-    trackLead('spot_claim', { area: data.area });
-
-    this.style.display = 'none';
-    document.getElementById('owner-success').style.display = 'block';
-    toast('✓ Spot claimed!');
+    // Success is shown, and counted in Analytics, only once the claim is really saved.
+    var form = this;
+    var button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    saveLead({
+      kind: 'owner_claim',
+      restaurant: data.restaurant,
+      contact_name: data.name,
+      phone: data.phone,
+      email: data.email,
+      area: data.area
+    }).then(function () {
+      trackLead('spot_claim', { area: data.area });
+      form.style.display = 'none';
+      document.getElementById('owner-success').style.display = 'block';
+      toast('✓ Spot claimed!');
+    }).catch(function () {
+      delete form.dataset.submitted;
+      button.disabled = false;
+      ownerErr.textContent = SEND_FAILED;
+      ownerErr.classList.add('show');
+    });
   });
 
   /* ── TOAST ───────────────────────────────────────── */

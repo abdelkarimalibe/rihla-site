@@ -31,7 +31,7 @@ These came out of the audits and cannot be done from the repo. Details are in th
 
 | Priority | What | From |
 |----------|------|------|
-| Critical | Neither homepage form sends the lead anywhere. Submissions stay in the visitor's browser. | 01-home |
+| Critical | Homepage forms: fixed on the branch 2026-11-13. Leads go to the `leads` table in Supabase (created the same day, insert-only for the site). Not live until published; the database checks and one real test claim are still to do. | 01-home |
 | High | QR scans only show in GA4 when the visitor accepts cookies. Count them on the server. | 01-home |
 | High | Buy a real domain. `rihla-website-self.vercel.app` appears 38 times in 14 files. | 01-home |
 | High | Set up Google Search Console and Bing Webmaster Tools, submit the sitemap. | 01-home |

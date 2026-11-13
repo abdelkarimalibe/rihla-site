@@ -5,3 +5,6 @@ seo
 # Internal notes. The root README describes the internal sales panel and names its address.
 README.md
 emails/README.md
+
+# Database migrations. A record of what was applied to Supabase, not part of the site.
+supabase
