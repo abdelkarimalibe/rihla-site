@@ -5,7 +5,7 @@
 // Paste your Google OAuth client ID (Web application) to turn on live Gmail
 // and Google Calendar. Setup steps are on the panel under "Data sources".
 // Leave empty to run on the Excel workbook only.
-var SALES_GOOGLE_CLIENT_ID = '';
+var SALES_GOOGLE_CLIENT_ID = '236804067350-r8pu4qejgjfac9rqu9v9pis3c38vtc7p.apps.googleusercontent.com';
 
 // Read-only scopes. The panel never sends, edits or deletes anything.
 var SALES_GOOGLE_SCOPES = 'https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/calendar.events.readonly';
