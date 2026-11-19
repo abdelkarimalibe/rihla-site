@@ -119,7 +119,7 @@ const handle = (r) => {
     // The error page is served at every missing address, so it must not name one canonical address.
     ok('error page: no canonical, and noindex', head.canonical === null && noindex, head.canonical);
   } else {
-    ok('canonical points at this page on the production host', head.canonical === 'https://rihla-website-self.vercel.app' + new URL(url).pathname.replace(/\/index\.html$/, '/'), head.canonical);
+    ok('canonical points at this page on the production host', head.canonical === 'https://rihla.fyi' + new URL(url).pathname.replace(/\/index\.html$/, '/'), head.canonical);
   }
   ok('three icon links', head.icons.length === 3, head.icons);
   if (!noindex) {
